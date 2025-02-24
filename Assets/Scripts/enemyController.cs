@@ -81,18 +81,20 @@ public class enemyController : MonoBehaviour
             //if reached destination, become idle there then choose next destination randomly
             if (ai.remainingDistance <= ai.stoppingDistance)
             {
+                Debug.Log("reachedDestination");
                 aiAnim.ResetTrigger("sprint");
                 aiAnim.ResetTrigger("walk");
                 aiAnim.SetTrigger("idle");
                 ai.speed = 0;
+                walking = false;
                 StopCoroutine("stayIdle");
                 StartCoroutine("stayIdle");
-                walking = false;
             }
         }
     }
     IEnumerator stayIdle()
     {
+        Debug.Log("stayIdleStarted");
         idleTime = Random.Range(minIdleTime, maxIdleTime);
         yield return new WaitForSeconds(idleTime);
         walking = true;
