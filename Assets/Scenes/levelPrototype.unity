@@ -4703,8 +4703,8 @@ MonoBehaviour:
   - {fileID: 1964472800}
   - {fileID: 45180055}
   aiAnim: {fileID: 0}
-  walkSpeed: 2
-  chaseSpeed: 5
+  walkSpeed: 6
+  chaseSpeed: 10
   minIdleTime: 2
   maxIdleTime: 9
   idleTime: 0
