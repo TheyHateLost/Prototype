@@ -1,0 +1,34 @@
+{
+    "name": "Controlls",
+    "maps": [
+        {
+            "name": "Gamplay",
+            "id": "3dc6f1c4-edea-48f6-84f3-8d04321c4ccd",
+            "actions": [
+                {
+                    "name": "QuestLogToggle",
+                    "type": "Button",
+                    "id": "0b6873e7-e5ab-4b4c-966e-7cac51fb479f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e74c8302-a6b2-41b9-a599-eb6b39d169dd",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuestLogToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

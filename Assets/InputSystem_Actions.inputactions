@@ -990,6 +990,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Gamplay",
+            "id": "42656a1a-4d96-414a-a3f5-1812e1e3dce7",
+            "actions": [
+                {
+                    "name": "QuestLogToggle",
+                    "type": "Button",
+                    "id": "d0460d75-f3bf-4a7b-8e30-a888135f7051",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "25925656-f50c-4ea3-9e56-2620c63fd75f",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuestLogToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
