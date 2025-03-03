@@ -292,7 +292,7 @@ MonoBehaviour:
   Destinations:
   - {x: 0, y: 20, z: 0}
   - {x: 0, y: 0.01, z: 0}
-  Speed: 0.1
+  Speed: 0.075
   returnSpeed: 0.05
   DestTimer: 4
   elevatorCallBackSpeed: 2
@@ -15882,7 +15882,11 @@ PrefabInstance:
       objectReference: {fileID: 1480082575}
     - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
       propertyPath: maxIdleTime
-      value: 7
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
+      propertyPath: minIdleTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
       propertyPath: stopHideText
