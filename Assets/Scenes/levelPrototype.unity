@@ -6623,9 +6623,11 @@ MonoBehaviour:
   walking: 0
   chasing: 0
   player: {fileID: 1240147295}
-  destinationAmount: 9
   rayCastOffset: {x: 0, y: 0, z: 0}
   deathScene: 
+  aiDistance: 0
+  hideText: {fileID: 0}
+  stopHideText: {fileID: 0}
 --- !u!136 &1702423289
 CapsuleCollider:
   m_ObjectHideFlags: 0
