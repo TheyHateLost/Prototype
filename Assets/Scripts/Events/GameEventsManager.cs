@@ -15,11 +15,21 @@ public class GameEventsManager : MonoBehaviour
     public GoldEvents goldEvents;
 
     public GameObject PauseMenu;
+    public GameObject KeypadMenu;
     private float originalTimeScale;
+    public gameState currentState;
+
+    public enum gameState
+    {
+        Paused,
+        InMenu,
+        Normal
+    }
 
     private void Awake()
     {
         originalTimeScale = Time.timeScale;
+        currentState = gameState.Normal;
 
         if (instance != null)
         {
@@ -37,13 +47,33 @@ public class GameEventsManager : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.activeInHierarchy)
+        if (KeypadMenu.activeInHierarchy)
         {
-            StopTime();
+            currentState = gameState.InMenu;
+        }
+        else if (PauseMenu.activeInHierarchy)
+        {
+            currentState = gameState.Paused;
         }
         else
         {
-            ResumeTime();
+            currentState = gameState.Normal;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        switch (currentState)
+        {
+            case gameState.Normal:
+                ResumeTime();
+                break;
+            case gameState.Paused:
+                StopTime();
+                break;
+            case gameState.InMenu:
+                CursorModeOn();
+                break;
         }
     }
     //Time stops, cursor is usable, and pause menu comes up
@@ -61,5 +91,11 @@ public class GameEventsManager : MonoBehaviour
         Cursor.visible = false;
 
         Time.timeScale = originalTimeScale;
+    }
+    //Cursor and menu goes away
+    public void CursorModeOn()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
