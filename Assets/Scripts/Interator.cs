@@ -1,31 +1,41 @@
 using UnityEngine;
 
-// Define the Interactable interface correctly
-public interface Interactable
+// Grabs the Interact method from other scripts using IInteractable
+interface IInteractable
 {
-    void Interact();
+    public void Interact();
 }
-
 // Main interaction script
-public class IntertheAct : MonoBehaviour
+public class Interator : MonoBehaviour
 {
     public Transform InteracterSource;
     public float InteractRange = 2f; // Default value for safety
+    public GameObject interactText;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        //Raycast from mouse position(center screen)
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, InteractRange))
         {
-            Ray r = new Ray(InteracterSource.position, InteracterSource.forward);
-            if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
+            //if looking at something with IInteractable class on it...
+            if (hit.collider.gameObject.TryGetComponent(out IInteractable interactObj))
             {
-                // Try to get a component that implements Interactable
-                Interactable interactObj = hitInfo.collider.gameObject.GetComponent<Interactable>();
-                if (interactObj != null)
+                //show prompt to interact with item
+                interactText.SetActive(true);
+
+                if (Input.GetKeyDown(KeyCode.E))
                 {
+                    //use the method from the script of the item you are looking at
                     interactObj.Interact();
                 }
             }
+        }
+        //if not looking at something with IInteractable class then turn off prompt
+        else
+        {
+            interactText.SetActive(false);
         }
     }
 }
