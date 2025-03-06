@@ -27827,6 +27827,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
+      propertyPath: destinations.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
       propertyPath: 'destinations.Array.data[0]'
       value: 
       objectReference: {fileID: 1630275385}
@@ -27845,15 +27849,47 @@ PrefabInstance:
     - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
       propertyPath: 'destinations.Array.data[4]'
       value: 
-      objectReference: {fileID: 373990135}
+      objectReference: {fileID: 1906962730}
     - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
       propertyPath: 'destinations.Array.data[5]'
       value: 
-      objectReference: {fileID: 1964472800}
+      objectReference: {fileID: 897078901}
     - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
       propertyPath: 'destinations.Array.data[6]'
       value: 
+      objectReference: {fileID: 974213869}
+    - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
+      propertyPath: 'destinations.Array.data[7]'
+      value: 
+      objectReference: {fileID: 373990135}
+    - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
+      propertyPath: 'destinations.Array.data[8]'
+      value: 
+      objectReference: {fileID: 1964472800}
+    - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
+      propertyPath: 'destinations.Array.data[9]'
+      value: 
       objectReference: {fileID: 45180055}
+    - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
+      propertyPath: 'destinations.Array.data[10]'
+      value: 
+      objectReference: {fileID: 1031462009}
+    - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
+      propertyPath: 'destinations.Array.data[11]'
+      value: 
+      objectReference: {fileID: 1555236039}
+    - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
+      propertyPath: 'destinations.Array.data[12]'
+      value: 
+      objectReference: {fileID: 1938787632}
+    - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
+      propertyPath: 'destinations.Array.data[13]'
+      value: 
+      objectReference: {fileID: 860263775}
+    - target: {fileID: 6997045999956299406, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
+      propertyPath: 'destinations.Array.data[14]'
+      value: 
+      objectReference: {fileID: 1454830532}
     - target: {fileID: 7346326383800892854, guid: e0d5c5b1f93f8f84b95ec915fbf1c713, type: 3}
       propertyPath: m_Name
       value: Monster

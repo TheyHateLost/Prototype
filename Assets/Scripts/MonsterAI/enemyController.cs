@@ -59,7 +59,7 @@ public class enemyController : MonoBehaviour
         //if chasing the player
         if (chasing == true)
         {
-            monsterChasing.Play();
+            //monsterChasing.Play();
 
             //its destination becomes the player 
             dest = player.position;
@@ -87,7 +87,7 @@ public class enemyController : MonoBehaviour
         //if not chasing player
         if (walking == true)
         {
-            monsterWalking.Play();
+            //monsterWalking.Play();
 
             //Destination becomes the positions set and anims play
             dest = currentDest.position;
