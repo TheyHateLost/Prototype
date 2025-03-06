@@ -7,7 +7,7 @@ public interface Interactable
 }
 
 // Main interaction script
-public class IntertheAct : MonoBehaviour
+public class interator: MonoBehaviour
 {
     public Transform InteracterSource;
     public float InteractRange = 2f; // Default value for safety
