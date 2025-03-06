@@ -6,18 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class enemyController : MonoBehaviour
 {
+    //AI Pathing
     public NavMeshAgent ai;
     public List<Transform> destinations;
-    public Animator aiAnim;
-    public float walkSpeed, chaseSpeed, minIdleTime, maxIdleTime, idleTime, sightDistance, catchDistance, chaseTime, minChaseTime, maxChaseTime, jumpscareTime;
-    public bool walking, chasing;
     public Transform player;
+    public Vector3 rayCastOffset;
     Transform currentDest;
     Vector3 dest;
-    public Vector3 rayCastOffset;
-    public string deathScene;
     public float aiDistance;
-    public GameObject hideText, stopHideText; 
+
+    //Monster Stats
+    public float walkSpeed, chaseSpeed, minIdleTime, maxIdleTime, idleTime, sightDistance, catchDistance, chaseTime, minChaseTime, maxChaseTime, jumpscareTime;
+    
+    public bool walking, chasing;
+    public string deathScene;
+    public Animator aiAnim;
+    public GameObject hideText, stopHideText;
+
+    //Audio
+    public AudioSource monsterWalking;
+    public AudioSource monsterChasing;
 
     void Start()
     {
@@ -51,6 +59,8 @@ public class enemyController : MonoBehaviour
         //if chasing the player
         if (chasing == true)
         {
+            monsterChasing.Play();
+
             //its destination becomes the player 
             dest = player.position;
             ai.destination = dest;
@@ -77,6 +87,8 @@ public class enemyController : MonoBehaviour
         //if not chasing player
         if (walking == true)
         {
+            monsterWalking.Play();
+
             //Destination becomes the positions set and anims play
             dest = currentDest.position;
             ai.destination = dest;

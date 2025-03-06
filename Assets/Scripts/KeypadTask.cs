@@ -8,18 +8,24 @@ public class KeypadTask : MonoBehaviour
 {
     public TextMeshProUGUI cardCode;
     public TextMeshProUGUI inputCode;
-    public int codeLength = 5;
-    public float codeResetTime = 0.5f;
+    public GameEventsManager gameManager;
+    public GameObject keypad;
+    public GameObject taskObject; 
+    public int codeLength = 3;
+    float codeResetTime;
     bool isResetting = false;
 
     void OnEnable()
     {
+        codeLength = Random.Range(5,9);
         string code = string.Empty;
 
         for(int i = 0; i < codeLength; i++)
         {
             code += Random.Range(1,10);
         }
+
+        //gameManager.tasksCompleted += 1;
 
         cardCode.text = code;
         inputCode.text = string.Empty; 
@@ -33,7 +39,10 @@ public class KeypadTask : MonoBehaviour
         if (inputCode.text == cardCode.text)
         {
             inputCode.text = "Correct";
-            StartCoroutine(ResetCode());
+            keypad.SetActive(false);
+            taskObject.SetActive(false);
+            gameManager.tasksCompleted += 1;
+            StartCoroutine(WinCode());
         }
         else if (inputCode.text.Length >= codeLength)
         {
@@ -42,6 +51,15 @@ public class KeypadTask : MonoBehaviour
         }
     }
     private IEnumerator ResetCode()
+    {
+        isResetting = true;
+
+        yield return new WaitForSeconds(codeResetTime);
+
+        inputCode.text = string.Empty;
+        isResetting = false;
+    }
+    private IEnumerator WinCode()
     {
         isResetting = true;
 

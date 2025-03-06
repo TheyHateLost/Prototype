@@ -7,6 +7,9 @@ using UnityEngine;
 public class GameEventsManager : MonoBehaviour
 {
     public static GameEventsManager instance { get; private set; }
+    public GameObject elevator;
+    DescendingCage elevatorScript;
+    public GameObject winning;
 
     public InputEvents inputEvents;
     public PlayerEvents playerEvents;
@@ -15,8 +18,10 @@ public class GameEventsManager : MonoBehaviour
     public GoldEvents goldEvents;
 
     public GameObject PauseMenu;
-    public GameObject KeypadMenu;
+    public GameObject KeypadMenu, KeypadMenu1, KeypadMenu2;
     float originalTimeScale;
+
+    public int tasksCompleted = 0;
 
     public enum gameState
     {
@@ -30,6 +35,8 @@ public class GameEventsManager : MonoBehaviour
     {
         originalTimeScale = Time.timeScale;
         currentState = gameState.Normal;
+
+        //elevatorScript = elevator.GetComponent<DescendingCage>();
 
         if (instance != null)
         {
@@ -47,7 +54,10 @@ public class GameEventsManager : MonoBehaviour
 
     void Update()
     {
-        if (KeypadMenu.activeInHierarchy)
+
+        Debug.Log(tasksCompleted);
+
+        if ((KeypadMenu.activeInHierarchy) || (KeypadMenu1.activeInHierarchy) || (KeypadMenu2.activeInHierarchy))
         {
             currentState = gameState.InMenu;
         }
@@ -59,6 +69,14 @@ public class GameEventsManager : MonoBehaviour
         {
             ResumeTime();
             currentState = gameState.Normal;
+        }
+
+        if (tasksCompleted >= 3)
+        {
+            //elevatorScript = new DescendingCage();
+            winning.SetActive(true);
+            elevatorScript.platMode = DescendingCage.platformMode.MOVING;
+
         }
     }
 
