@@ -8,8 +8,10 @@ public class GameEventsManager : MonoBehaviour
 {
     public static GameEventsManager instance { get; private set; }
     public GameObject elevator;
-    DescendingCage elevatorScript;
+    public GameObject player;
     public GameObject winning;
+    enemyController monsterAI;
+    DescendingCage elevatorScript;
 
     public InputEvents inputEvents;
     public PlayerEvents playerEvents;
@@ -18,7 +20,7 @@ public class GameEventsManager : MonoBehaviour
     public GoldEvents goldEvents;
 
     public GameObject PauseMenu;
-    public GameObject KeypadMenu, KeypadMenu1, KeypadMenu2;
+    public GameObject KeypadMenu, KeypadMenu1, KeypadMenu2, KeypadMenu3;
     float originalTimeScale;
 
     public int tasksCompleted = 0;
@@ -57,7 +59,7 @@ public class GameEventsManager : MonoBehaviour
 
         Debug.Log(tasksCompleted);
 
-        if ((KeypadMenu.activeInHierarchy) || (KeypadMenu1.activeInHierarchy) || (KeypadMenu2.activeInHierarchy))
+        if ((KeypadMenu.activeInHierarchy) || (KeypadMenu1.activeInHierarchy) || (KeypadMenu2.activeInHierarchy) || (KeypadMenu3.activeInHierarchy))
         {
             currentState = gameState.InMenu;
         }
@@ -71,12 +73,15 @@ public class GameEventsManager : MonoBehaviour
             currentState = gameState.Normal;
         }
 
-        if (tasksCompleted >= 3)
+        if (tasksCompleted >= 4)
         {
             //elevatorScript = new DescendingCage();
             winning.SetActive(true);
             elevatorScript.platMode = DescendingCage.platformMode.MOVING;
-
+            if (player.activeInHierarchy)
+            {
+                //monsterAI.dest = player.position;
+            }
         }
     }
 
