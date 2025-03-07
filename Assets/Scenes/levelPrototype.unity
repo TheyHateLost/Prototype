@@ -6637,7 +6637,9 @@ MonoBehaviour:
   - {fileID: 373990135}
   - {fileID: 1964472800}
   - {fileID: 45180055}
-  aiAnim: {fileID: 0}
+  player: {fileID: 1240147295}
+  rayCastOffset: {x: 0, y: 0, z: 0}
+  aiDistance: 0
   walkSpeed: 6
   chaseSpeed: 10
   minIdleTime: 2
@@ -6651,12 +6653,12 @@ MonoBehaviour:
   jumpscareTime: 2
   walking: 0
   chasing: 0
-  player: {fileID: 1240147295}
-  rayCastOffset: {x: 0, y: 0, z: 0}
   deathScene: 
-  aiDistance: 0
+  aiAnim: {fileID: 0}
   hideText: {fileID: 0}
   stopHideText: {fileID: 0}
+  monsterWalking: {fileID: 0}
+  monsterChasing: {fileID: 0}
 --- !u!136 &1702423289
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7987,7 +7989,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77a7e0963cff432459f6484b93394ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elevator: {fileID: 0}
+  winning: {fileID: 0}
   PauseMenu: {fileID: 0}
+  KeypadMenu: {fileID: 0}
+  KeypadMenu1: {fileID: 0}
+  KeypadMenu2: {fileID: 0}
+  tasksCompleted: 0
+  currentState: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
