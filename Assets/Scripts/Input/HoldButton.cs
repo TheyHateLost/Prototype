@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class HoldButton : MonoBehaviour
 {
-    public PressHold pressHold;  
+     /*public PressHold pressHold;  
      public bool isHolding;
 
     public void Awake()
@@ -44,5 +44,5 @@ public class HoldButton : MonoBehaviour
             // Continuous action while holding 'E'
             Debug.Log("Holding the E key");
         }
-    }
+    }*/
 }
