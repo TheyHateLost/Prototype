@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using System;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class GameEventsManager : MonoBehaviour
 {
@@ -10,7 +12,9 @@ public class GameEventsManager : MonoBehaviour
     public GameObject elevator;
     public GameObject player;
     public GameObject winning;
-    enemyController monsterAI;
+    //enemyController monsterAI;
+    public GameObject monster;
+    public GameObject allTasksCompleted;
     DescendingCage elevatorScript;
 
     public InputEvents inputEvents;
@@ -23,7 +27,8 @@ public class GameEventsManager : MonoBehaviour
     public GameObject KeypadMenu, KeypadMenu1, KeypadMenu2, KeypadMenu3;
     float originalTimeScale;
 
-    public int tasksCompleted = 0;
+    public int tasksRemaining = 4;
+    public Text numberOfTasksLeft;
 
     public enum gameState
     {
@@ -56,8 +61,9 @@ public class GameEventsManager : MonoBehaviour
 
     void Update()
     {
+        numberOfTasksLeft.text = tasksRemaining.ToString();
 
-        Debug.Log(tasksCompleted);
+        Debug.Log(tasksRemaining);
 
         if ((KeypadMenu.activeInHierarchy) || (KeypadMenu1.activeInHierarchy) || (KeypadMenu2.activeInHierarchy) || (KeypadMenu3.activeInHierarchy))
         {
@@ -73,15 +79,13 @@ public class GameEventsManager : MonoBehaviour
             currentState = gameState.Normal;
         }
 
-        if (tasksCompleted >= 4)
+        if (tasksRemaining <= 0)
         {
             //elevatorScript = new DescendingCage();
             winning.SetActive(true);
             elevatorScript.platMode = DescendingCage.platformMode.MOVING;
-            if (player.activeInHierarchy)
-            {
-                //monsterAI.dest = player.position;
-            }
+            allTasksCompleted.SetActive(true);
+            //enemyController.endGame = true;
         }
     }
 

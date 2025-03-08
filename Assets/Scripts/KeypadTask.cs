@@ -11,7 +11,7 @@ public class KeypadTask : MonoBehaviour
     public GameEventsManager gameManager;
     public GameObject keypad;
     public GameObject taskObject; 
-    public int codeLength = 3;
+    public int codeLength;
     float codeResetTime;
     bool isResetting = false;
 
@@ -41,7 +41,7 @@ public class KeypadTask : MonoBehaviour
             inputCode.text = "Correct";
             keypad.SetActive(false);
             taskObject.SetActive(false);
-            gameManager.tasksCompleted += 1;
+            gameManager.tasksRemaining -= 1;
             StartCoroutine(WinCode());
         }
         else if (inputCode.text.Length >= codeLength)

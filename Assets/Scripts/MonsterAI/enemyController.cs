@@ -14,18 +14,21 @@ public class enemyController : MonoBehaviour
     Transform currentDest;
     Vector3 dest;
     public float aiDistance;
+    
 
     //Monster Stats
     public float walkSpeed, chaseSpeed, minIdleTime, maxIdleTime, idleTime, sightDistance, catchDistance, chaseTime, minChaseTime, maxChaseTime, jumpscareTime;
-    
+
     public bool walking, chasing;
+    public static bool endGame;
     public string deathScene;
     public Animator aiAnim;
     public GameObject hideText, stopHideText;
 
     //Audio
-    public AudioSource monsterWalking;
-    public AudioSource monsterChasing;
+    //public AudioSource monsterWalking;
+    //public AudioSource monsterChasing;
+    //public AudioSource monsterSeesPlayer;
 
     void Start()
     {
@@ -59,8 +62,6 @@ public class enemyController : MonoBehaviour
         //if chasing the player
         if (chasing == true)
         {
-            //monsterChasing.Play();
-
             //its destination becomes the player 
             dest = player.position;
             ai.destination = dest;
@@ -87,8 +88,6 @@ public class enemyController : MonoBehaviour
         //if not chasing player
         if (walking == true)
         {
-            //monsterWalking.Play();
-
             //Destination becomes the positions set and anims play
             dest = currentDest.position;
             ai.destination = dest;
@@ -108,6 +107,14 @@ public class enemyController : MonoBehaviour
                 walking = false;
             }
         }
+        /*if (endGame == true)
+        {
+            dest = player.position;
+            ai.destination = dest;
+            ai.speed = chaseSpeed;
+            walking = false;
+            chasing = false;
+        }*/
     }
 
     public void stopChase()
