@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         readyToJump = true;
+        crouching = false;
         currentMoveSpeed = walkSpeed;
 
         spawnPoint = transform.position;
@@ -145,7 +146,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Start Crouch
-        if (Input.GetKeyDown(crouchKey) && grounded)
+        if (Input.GetKey(crouchKey) && grounded && crouching == false)
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
@@ -153,7 +154,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Stop Crouch
-        if (Input.GetKeyUp(crouchKey) && grounded)
+        if (Input.GetKeyDown(crouchKey) && grounded && crouching == true)
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
             crouching = false;
