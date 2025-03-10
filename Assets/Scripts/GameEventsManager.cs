@@ -27,7 +27,7 @@ public class GameEventsManager : MonoBehaviour
     public GameObject KeypadMenu, KeypadMenu1, KeypadMenu2, KeypadMenu3;
     float originalTimeScale;
 
-    public int tasksRemaining = 4;
+    public int tasksRemaining = 0;
     public Text numberOfTasksLeft;
 
     public enum gameState
@@ -63,7 +63,7 @@ public class GameEventsManager : MonoBehaviour
     {
         numberOfTasksLeft.text = tasksRemaining.ToString();
 
-        Debug.Log(tasksRemaining);
+        //Debug.Log(tasksRemaining);
 
         if ((KeypadMenu.activeInHierarchy) || (KeypadMenu1.activeInHierarchy) || (KeypadMenu2.activeInHierarchy) || (KeypadMenu3.activeInHierarchy))
         {
@@ -83,9 +83,9 @@ public class GameEventsManager : MonoBehaviour
         {
             //elevatorScript = new DescendingCage();
             winning.SetActive(true);
-            elevatorScript.platMode = DescendingCage.platformMode.MOVING;
             allTasksCompleted.SetActive(true);
-            //enemyController.endGame = true;
+            enemyController.endGame = true;
+            //elevatorScript.platMode = DescendingCage.platformMode.MOVING;
         }
     }
 

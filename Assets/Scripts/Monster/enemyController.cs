@@ -107,14 +107,14 @@ public class enemyController : MonoBehaviour
                 walking = false;
             }
         }
-        /*if (endGame == true)
+        if (endGame == true)
         {
             dest = player.position;
             ai.destination = dest;
             ai.speed = chaseSpeed;
             walking = false;
             chasing = false;
-        }*/
+        }
     }
 
     public void stopChase()

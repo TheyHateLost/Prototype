@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
                 pauseMenu.SetActive(true);
             }
         }
-        // Pausing
+        // OtherMenu
         if (Input.GetKeyDown(taskMenuKey))
         {
             if (taskMenu.activeInHierarchy)
