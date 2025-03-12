@@ -22,8 +22,7 @@ public class Timer : MonoBehaviour
         if (currentTime <= 0)
         {
             currentTime = 0;
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-           
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);  
         }
     }
 }

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float walkSpeed;
     public float sprintSpeed;
     float currentMoveSpeed;
+    public AudioSource normalFootSteps, sprintingFootSteps;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -89,32 +90,6 @@ public class PlayerController : MonoBehaviour
         PlayerMovement();
     }
 
-    private void movePlayer()
-    {
-        //caculate movement direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-        rb.AddForce(moveDirection.normalized * currentMoveSpeed * 10f, ForceMode.Force);
-
-        //Jump if ready and grounded
-        if (Input.GetKey(KeyCode.Space) && readyToJump && grounded)
-        {
-            Jump();
-        }
-    }
-
-    private void speedControl()
-    {
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
-        //limit velocity
-        if (flatVel.magnitude > currentMoveSpeed)
-        {
-            Vector3 limitedVel = flatVel.normalized * currentMoveSpeed;
-            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
-        }
-    }
-
     private void OnTriggerEnter(Collider collider)
     {
         //put player in spawn if they collide with enemy and they have lives left
@@ -139,6 +114,26 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        /*//Walking and Sprinting sounds
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                normalFootSteps.enabled = false;
+                sprintingFootSteps.enabled = true;
+            }
+            else
+            {
+                normalFootSteps.enabled = true;
+                sprintingFootSteps.enabled = false;
+            }
+        }
+        else
+        {
+            normalFootSteps.enabled = false;
+            sprintingFootSteps.enabled = false;
+        }*/
+
         // Jumping
         if (Input.GetKey(KeyCode.Space) && readyToJump && grounded && crouching == false)
         {
@@ -146,7 +141,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Start Crouch
-        if (Input.GetKey(crouchKey) && grounded && crouching == false)
+        if (Input.GetKeyDown(crouchKey) && grounded && crouching == false)
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
@@ -154,7 +149,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Stop Crouch
-        if (Input.GetKeyDown(crouchKey) && grounded && crouching == true)
+        if (Input.GetKeyUp(crouchKey) && grounded && crouching == true)
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
             crouching = false;
@@ -207,6 +202,18 @@ public class PlayerController : MonoBehaviour
         else
         {
             currentMoveSpeed = walkSpeed;
+        }
+    }
+
+    private void speedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+        //limit velocity
+        if (flatVel.magnitude > currentMoveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * currentMoveSpeed;
+            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
 

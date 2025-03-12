@@ -8840,7 +8840,7 @@ GameObject:
   - component: {fileID: 478186761}
   - component: {fileID: 478186764}
   m_Layer: 0
-  m_Name: EventSystem (1)
+  m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8919,7 +8919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f362f12bc88fee24bb37e7180cdb557d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 600
+  startingTime: 400
   countdownText: {fileID: 1231594986}
 --- !u!1 &479690578
 GameObject:
@@ -9931,7 +9931,7 @@ GameObject:
   - component: {fileID: 564633307}
   - component: {fileID: 564633306}
   m_Layer: 5
-  m_Name: TimeLeft
+  m_Name: TimeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23188,7 +23188,7 @@ GameObject:
   - component: {fileID: 1231594987}
   - component: {fileID: 1231594986}
   m_Layer: 5
-  m_Name: TimerText
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23442,6 +23442,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   sprintSpeed: 10
+  normalFootSteps: {fileID: 0}
+  sprintingFootSteps: {fileID: 0}
   jumpForce: 0
   jumpCooldown: 0
   airMultiplier: 0.1
@@ -38739,13 +38741,13 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 584935847}
+  - {fileID: 530317771}
   - {fileID: 1240147295}
   - {fileID: 2008022111}
   - {fileID: 722064284}
   - {fileID: 1797457023}
   - {fileID: 1149964316}
   - {fileID: 478186763}
-  - {fileID: 530317771}
   - {fileID: 829138315}
   - {fileID: 1382991803}
   - {fileID: 1615234605}
