@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-//using UnityEngine.InputSystem.Editor;
 using UnityEngine.UI;
 
 public class KeypadTask : MonoBehaviour
@@ -34,6 +33,7 @@ public class KeypadTask : MonoBehaviour
     {
         if (isResetting) { return; }
 
+        //the generated code is set to 
         inputCode.text += number;
 
         if (inputCode.text == cardCode.text)
@@ -42,7 +42,7 @@ public class KeypadTask : MonoBehaviour
             keypad.SetActive(false);
             taskObject.SetActive(false);
             gameManager.tasksRemaining -= 1;
-            StartCoroutine(WinCode());
+            StartCoroutine(ResetCode());
         }
         else if (inputCode.text.Length >= codeLength)
         {
@@ -50,6 +50,7 @@ public class KeypadTask : MonoBehaviour
             StartCoroutine(ResetCode()); 
         }
     }
+    //When keypad is not up, code gets reset
     private IEnumerator ResetCode()
     {
         isResetting = true;
