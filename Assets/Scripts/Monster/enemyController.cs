@@ -32,15 +32,6 @@ public class enemyController : MonoBehaviour
     float walkingAudio_Timer = 0f;
     float runningAudio_Timer = 0f;
 
-    [Header("Audio")]
-    public AudioSource monsterWalking;
-    public AudioSource monsterRunning;
-    public AudioSource monsterChaseTheme;
-
-    public AudioClip walking_monsterSound;
-    public AudioClip running_monsterSound;
-    public AudioClip chasing_monsterSound;
-
     void Start()
     {
         walking = true;
@@ -70,70 +61,28 @@ public class enemyController : MonoBehaviour
                 chasing = false;
             }
         }
+
         //if chasing the player
         if (chasing == true)
         {
-            //its destination becomes the player and speed changes
-            dest = player.position;
-            ai.destination = dest;
-            ai.speed = chaseSpeed;
-
-            //RunningAudio();
-
-            //aiAnim.ResetTrigger("walk");
-            //aiAnim.ResetTrigger("idle");
-            //aiAnim.SetTrigger("sprint");
-
-            //distance between player and enemy
-            if (aiDistance <= catchDistance)
-            {
-                //player dies and plays jumpscare then loads selected scene 
-                player.gameObject.SetActive(false);
-                //aiAnim.ResetTrigger("walk");
-                //aiAnim.ResetTrigger("idle");
-                hideText.SetActive(false);
-                stopHideText.SetActive(false);
-                //aiAnim.ResetTrigger("sprint");
-                //aiAnim.SetTrigger("jumpscare");
-                StartCoroutine(deathRoutine());
-                chasing = false;
-            }
+            chasePlayer();
         }
+
         //if not chasing player
         if (walking == true)
         {
-            //Destination becomes the positions set and anims play
-            dest = currentDest.position;
-            ai.destination = dest;
-            ai.speed = walkSpeed;
+            walkAround();
 
-            walkingAudio_Timer -= Time.fixedDeltaTime;
+            //Walking Sound
+            walkingAudio_Timer -= Time.deltaTime;
 
-            //Walking sound
             if (walkingAudio_Timer <= 0 && walking)
             {
-                monsterWalking.PlayOneShot(walking_monsterSound);
-                walkingAudio_Timer = 2f;
-            }
-
-            //WalkingAudio();
-
-            //aiAnim.ResetTrigger("sprint");
-            //aiAnim.ResetTrigger("idle");
-            //aiAnim.SetTrigger("walk");
-
-            //if reached destination, become idle there then choose next destination randomly
-            if (ai.remainingDistance <= ai.stoppingDistance + 0.1f)
-            {
-                //aiAnim.ResetTrigger("sprint");
-                //aiAnim.ResetTrigger("walk");
-                //aiAnim.SetTrigger("idle");
-                ai.speed = 0;
-                StopCoroutine("stayIdle");
-                StartCoroutine("stayIdle");
-                walking = false;
+                SoundManager.PlaySound(SoundType.Monster_Walking);
+                walkingAudio_Timer = 0.5f;
             }
         }
+
         if (endGame == true)
         {
             dest = player.position;
@@ -144,6 +93,64 @@ public class enemyController : MonoBehaviour
         }
     }
 
+
+
+
+    public void chasePlayer()
+    {
+        //its destination becomes the player and speed changes
+        dest = player.position;
+        ai.destination = dest;
+        ai.speed = chaseSpeed;
+
+        //RunningAudio();
+
+        //aiAnim.ResetTrigger("walk");
+        //aiAnim.ResetTrigger("idle");
+        //aiAnim.SetTrigger("sprint");
+
+        //distance between player and enemy
+        if (aiDistance <= catchDistance)
+        {
+            //player dies and plays jumpscare then loads selected scene 
+            player.gameObject.SetActive(false);
+            //aiAnim.ResetTrigger("walk");
+            //aiAnim.ResetTrigger("idle");
+            hideText.SetActive(false);
+            stopHideText.SetActive(false);
+            //aiAnim.ResetTrigger("sprint");
+            //aiAnim.SetTrigger("jumpscare");
+            StartCoroutine(deathRoutine());
+            chasing = false;
+        }
+    }
+    public void walkAround()
+    {
+        //Destination becomes the positions set and anims play
+        dest = currentDest.position;
+        ai.destination = dest;
+        ai.speed = walkSpeed;
+
+        //Animations
+        //aiAnim.ResetTrigger("sprint");
+        //aiAnim.ResetTrigger("idle");
+        //aiAnim.SetTrigger("walk");
+
+        //Reached destination, idle there then choose next destination randomly
+        if (ai.remainingDistance <= ai.stoppingDistance + 0.1f)
+        {
+            //aiAnim.ResetTrigger("sprint");
+            //aiAnim.ResetTrigger("walk");
+            //aiAnim.SetTrigger("idle");
+            ai.speed = 0;
+            StopCoroutine("stayIdle");
+            StartCoroutine("stayIdle");
+            walking = false;
+        }
+    }
+
+
+
     public void stopChase()
     {
         walking = true;
@@ -151,6 +158,7 @@ public class enemyController : MonoBehaviour
         StopCoroutine("chaseRoutine");
         currentDest = destinations[Random.Range(0, destinations.Count)];
     }
+
     IEnumerator stayIdle()
     {
         idleTime = Random.Range(minIdleTime, maxIdleTime);
@@ -158,28 +166,24 @@ public class enemyController : MonoBehaviour
         walking = true;
         currentDest = destinations[Random.Range(0, destinations.Count)];
     }
+
+
+
+    //Routines
     IEnumerator chaseRoutine()
     {
         chaseTime = Random.Range(minChaseTime, maxChaseTime);
         yield return new WaitForSeconds(chaseTime);
         stopChase();
     }
+
     IEnumerator deathRoutine()
     {
         yield return new WaitForSeconds(jumpscareTime);
         SceneManager.LoadScene(deathScene);
     }
-    public void WalkingAudio()
-    {
-        walkingAudio_Timer -= Time.fixedDeltaTime;
 
-        //Walking sound
-        if (walkingAudio_Timer <= 0 && walking)
-        {
-            monsterWalking.PlayOneShot(walking_monsterSound);
-            walkingAudio_Timer = 2.4f;
-        }
-    }
+
     public void RunningAudio()
     {
         runningAudio_Timer -= Time.fixedDeltaTime;
@@ -187,7 +191,7 @@ public class enemyController : MonoBehaviour
         //Running sound
         if (runningAudio_Timer <= 0 && walking)
         {
-            monsterRunning.PlayOneShot(running_monsterSound);
+            //monsterRunning.PlayOneShot(running_monsterSound);
             runningAudio_Timer = 4f;
         }
     }

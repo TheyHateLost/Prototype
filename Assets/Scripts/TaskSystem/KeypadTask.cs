@@ -5,11 +5,20 @@ using UnityEngine.UI;
 
 public class KeypadTask : MonoBehaviour
 {
+    //Code given to player
     public TextMeshProUGUI cardCode;
+
+    //Players input
     public TextMeshProUGUI inputCode;
+
+    //Updates number of tasks done
     public GameEventsManager gameManager;
+
+    //Task objects
     public GameObject keypad;
     public GameObject taskObject; 
+
+    //Task Code
     public int codeLength;
     float codeResetTime;
     bool isResetting = false;
@@ -23,8 +32,6 @@ public class KeypadTask : MonoBehaviour
         {
             code += Random.Range(1,10);
         }
-
-        //gameManager.tasksCompleted += 1;
 
         cardCode.text = code;
         inputCode.text = string.Empty; 

@@ -8,27 +8,32 @@ using UnityEngine.UI;
 
 public class GameEventsManager : MonoBehaviour
 {
+
+    [Header("GameObjects")]
     public static GameEventsManager instance { get; private set; }
     public GameObject elevator;
     public GameObject player;
     public GameObject winning;
-    //enemyController monsterAI;
     public GameObject monster;
     public GameObject allTasksCompleted;
+    public Text numberOfTasksLeft;
+
     DescendingCage elevatorScript;
 
+    [Header("Events?")]
     public InputEvents inputEvents;
     public PlayerEvents playerEvents;
     public QuestEvents questEvents;
     public MiscEvents miscEvents;
     public GoldEvents goldEvents;
 
+    [Header("Menus")]
     public GameObject PauseMenu;
     public GameObject KeypadMenu, KeypadMenu1, KeypadMenu2, KeypadMenu3;
     float originalTimeScale;
 
+    [Header("Tasks")]
     public int tasksRemaining = 0;
-    public Text numberOfTasksLeft;
 
     public enum gameState
     {
@@ -42,8 +47,6 @@ public class GameEventsManager : MonoBehaviour
     {
         originalTimeScale = Time.timeScale;
         currentState = gameState.Normal;
-
-        //elevatorScript = elevator.GetComponent<DescendingCage>();
 
         if (instance != null)
         {

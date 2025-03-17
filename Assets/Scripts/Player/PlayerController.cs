@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     public float crouchSpeed;
     public float crouchYScale;
     float startYScale;
-    //public bool crouching;
 
     [Header("PlayerStats")]
     public int lives = 3;
@@ -39,10 +38,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Timers")]
     public float walkingSound_Timer = 0;
-
-    [Header("Audio")]
-    public AudioSource normalFootSteps, sprintingFootSteps;
-    public AudioClip walkingSound, sprintingSound;
 
     [Header("Booleans")]
     public static bool playerIsSprinting;
@@ -80,11 +75,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    Debug.Log("Walking is: " + playerIsWalking);
-    Debug.Log("Sprinting is: " + playerIsSprinting);
-    Debug.Log("Crouching is: " + playerIsCrouching);
-
         //ground check -- 0.5f is half the players height and 0.2f is extra length
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, Ground);
 
@@ -132,13 +122,13 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        walkingSound_Timer -= Time.fixedDeltaTime;
+        walkingSound_Timer -= Time.deltaTime;
 
         //Walking sound
         if (walkingSound_Timer <= 0 && walking)
         {
-            normalFootSteps.PlayOneShot(walkingSound);
-            walkingSound_Timer = 3.5f;
+            SoundManager.PlaySound(SoundType.Player_Walking);
+            walkingSound_Timer = 0.475f;
         }
 
         // Jumping
