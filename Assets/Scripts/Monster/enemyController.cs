@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class enemyController : MonoBehaviour
 {
-    //AI Pathing
+    [Header("AI Pathing")]
     public NavMeshAgent ai;
     public List<Transform> destinations;
     public Transform player;
@@ -14,21 +14,30 @@ public class enemyController : MonoBehaviour
     Transform currentDest;
     Vector3 dest;
     public float aiDistance;
-    
 
-    //Monster Stats
+    [Header("Monster Stats")]
     public float walkSpeed, chaseSpeed, minIdleTime, maxIdleTime, idleTime, sightDistance, catchDistance, chaseTime, minChaseTime, maxChaseTime, jumpscareTime;
+    public string deathScene;
 
+    [Header("Booleans")]
     public bool walking, chasing;
     public static bool endGame;
-    public string deathScene;
+
     public Animator aiAnim;
     public GameObject hideText, stopHideText;
 
-    //Audio
-    //public AudioSource monsterWalking;
-    //public AudioSource monsterChasing;
-    //public AudioSource monsterSeesPlayer;
+    [Header("Timers")]
+    float walkingAudio_Timer = 0f;
+    float runningAudio_Timer = 0f;
+
+    [Header("Audio")]
+    public AudioSource monsterWalking;
+    public AudioSource monsterRunning;
+    public AudioSource monsterChaseTheme;
+
+    public AudioClip walking_monsterSound;
+    public AudioClip running_monsterSound;
+    public AudioClip chasing_monsterSound;
 
     void Start()
     {
@@ -62,15 +71,18 @@ public class enemyController : MonoBehaviour
         //if chasing the player
         if (chasing == true)
         {
-            //its destination becomes the player 
+            //its destination becomes the player and speed changes
             dest = player.position;
             ai.destination = dest;
             ai.speed = chaseSpeed;
+
+            //RunningAudio();
+
             //aiAnim.ResetTrigger("walk");
             //aiAnim.ResetTrigger("idle");
             //aiAnim.SetTrigger("sprint");
+
             //distance between player and enemy
-            //if enemy catches player
             if (aiDistance <= catchDistance)
             {
                 //player dies and plays jumpscare then loads selected scene 
@@ -92,9 +104,22 @@ public class enemyController : MonoBehaviour
             dest = currentDest.position;
             ai.destination = dest;
             ai.speed = walkSpeed;
+
+            walkingAudio_Timer -= Time.fixedDeltaTime;
+
+            //Walking sound
+            if (walkingAudio_Timer <= 0 && walking)
+            {
+                monsterWalking.PlayOneShot(walking_monsterSound);
+                walkingAudio_Timer = 2f;
+            }
+
+            //WalkingAudio();
+
             //aiAnim.ResetTrigger("sprint");
             //aiAnim.ResetTrigger("idle");
             //aiAnim.SetTrigger("walk");
+
             //if reached destination, become idle there then choose next destination randomly
             if (ai.remainingDistance <= ai.stoppingDistance + 0.1f)
             {
@@ -141,5 +166,27 @@ public class enemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(jumpscareTime);
         SceneManager.LoadScene(deathScene);
+    }
+    public void WalkingAudio()
+    {
+        walkingAudio_Timer -= Time.fixedDeltaTime;
+
+        //Walking sound
+        if (walkingAudio_Timer <= 0 && walking)
+        {
+            monsterWalking.PlayOneShot(walking_monsterSound);
+            walkingAudio_Timer = 2.4f;
+        }
+    }
+    public void RunningAudio()
+    {
+        runningAudio_Timer -= Time.fixedDeltaTime;
+
+        //Running sound
+        if (runningAudio_Timer <= 0 && walking)
+        {
+            monsterRunning.PlayOneShot(running_monsterSound);
+            runningAudio_Timer = 4f;
+        }
     }
 }

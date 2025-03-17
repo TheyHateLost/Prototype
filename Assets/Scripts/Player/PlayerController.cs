@@ -1,15 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float walkSpeed;
     public float sprintSpeed;
     float currentMoveSpeed;
-    public AudioSource normalFootSteps, sprintingFootSteps;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -37,6 +37,13 @@ public class PlayerController : MonoBehaviour
     public KeyCode pauseMenuKey = KeyCode.Escape;
     public KeyCode crouchKey = KeyCode.C;
 
+    [Header("Timers")]
+    public float walkingSound_Timer = 0;
+
+    [Header("Audio")]
+    public AudioSource normalFootSteps, sprintingFootSteps;
+    public AudioClip walkingSound, sprintingSound;
+
     public Transform orientation;
     Vector3 spawnPoint;
     Rigidbody rb;
@@ -47,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject taskMenu;
+
+    bool walking;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -69,8 +78,9 @@ public class PlayerController : MonoBehaviour
         //ground check -- 0.5f is half the players height and 0.2f is extra length
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, Ground);
 
-        //horizontalInput = Input.GetAxisRaw("Horizontal");
-        //verticalInput = Input.GetAxisRaw("Vertical");
+        walking = Mathf.Abs(Input.GetAxisRaw("Horizontal")) + Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.2f;
+
+        Debug.Log(walking);
 
         MyInput();
         speedControl();
@@ -114,25 +124,14 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        /*//Walking and Sprinting sounds
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        walkingSound_Timer -= Time.fixedDeltaTime;
+
+        //Walking sound
+        if (walkingSound_Timer <= 0 && walking)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                normalFootSteps.enabled = false;
-                sprintingFootSteps.enabled = true;
-            }
-            else
-            {
-                normalFootSteps.enabled = true;
-                sprintingFootSteps.enabled = false;
-            }
+            normalFootSteps.PlayOneShot(walkingSound);
+            walkingSound_Timer = 3.5f;
         }
-        else
-        {
-            normalFootSteps.enabled = false;
-            sprintingFootSteps.enabled = false;
-        }*/
 
         // Jumping
         if (Input.GetKey(KeyCode.Space) && readyToJump && grounded && crouching == false)

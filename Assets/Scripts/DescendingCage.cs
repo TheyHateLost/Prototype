@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.XR;
-//using static StateRotation;
 using System.Linq;
 
 public class DescendingCage: MonoBehaviour
 {
-    //Will NOT MOVE at start, activated by player collision, waits only ATSTOP until player leaves 
-    //Will MOVE between destinations (back and forth) as long as player is on it
-    //Will CONTINUE on its path when player leaves, then RETURN
-
+    //Platform destinations
     public List<Vector3> Destinations;
     private int CurrentDest;
+
+    //Platform Speeds
     public float Speed = 0.1f;
     public float returnSpeed = 0.5f;
+
+    //List of players/objects that will stay on the platform
     private List<Transform> Riders = new List<Transform>();
+
+
     private bool playerIsOn = false;
     public float DestTimer = 4;
     float destTimer;
@@ -61,8 +63,10 @@ public class DescendingCage: MonoBehaviour
                 break;
         }
     }
-    private void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision other)
     {
+        playerIsOn = true;
+
         if (!Riders.Contains(other.transform))
             Riders.Add(other.transform);
 
@@ -75,16 +79,14 @@ public class DescendingCage: MonoBehaviour
             }
         }
         platMode = platformMode.MOVING;
-
-        playerIsOn = true;
     }
 
-    private void OnCollisionExit(Collision other)
+    void OnCollisionExit(Collision other)
     {
-        Riders.Remove(other.transform);
         playerIsOn = false;
+        Riders.Remove(other.transform);
 
-        //Call the elevator back after a certain amount of time
+        //Calls platform back if player is not on it 
         Invoke("SetState2AtStop", elevatorCallBackSpeed);
     }
 
@@ -136,10 +138,13 @@ public class DescendingCage: MonoBehaviour
         }
     }
 
-    //Bugfix: sets platform back to ATSTOP when player gets back on platform when platform is at its destination
+    //Bugfix: sets state to ATSTOP when player gets back on platform when reached the destination
     void SetState2AtStop()
     {
-        destTimer = DestTimer;
-        platMode = platformMode.ATSTOP;
+        if (playerIsOn == false)
+        {
+            destTimer = DestTimer;
+            platMode = platformMode.ATSTOP;
+        }
     }
 }
