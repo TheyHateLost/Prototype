@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public float crouchSpeed;
     public float crouchYScale;
     float startYScale;
-    public bool crouching;
+    //public bool crouching;
 
     [Header("PlayerStats")]
     public int lives = 3;
@@ -44,6 +44,11 @@ public class PlayerController : MonoBehaviour
     public AudioSource normalFootSteps, sprintingFootSteps;
     public AudioClip walkingSound, sprintingSound;
 
+    [Header("Booleans")]
+    public static bool playerIsSprinting;
+    public static bool playerIsCrouching;
+    public static bool playerIsWalking;
+
     public Transform orientation;
     Vector3 spawnPoint;
     Rigidbody rb;
@@ -61,7 +66,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         readyToJump = true;
-        crouching = false;
+        playerIsCrouching = false;
         currentMoveSpeed = walkSpeed;
 
         spawnPoint = transform.position;
@@ -75,12 +80,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    Debug.Log("Walking is: " + playerIsWalking);
+    Debug.Log("Sprinting is: " + playerIsSprinting);
+    Debug.Log("Crouching is: " + playerIsCrouching);
+
         //ground check -- 0.5f is half the players height and 0.2f is extra length
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, Ground);
 
         walking = Mathf.Abs(Input.GetAxisRaw("Horizontal")) + Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.2f;
-
-        Debug.Log(walking);
 
         MyInput();
         speedControl();
@@ -134,24 +142,24 @@ public class PlayerController : MonoBehaviour
         }
 
         // Jumping
-        if (Input.GetKey(KeyCode.Space) && readyToJump && grounded && crouching == false)
+        if (Input.GetKey(KeyCode.Space) && readyToJump && grounded && playerIsCrouching == false)
         {
             Jump();
         }
 
         // Start Crouch
-        if (Input.GetKeyDown(crouchKey) && grounded && crouching == false)
+        if (Input.GetKeyDown(crouchKey) && grounded && playerIsCrouching == false)
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-            crouching = true;
+            playerIsCrouching = true;
         }
 
         // Stop Crouch
-        if (Input.GetKeyUp(crouchKey) && grounded && crouching == true)
+        if (Input.GetKeyUp(crouchKey) && grounded && playerIsCrouching == true)
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-            crouching = false;
+            playerIsCrouching = false;
         }
 
         // Pausing
@@ -182,25 +190,35 @@ public class PlayerController : MonoBehaviour
 
     void PlayerMovement()
     {
-
         rb.AddForce(moveDirection.normalized * currentMoveSpeed * 10f, ForceMode.Force);
         //calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        // Mode - Climbing
-        if (crouching == true)
+        // Mode - Crouching
+        if (playerIsCrouching == true)
         {
             currentMoveSpeed = crouchSpeed;
         }
         // Mode - Sprinting
-        else if (grounded && Input.GetKey(KeyCode.LeftShift) && crouching == false)
+        else if (grounded && Input.GetKey(KeyCode.LeftShift) && playerIsCrouching == false)
         {
             currentMoveSpeed = sprintSpeed;
-
+            playerIsSprinting = true;
         }
         else
         {
             currentMoveSpeed = walkSpeed;
+            playerIsSprinting = false;
+        }
+
+        //Walking Boolean
+        if (walking)
+        {
+            playerIsWalking = true;
+        }
+        else
+        {
+            playerIsWalking = false;
         }
     }
 
