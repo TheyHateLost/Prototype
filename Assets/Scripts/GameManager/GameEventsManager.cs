@@ -20,13 +20,6 @@ public class GameEventsManager : MonoBehaviour
 
     DescendingCage elevatorScript;
 
-    [Header("Events?")]
-    public InputEvents inputEvents;
-    public PlayerEvents playerEvents;
-    public QuestEvents questEvents;
-    public MiscEvents miscEvents;
-    public GoldEvents goldEvents;
-
     [Header("Menus")]
     public GameObject PauseMenu;
     public GameObject KeypadMenu, KeypadMenu1, KeypadMenu2, KeypadMenu3;
@@ -54,12 +47,6 @@ public class GameEventsManager : MonoBehaviour
         }
         instance = this;
 
-        // initialize all events
-        inputEvents = new InputEvents();
-        playerEvents = new PlayerEvents();
-        questEvents = new QuestEvents();
-        goldEvents = new GoldEvents();
-        miscEvents = new MiscEvents();
     }
 
     void Update()
