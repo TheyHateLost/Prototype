@@ -32,17 +32,17 @@ public class PlayerController : MonoBehaviour
     public float groundDrag;
 
     [Header("Keybinds")]
-    public KeyCode taskMenuKey = KeyCode.Tab;
-    public KeyCode pauseMenuKey = KeyCode.Escape;
+    public KeyCode toggleMenu = KeyCode.Tab;
+    public KeyCode togglePause = KeyCode.Escape;
     public KeyCode crouchKey = KeyCode.C;
 
     [Header("Timers")]
     public float walkingSound_Timer = 0;
+    public float maxSprintTime = 5;
+    float sprintTime;
 
     [Header("Booleans")]
-    public static bool playerIsSprinting;
-    public static bool playerIsCrouching;
-    public static bool playerIsWalking;
+    public static bool sprinting, crouching, walking, cannotSprint;
 
     public Transform orientation;
     Vector3 spawnPoint;
@@ -55,14 +55,16 @@ public class PlayerController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject taskMenu;
 
-    bool walking;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         readyToJump = true;
-        playerIsCrouching = false;
+        crouching = false;
+        cannotSprint = false;
         currentMoveSpeed = walkSpeed;
+        sprinting = false;
+
+        sprintTime = maxSprintTime;
 
         spawnPoint = transform.position;
 
@@ -91,6 +93,8 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearDamping = 0;
         }
+
+        Debug.Log(sprintTime);
     }
 
     private void FixedUpdate()
@@ -117,6 +121,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Here are the controls that switch the player to different movements 
+    //and activate objects with buttons
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -127,33 +133,35 @@ public class PlayerController : MonoBehaviour
         //Walking sound
         if (walkingSound_Timer <= 0 && walking)
         {
-            SoundManager.PlaySound(SoundType.Player_Walking);
+            SoundManager.PlaySound(SoundType.Player_Walking, 1f);
             walkingSound_Timer = 0.475f;
         }
 
         // Jumping
-        if (Input.GetKey(KeyCode.Space) && readyToJump && grounded && playerIsCrouching == false)
+        if (Input.GetKey(KeyCode.Space) && readyToJump && grounded && crouching == false)
         {
             Jump();
         }
 
         // Start Crouch
-        if (Input.GetKeyDown(crouchKey) && grounded && playerIsCrouching == false)
+        if (Input.GetKeyDown(crouchKey) && grounded && crouching == false)
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-            playerIsCrouching = true;
+            crouching = true;
+            cannotSprint = true;
         }
 
         // Stop Crouch
-        if (Input.GetKeyUp(crouchKey) && grounded && playerIsCrouching == true)
+        if (Input.GetKeyUp(crouchKey) && grounded && crouching == true)
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-            playerIsCrouching = false;
+            crouching = false;
+            cannotSprint = false;
         }
 
         // Pausing
-        if (Input.GetKeyDown(pauseMenuKey))
+        if (Input.GetKeyDown(togglePause))
         {
             if(pauseMenu.activeInHierarchy)
             {
@@ -165,7 +173,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         // OtherMenu
-        if (Input.GetKeyDown(taskMenuKey))
+        if (Input.GetKeyDown(toggleMenu))
         {
             if (taskMenu.activeInHierarchy)
             {
@@ -177,38 +185,60 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    //Here is wherre the player movement is calculated
+    //Crouching, sprinting, and walking
     void PlayerMovement()
     {
         rb.AddForce(moveDirection.normalized * currentMoveSpeed * 10f, ForceMode.Force);
         //calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        // Mode - Crouching
-        if (playerIsCrouching == true)
+        //Switch to crouching
+        if (crouching == true)
         {
             currentMoveSpeed = crouchSpeed;
         }
-        // Mode - Sprinting
-        else if (grounded && Input.GetKey(KeyCode.LeftShift) && playerIsCrouching == false)
+
+        //Switch to sprinting
+        else if (grounded && Input.GetKey(KeyCode.LeftShift) && cannotSprint == false && crouching == false)
         {
+            sprintTime -=  1 * Time.fixedDeltaTime;
+
             currentMoveSpeed = sprintSpeed;
-            playerIsSprinting = true;
+            sprinting = true;
+
+            if (sprintTime <= 0)
+            {
+                cannotSprint = true;
+                sprinting = false;
+                currentMoveSpeed = walkSpeed;
+            }
+            else
+            {
+                sprinting = true;
+                cannotSprint = false;
+            }
         }
-        else
+
+        /*if (!Input.GetKey(KeyCode.LeftShift) && grounded && crouching == false && sprinting == false)
         {
             currentMoveSpeed = walkSpeed;
-            playerIsSprinting = false;
-        }
+        }*/
 
         //Walking Boolean
         if (walking)
         {
-            playerIsWalking = true;
+            walking = true;
         }
         else
         {
-            playerIsWalking = false;
+            walking = false;
+        }
+
+        //Recharges sprint when not sprinting
+        if (sprintTime < maxSprintTime && sprinting == false)
+        {
+            sprintTime += 1 * Time.fixedDeltaTime;
         }
     }
 

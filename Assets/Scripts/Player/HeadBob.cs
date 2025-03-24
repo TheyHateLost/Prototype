@@ -23,15 +23,15 @@ public class HeadBob : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (PlayerController.playerIsWalking == true)
+        if (PlayerController.walking == true)
         {
             normalHeadBob();
         }
-        if (PlayerController.playerIsSprinting == true)
+        if (PlayerController.sprinting == true)
         {
             sprintingHeadBob();
         }
-        if (PlayerController.playerIsSprinting == true)
+        if (PlayerController.sprinting == true)
         {
             crouchingHeadBob();
         }

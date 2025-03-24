@@ -16,6 +16,7 @@ public class enemyController : MonoBehaviour
     Transform currentDest;
     Vector3 dest;
     public float aiDistance;
+    float extraRotationSpeed;
 
     [Header("Monster Stats")]
     public float walkSpeed, chaseSpeed, minIdleTime, maxIdleTime, idleTime, sightDistance, catchDistance, chaseTime, minChaseTime, maxChaseTime, jumpscareTime;
@@ -39,6 +40,7 @@ public class enemyController : MonoBehaviour
     }
     void Update()
     {
+        extraRotation();
         Vector3 direction = (player.position - transform.position).normalized;
         RaycastHit hit;
         aiDistance = Vector3.Distance(player.position, this.transform.position);
@@ -92,9 +94,6 @@ public class enemyController : MonoBehaviour
             chasing = false;
         }
     }
-
-
-
 
     public void chasePlayer()
     {
@@ -167,7 +166,11 @@ public class enemyController : MonoBehaviour
         currentDest = destinations[Random.Range(0, destinations.Count)];
     }
 
-
+    void extraRotation()
+    {
+        Vector3 lookrotation = ai.steeringTarget - transform.position;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookrotation), extraRotationSpeed * Time.deltaTime);
+    }
 
     //Routines
     IEnumerator chaseRoutine()

@@ -39,5 +39,4 @@ public class SoundManager : MonoBehaviour
         //instance.audioSource.PlayOneShot(clips, volume);
         instance.audioSource.PlayOneShot(instance.soundList[(int)sound], volume);
     }
-
 }
