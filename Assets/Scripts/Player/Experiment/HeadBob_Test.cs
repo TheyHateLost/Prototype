@@ -2,37 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeadBob : MonoBehaviour
-{    
+public class HeadBob_Test : MonoBehaviour
+{   
     private float timer = 0.0f;
 
-    //How fast the camera bobs
-    [Header("Bobbing Speed")]
-    public float normalBobbingSpeed = 0.05f;
-    public float sprintingBobbingSpeed = 0.05f;
-    public float crouchingBobbingSpeed = 0.05f;
+    [Header("Walk Head Bob")]
+    public float walkBobSpeed = 0.05f;
+    public float walkBobAmount = 0.04f;
 
-    //How strong the bob is
-    [Header("Bobbing Strength")]
-    public float normalBobbingAmount = 0.04f;
-    public float sprintingBobbingAmount = 0.04f;
-    public float crouchingBobbingAmount = 0.04f;
+    [Header("Sprint Head Bob")]
+    public float sprintBobSpeed = 0.05f;
+    public float sprintBobAmount = 0.04f;
+
+    [Header("Crouch Head Bob")]
+    public float crouchBobSpeed = 0.05f;
+    public float crouchBobAmount = 0.04f;
 
     //Y scale of the camera(height of the cam)
-    [Header("Height of Cam")]
     public float midpoint = 0.96f;
 
     void FixedUpdate()
     {
-        if (PlayerController.walking == true)
+        if (StatePlayer_Test.walking == true)
         {
             normalHeadBob();
         }
-        if (PlayerController.sprinting == true)
+        if (StatePlayer_Test.sprinting == true)
         {
             sprintingHeadBob();
         }
-        if (PlayerController.crouching == true)
+        if (StatePlayer_Test.crouching == true)
         {
             crouchingHeadBob();
         }
@@ -40,6 +39,7 @@ public class HeadBob : MonoBehaviour
         {
             normalHeadBob();
         }
+
     }
 
     private void normalHeadBob()
@@ -57,7 +57,7 @@ public class HeadBob : MonoBehaviour
         else
         {
             waveslice = Mathf.Sin(timer);
-            timer = timer + normalBobbingSpeed;
+            timer = timer + walkBobSpeed;
             if (timer > Mathf.PI * 2)
             {
                 timer = timer - (Mathf.PI * 2);
@@ -65,7 +65,7 @@ public class HeadBob : MonoBehaviour
         }
         if (waveslice != 0)
         {
-            float translateChange = waveslice * normalBobbingAmount;
+            float translateChange = waveslice * walkBobAmount;
             float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
             translateChange = totalAxes * translateChange;
@@ -94,7 +94,7 @@ public class HeadBob : MonoBehaviour
         else
         {
             waveslice = Mathf.Sin(timer);
-            timer = timer + sprintingBobbingSpeed;
+            timer = timer + sprintBobSpeed;
             if (timer > Mathf.PI * 2)
             {
                 timer = timer - (Mathf.PI * 2);
@@ -102,7 +102,7 @@ public class HeadBob : MonoBehaviour
         }
         if (waveslice != 0)
         {
-            float translateChange = waveslice * sprintingBobbingAmount;
+            float translateChange = waveslice * sprintBobAmount;
             float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
             translateChange = totalAxes * translateChange;
@@ -130,7 +130,7 @@ public class HeadBob : MonoBehaviour
         else
         {
             waveslice = Mathf.Sin(timer);
-            timer = timer + crouchingBobbingSpeed;
+            timer = timer + crouchBobSpeed;
             if (timer > Mathf.PI * 2)
             {
                 timer = timer - (Mathf.PI * 2);
@@ -138,7 +138,7 @@ public class HeadBob : MonoBehaviour
         }
         if (waveslice != 0)
         {
-            float translateChange = waveslice * crouchingBobbingAmount;
+            float translateChange = waveslice * crouchBobAmount;
             float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
             totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
             translateChange = totalAxes * translateChange;

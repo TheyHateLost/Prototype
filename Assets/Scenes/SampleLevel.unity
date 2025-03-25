@@ -6928,7 +6928,6 @@ GameObject:
   - component: {fileID: 378092045}
   - component: {fileID: 378092044}
   - component: {fileID: 378092043}
-  - component: {fileID: 378092042}
   m_Layer: 5
   m_Name: QuestLogScrollingList
   m_TagString: Untagged
@@ -6958,18 +6957,6 @@ RectTransform:
   m_AnchoredPosition: {x: -229, y: 0}
   m_SizeDelta: {x: 275, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &378092042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378092040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d70259e5f8904544193c35fb035cb25d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &378092043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7690,14 +7677,13 @@ GameObject:
   m_Component:
   - component: {fileID: 401691009}
   - component: {fileID: 401691011}
-  - component: {fileID: 401691010}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &401691009
 Transform:
   m_ObjectHideFlags: 0
@@ -7713,18 +7699,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 530317771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &401691010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401691008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e81ea400364a9b4286a959061cc32ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &401691011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7752,7 +7726,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 401691010}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
         m_MethodName: QuestLogTogglePressed
         m_Mode: 0
@@ -13723,6 +13697,7 @@ GameObject:
   - component: {fileID: 743013652}
   - component: {fileID: 743013651}
   - component: {fileID: 743013650}
+  - component: {fileID: 743013657}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -13753,7 +13728,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743013648}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 510926df8e482bf499b94b4084991d17, type: 3}
   m_Name: 
@@ -13919,6 +13894,25 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &743013657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743013648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35c08c1f01bd2840a8eff6a6ed6b609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkBobSpeed: 0.12
+  walkBobAmount: 0.09
+  sprintBobSpeed: 0.16
+  sprintBobAmount: 0.155
+  crouchBobSpeed: 0.15
+  crouchBobAmount: 0.05
+  midpoint: 0.96
 --- !u!1 &750653589
 GameObject:
   m_ObjectHideFlags: 0
@@ -20714,9 +20708,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 43ed7a70cf622d3469037f1495443a52, type: 3}
+  - {fileID: 8300000, guid: 43ed7a70cf622d3469037f1495443a52, type: 3}
+  - {fileID: 8300000, guid: 43ed7a70cf622d3469037f1495443a52, type: 3}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!82 &1040788728
@@ -21223,6 +21217,7 @@ GameObject:
   - component: {fileID: 1061068884}
   - component: {fileID: 1061068883}
   - component: {fileID: 1061068882}
+  - component: {fileID: 1061068888}
   m_Layer: 0
   m_Name: Player_Test
   m_TagString: Player
@@ -21264,7 +21259,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061068881}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d9da4e682c6d8f4096b63b4459adfde, type: 3}
   m_Name: 
@@ -21383,6 +21378,43 @@ Transform:
   - {fileID: 743013649}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1061068888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061068881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584622792f359aa4bb35d95336177af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 5
+  sprintSpeed: 10
+  crouchSpeed: 3
+  jumpForce: 0
+  jumpCooldown: 0
+  airMultiplier: 0.1
+  crouchYScale: 0.5
+  lives: 3
+  playerHeight: 2
+  Ground:
+    serializedVersion: 2
+    m_Bits: 8
+  groundDrag: 5
+  toggleMenu: 9
+  togglePause: 27
+  crouchKey: 99
+  sprintKey: 304
+  jumpKey: 32
+  walkingSound_Timer: 0
+  sprintSound_Timer: 0
+  crouchSound_Timer: 0
+  maxSprintTime: 5
+  orientation: {fileID: 2106242474}
+  pauseMenu: {fileID: 450507927}
+  taskMenu: {fileID: 1124513306}
 --- !u!1 &1066803577
 GameObject:
   m_ObjectHideFlags: 0
@@ -22169,7 +22201,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1124513307}
-  - component: {fileID: 1124513308}
   m_Layer: 5
   m_Name: QuestLogUI
   m_TagString: Untagged
@@ -22197,18 +22228,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1124513308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124513306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55a4f918ee503fe4288314d70da54bed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1127236557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6476168312960709322, guid: 0849ac2c46130bf4b938713f1596fdf4, type: 3}
@@ -24413,7 +24432,7 @@ MonoBehaviour:
   togglePause: 27
   crouchKey: 99
   walkingSound_Timer: 0
-  maxSprintTime: 0
+  maxSprintTime: 5
   orientation: {fileID: 1116640352}
   pauseMenu: {fileID: 450507927}
   taskMenu: {fileID: 1124513306}
