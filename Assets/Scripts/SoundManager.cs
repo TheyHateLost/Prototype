@@ -10,8 +10,8 @@ public enum SoundType
     Player_Walking,
     Player_Sprinting,
     Player_Crouching,
-    Monster_Walking,
-    Monster_Running,
+    Monster_Wandering,
+    Monster_Chasing,
     Monster_SeesPlayer,
 }
 [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]

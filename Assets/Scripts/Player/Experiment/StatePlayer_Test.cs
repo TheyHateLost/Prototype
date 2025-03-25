@@ -10,6 +10,7 @@ public class StatePlayer_Test : MonoBehaviour
     public float walkSpeed;
     public float sprintSpeed;
     public float crouchSpeed;
+    [SerializeField] float sprintRechargeDelay = 2;
     float currentMoveSpeed;
     float desiredMoveSpeed;
 
@@ -22,9 +23,8 @@ public class StatePlayer_Test : MonoBehaviour
     [Header("Crouching")]
     public float crouchYScale;
     float startYScale;
-
-    [Header("PlayerStats")]
-    public int lives = 3;
+    [SerializeField] float distanceAbovePlayer = 0.5f;
+    bool canStand;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -45,7 +45,7 @@ public class StatePlayer_Test : MonoBehaviour
     float sprintTime;
 
     [Header("Booleans")]
-    public static bool sprinting, crouching, walking, cannotSprint, playerIsMoving;
+    public static bool sprinting, crouching, walking, canSprint, playerIsMoving;
 
     public Transform orientation;
     Vector3 spawnPoint;
@@ -63,7 +63,7 @@ public class StatePlayer_Test : MonoBehaviour
     {
         readyToJump = true;
         crouching = false;
-        cannotSprint = false;
+        canSprint = true;
         desiredMoveSpeed = walkSpeed;
         sprinting = false;
 
@@ -89,8 +89,8 @@ public class StatePlayer_Test : MonoBehaviour
 
         MyInput();
         speedControl();
-        SprintTimer();
-        ResetSprintTimer();
+        LimitSprint();
+        RechargeSprint();
 
         if (grounded)
         {
@@ -101,7 +101,8 @@ public class StatePlayer_Test : MonoBehaviour
             rb.linearDamping = 0;
         }
 
-        Debug.Log(currentMoveSpeed);
+        //Debug.Log(currentMoveSpeed);
+        Debug.Log(sprinting);
     }
 
     private void FixedUpdate()
@@ -157,16 +158,27 @@ public class StatePlayer_Test : MonoBehaviour
             }
         }
         
+        // Detects if crouching
         if (Input.GetKey(crouchKey) && grounded)
         {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, Vector3.up, out hit, distanceAbovePlayer))
+            {
+                canStand = false;
+            }
+            else
+            {
+                canStand = true;
+            }
+
             // Crouching sound
             if (crouchSound_Timer <= 0 && crouching == true && playerIsMoving == true)
             {
-                SoundManager.PlaySound(SoundType.Player_Crouching, 1f);
+                SoundManager.PlaySound(SoundType.Player_Crouching, 0.35f);
                 crouchSound_Timer = 0.7f;
             }
         }
-
 
         // Start Crouching
         if (Input.GetKeyDown(crouchKey) && grounded)
@@ -183,7 +195,7 @@ public class StatePlayer_Test : MonoBehaviour
         }
 
         // Stop Crouching
-        else if (Input.GetKeyUp(crouchKey) && grounded)
+        else if (Input.GetKeyUp(crouchKey) && grounded && canStand == true)
         {
             desiredMoveSpeed = walkSpeed;
 
@@ -193,18 +205,18 @@ public class StatePlayer_Test : MonoBehaviour
         }
 
         // Sprinting
-        else if (Input.GetKey(sprintKey) && grounded && crouching == false && cannotSprint == false)
+        else if (Input.GetKey(sprintKey) && grounded && crouching == false && canSprint == true)
         {
+            sprintTime -= Time.deltaTime;
             desiredMoveSpeed = sprintSpeed;
             sprinting = true;
 
             // Running sound
-            if (sprintSound_Timer <= 0 && sprinting == true && playerIsMoving == true)
+            if (sprintSound_Timer <= 0 && sprinting == true && playerIsMoving == true && canSprint == true)
             {
-                SoundManager.PlaySound(SoundType.Player_Sprinting, 1f);
+                SoundManager.PlaySound(SoundType.Player_Sprinting, 0.6f);
                 sprintSound_Timer = 0.2375f;
             }
-
             Debug.Log("Running");
         }
 
@@ -232,7 +244,7 @@ public class StatePlayer_Test : MonoBehaviour
             // Walking sound
             if (walkingSound_Timer <= 0 && walking == true)
             {
-                SoundManager.PlaySound(SoundType.Player_Walking, 1f);
+                SoundManager.PlaySound(SoundType.Player_Walking, 0.5f);
                 walkingSound_Timer = 0.475f;
             }
         }
@@ -285,27 +297,28 @@ public class StatePlayer_Test : MonoBehaviour
     }
 
     // Limited sprint time
-    void SprintTimer()
+    void LimitSprint()
     {
-        sprintTime -= 1 * Time.deltaTime;
-
         if (sprintTime <= 0)
         {
-            cannotSprint = true;
+            canSprint = false;
+            sprinting = false;
             //desiredMoveSpeed = walkSpeed;
         }
         else
         {
-            cannotSprint = false;
+            canSprint = true;
         }
     }
 
     // Recharges sprint when not running
-    void ResetSprintTimer()
+    IEnumerator RechargeSprint()
     {
+        yield return new WaitForSeconds(sprintRechargeDelay);
+
         if (sprintTime < maxSprintTime && sprinting == false)
         {
-            sprintTime += 1 * Time.deltaTime;
+            sprintTime += Time.deltaTime;
         }
 
         // In case the timer goes above max allowed time
@@ -313,6 +326,8 @@ public class StatePlayer_Test : MonoBehaviour
         {
             sprintTime = maxSprintTime;
         }
+
+        //yield return null;
     }
 }
 

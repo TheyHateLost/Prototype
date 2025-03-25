@@ -23,7 +23,7 @@ public class enemyController : MonoBehaviour
     public string deathScene;
 
     [Header("Booleans")]
-    public bool walking, chasing;
+    public bool wandering, chasing;
     public static bool endGame;
 
     public Animator aiAnim;
@@ -35,7 +35,7 @@ public class enemyController : MonoBehaviour
 
     void Start()
     {
-        walking = true;
+        wandering = true;
         currentDest = destinations[Random.Range(0, destinations.Count)];
     }
     void Update()
@@ -45,14 +45,14 @@ public class enemyController : MonoBehaviour
         RaycastHit hit;
         aiDistance = Vector3.Distance(player.position, this.transform.position);
 
-        //rayCast for detecting the player(its sight)
+        // Player Detection RayCast
         if (Physics.Raycast(transform.position + rayCastOffset, direction, out hit, sightDistance))
         {
-            //if it sees the player
+            // Monster sees player
             if (hit.collider.gameObject.tag == "Player")
             {
-                //start chasing and initiate a chase
-                walking = false;
+                // Initiate Chase
+                wandering = false;
                 StopCoroutine("stayIdle");
                 StopCoroutine("chaseRoutine");
                 StartCoroutine("chaseRoutine");
@@ -64,23 +64,23 @@ public class enemyController : MonoBehaviour
             }
         }
 
-        //if chasing the player
+        // State - Chasing the player
         if (chasing == true)
         {
             chasePlayer();
         }
 
-        //if not chasing player
-        if (walking == true)
+        // State - Wandering the map
+        if (wandering == true)
         {
             walkAround();
 
             //Walking Sound
             walkingAudio_Timer -= Time.deltaTime;
 
-            if (walkingAudio_Timer <= 0 && walking)
+            if (walkingAudio_Timer <= 0)
             {
-                SoundManager.PlaySound(SoundType.Monster_Walking);
+                SoundManager.PlaySound(SoundType.Monster_Wandering, 1f);
                 walkingAudio_Timer = 0.5f;
             }
         }
@@ -90,14 +90,14 @@ public class enemyController : MonoBehaviour
             dest = player.position;
             ai.destination = dest;
             ai.speed = chaseSpeed;
-            walking = false;
+            wandering = false;
             chasing = false;
         }
     }
 
     public void chasePlayer()
     {
-        //its destination becomes the player and speed changes
+        // Change speed and destination becomes player
         dest = player.position;
         ai.destination = dest;
         ai.speed = chaseSpeed;
@@ -108,10 +108,10 @@ public class enemyController : MonoBehaviour
         //aiAnim.ResetTrigger("idle");
         //aiAnim.SetTrigger("sprint");
 
-        //distance between player and enemy
+        // Distance between monster and player - (Monster catches player)
         if (aiDistance <= catchDistance)
         {
-            //player dies and plays jumpscare then loads selected scene 
+            // Kill player and play jumpscare 
             player.gameObject.SetActive(false);
             //aiAnim.ResetTrigger("walk");
             //aiAnim.ResetTrigger("idle");
@@ -125,7 +125,7 @@ public class enemyController : MonoBehaviour
     }
     public void walkAround()
     {
-        //Destination becomes the positions set and anims play
+        // Change speed and Wander to determined destination
         dest = currentDest.position;
         ai.destination = dest;
         ai.speed = walkSpeed;
@@ -135,7 +135,7 @@ public class enemyController : MonoBehaviour
         //aiAnim.ResetTrigger("idle");
         //aiAnim.SetTrigger("walk");
 
-        //Reached destination, idle there then choose next destination randomly
+        // Reached destination, idle there then choose next destination randomly
         if (ai.remainingDistance <= ai.stoppingDistance + 0.1f)
         {
             //aiAnim.ResetTrigger("sprint");
@@ -144,15 +144,13 @@ public class enemyController : MonoBehaviour
             ai.speed = 0;
             StopCoroutine("stayIdle");
             StartCoroutine("stayIdle");
-            walking = false;
+            wandering = false;
         }
     }
 
-
-
     public void stopChase()
     {
-        walking = true;
+        wandering = true;
         chasing = false;
         StopCoroutine("chaseRoutine");
         currentDest = destinations[Random.Range(0, destinations.Count)];
@@ -162,7 +160,7 @@ public class enemyController : MonoBehaviour
     {
         idleTime = Random.Range(minIdleTime, maxIdleTime);
         yield return new WaitForSeconds(idleTime);
-        walking = true;
+        wandering = true;
         currentDest = destinations[Random.Range(0, destinations.Count)];
     }
 
@@ -172,7 +170,7 @@ public class enemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookrotation), extraRotationSpeed * Time.deltaTime);
     }
 
-    //Routines
+    // Routines
     IEnumerator chaseRoutine()
     {
         chaseTime = Random.Range(minChaseTime, maxChaseTime);
@@ -185,14 +183,12 @@ public class enemyController : MonoBehaviour
         yield return new WaitForSeconds(jumpscareTime);
         SceneManager.LoadScene(deathScene);
     }
-
-
     public void RunningAudio()
     {
         runningAudio_Timer -= Time.fixedDeltaTime;
 
-        //Running sound
-        if (runningAudio_Timer <= 0 && walking)
+        // Running sound
+        if (runningAudio_Timer <= 0 && wandering)
         {
             //monsterRunning.PlayOneShot(running_monsterSound);
             runningAudio_Timer = 4f;
