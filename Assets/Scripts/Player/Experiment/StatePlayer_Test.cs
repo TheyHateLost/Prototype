@@ -11,6 +11,7 @@ public class StatePlayer_Test : MonoBehaviour
     public float sprintSpeed;
     public float crouchSpeed;
     [SerializeField] float sprintRechargeDelay = 2;
+    float sprintRechargeTimer;
     float currentMoveSpeed;
     float desiredMoveSpeed;
 
@@ -66,6 +67,7 @@ public class StatePlayer_Test : MonoBehaviour
         canSprint = true;
         desiredMoveSpeed = walkSpeed;
         sprinting = false;
+        sprintRechargeTimer = sprintRechargeDelay;
 
         sprintTime = maxSprintTime;
 
@@ -89,7 +91,7 @@ public class StatePlayer_Test : MonoBehaviour
 
         MyInput();
         speedControl();
-        LimitSprint();
+        //LimitSprint();
         RechargeSprint();
 
         if (grounded)
@@ -159,19 +161,8 @@ public class StatePlayer_Test : MonoBehaviour
         }
         
         // Detects if crouching
-        if (Input.GetKey(crouchKey) && grounded)
+        if (Input.GetKey(crouchKey) && CanCrouch())
         {
-            RaycastHit hit;
-
-            if (Physics.Raycast(transform.position, Vector3.up, out hit, distanceAbovePlayer))
-            {
-                canStand = false;
-            }
-            else
-            {
-                canStand = true;
-            }
-
             // Crouching sound
             if (crouchSound_Timer <= 0 && crouching == true && playerIsMoving == true)
             {
@@ -181,7 +172,7 @@ public class StatePlayer_Test : MonoBehaviour
         }
 
         // Start Crouching
-        if (Input.GetKeyDown(crouchKey) && grounded)
+        if (Input.GetKeyDown(crouchKey) && CanCrouch())
         {
             desiredMoveSpeed = crouchSpeed;
 
@@ -195,18 +186,33 @@ public class StatePlayer_Test : MonoBehaviour
         }
 
         // Stop Crouching
-        else if (Input.GetKeyUp(crouchKey) && grounded && canStand == true)
+        else if (Input.GetKeyUp(crouchKey) && grounded)
         {
-            desiredMoveSpeed = walkSpeed;
+            RaycastHit hit;
 
-            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+            if (Physics.Raycast(transform.position, Vector3.up, out hit, distanceAbovePlayer))
+            {
+                canStand = false;
+            }
+            else
+            {
+                canStand = true;
+            }
 
-            crouching = false;
+            if (canStand == true)
+            {
+                desiredMoveSpeed = walkSpeed;
+                transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+
+                crouching = false;
+            }
         }
 
         // Sprinting
-        else if (Input.GetKey(sprintKey) && grounded && crouching == false && canSprint == true)
+        else if (Input.GetKey(sprintKey) && grounded && crouching == false && sprintTime > 0f)
         {
+            sprintRechargeTimer = sprintRechargeDelay;
+
             sprintTime -= Time.deltaTime;
             desiredMoveSpeed = sprintSpeed;
             sprinting = true;
@@ -214,7 +220,7 @@ public class StatePlayer_Test : MonoBehaviour
             // Running sound
             if (sprintSound_Timer <= 0 && sprinting == true && playerIsMoving == true && canSprint == true)
             {
-                SoundManager.PlaySound(SoundType.Player_Sprinting, 0.6f);
+                SoundManager.PlaySound(SoundType.Player_Sprinting, 0.6f,Random.Range(0.8f,1.2f));
                 sprintSound_Timer = 0.2375f;
             }
             Debug.Log("Running");
@@ -249,6 +255,12 @@ public class StatePlayer_Test : MonoBehaviour
             }
         }
     }
+
+    public bool CanCrouch()
+    {
+        return grounded;
+    }
+
     // Here is the method used to move the player
     void PlayerMovement()
     {
@@ -312,22 +324,23 @@ public class StatePlayer_Test : MonoBehaviour
     }
 
     // Recharges sprint when not running
-    IEnumerator RechargeSprint()
+    void RechargeSprint()
     {
-        yield return new WaitForSeconds(sprintRechargeDelay);
-
-        if (sprintTime < maxSprintTime && sprinting == false)
+        if (!Input.GetKey(sprintKey) || sprintTime < maxSprintTime)
         {
-            sprintTime += Time.deltaTime;
+             sprintRechargeTimer -= Time.deltaTime;
+
+            if (sprintRechargeTimer <= 0f)
+            {
+                sprintTime += Time.deltaTime;
+            }
         }
 
-        // In case the timer goes above max allowed time
+        /*// In case the timer goes above max allowed time
         if (sprintTime > maxSprintTime)
         {
             sprintTime = maxSprintTime;
-        }
-
-        //yield return null;
+        }*/
     }
 }
 

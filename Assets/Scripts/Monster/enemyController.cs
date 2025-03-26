@@ -30,17 +30,30 @@ public class enemyController : MonoBehaviour
     public GameObject hideText, stopHideText;
 
     [Header("Timers")]
-    float walkingAudio_Timer = 0f;
+    public float walkingAudio_Timer = 0.5f;
     float runningAudio_Timer = 0f;
+
+    public monsterState monsterMode;
+
+    public enum monsterState
+    {
+        Wander,
+        Chase,
+        Idle,
+    }
+
+    
 
     void Start()
     {
+        monsterMode = monsterState.Wander;
+
         wandering = true;
-        currentDest = destinations[Random.Range(0, destinations.Count)];
+        if(destinations.Count > 0)
+            currentDest = destinations[Random.Range(0, destinations.Count)];
     }
     void Update()
     {
-        extraRotation();
         Vector3 direction = (player.position - transform.position).normalized;
         RaycastHit hit;
         aiDistance = Vector3.Distance(player.position, this.transform.position);
@@ -67,24 +80,71 @@ public class enemyController : MonoBehaviour
         // State - Chasing the player
         if (chasing == true)
         {
-            chasePlayer();
+            // Change speed and destination becomes player
+            dest = player.position;
+            ai.destination = dest;
+            ai.speed = chaseSpeed;
+
+            //RunningAudio();
+
+            //aiAnim.ResetTrigger("walk");
+            //aiAnim.ResetTrigger("idle");
+            //aiAnim.SetTrigger("sprint");
+
+            // Distance between monster and player - (Monster catches player)
+            if (aiDistance <= catchDistance)
+            {
+                // Kill player and play jumpscare 
+                player.gameObject.SetActive(false);
+                //aiAnim.ResetTrigger("walk");
+                //aiAnim.ResetTrigger("idle");
+                hideText.SetActive(false);
+                stopHideText.SetActive(false);
+                //aiAnim.ResetTrigger("sprint");
+                //aiAnim.SetTrigger("jumpscare");
+                StartCoroutine(deathRoutine());
+                chasing = false;
+            }
         }
 
         // State - Wandering the map
         if (wandering == true)
         {
-            walkAround();
-
             //Walking Sound
             walkingAudio_Timer -= Time.deltaTime;
 
-            if (walkingAudio_Timer <= 0)
+            if (walkingAudio_Timer <= 0f) 
             {
                 SoundManager.PlaySound(SoundType.Monster_Wandering, 1f);
                 walkingAudio_Timer = 0.5f;
             }
-        }
 
+            // Change speed and Wander to determined destination
+            if (currentDest != null)
+            {
+                dest = currentDest.position;
+                ai.destination = dest;
+                ai.speed = walkSpeed;
+            }
+
+            //Animations
+            //aiAnim.ResetTrigger("sprint");
+            //aiAnim.ResetTrigger("idle");
+            //aiAnim.SetTrigger("walk");
+
+            // Reached destination, idle there then choose next destination randomly
+            if (ai.remainingDistance <= ai.stoppingDistance + 0.1f)
+            {
+                //aiAnim.ResetTrigger("sprint");
+                //aiAnim.ResetTrigger("walk");
+                //aiAnim.SetTrigger("idle");
+                ai.speed = 0;
+                StopCoroutine("stayIdle");
+                StartCoroutine("stayIdle");
+                wandering = false;
+            }
+        }
+        // When tasks complete - know where player is and hunt them
         if (endGame == true)
         {
             dest = player.position;
@@ -92,59 +152,6 @@ public class enemyController : MonoBehaviour
             ai.speed = chaseSpeed;
             wandering = false;
             chasing = false;
-        }
-    }
-
-    public void chasePlayer()
-    {
-        // Change speed and destination becomes player
-        dest = player.position;
-        ai.destination = dest;
-        ai.speed = chaseSpeed;
-
-        //RunningAudio();
-
-        //aiAnim.ResetTrigger("walk");
-        //aiAnim.ResetTrigger("idle");
-        //aiAnim.SetTrigger("sprint");
-
-        // Distance between monster and player - (Monster catches player)
-        if (aiDistance <= catchDistance)
-        {
-            // Kill player and play jumpscare 
-            player.gameObject.SetActive(false);
-            //aiAnim.ResetTrigger("walk");
-            //aiAnim.ResetTrigger("idle");
-            hideText.SetActive(false);
-            stopHideText.SetActive(false);
-            //aiAnim.ResetTrigger("sprint");
-            //aiAnim.SetTrigger("jumpscare");
-            StartCoroutine(deathRoutine());
-            chasing = false;
-        }
-    }
-    public void walkAround()
-    {
-        // Change speed and Wander to determined destination
-        dest = currentDest.position;
-        ai.destination = dest;
-        ai.speed = walkSpeed;
-
-        //Animations
-        //aiAnim.ResetTrigger("sprint");
-        //aiAnim.ResetTrigger("idle");
-        //aiAnim.SetTrigger("walk");
-
-        // Reached destination, idle there then choose next destination randomly
-        if (ai.remainingDistance <= ai.stoppingDistance + 0.1f)
-        {
-            //aiAnim.ResetTrigger("sprint");
-            //aiAnim.ResetTrigger("walk");
-            //aiAnim.SetTrigger("idle");
-            ai.speed = 0;
-            StopCoroutine("stayIdle");
-            StartCoroutine("stayIdle");
-            wandering = false;
         }
     }
 
@@ -161,13 +168,8 @@ public class enemyController : MonoBehaviour
         idleTime = Random.Range(minIdleTime, maxIdleTime);
         yield return new WaitForSeconds(idleTime);
         wandering = true;
-        currentDest = destinations[Random.Range(0, destinations.Count)];
-    }
-
-    void extraRotation()
-    {
-        Vector3 lookrotation = ai.steeringTarget - transform.position;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookrotation), extraRotationSpeed * Time.deltaTime);
+        if(destinations.Count > 0)
+            currentDest = destinations[Random.Range(0, destinations.Count)];
     }
 
     // Routines
