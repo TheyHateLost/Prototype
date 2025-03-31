@@ -115,7 +115,7 @@ public class enemyController : MonoBehaviour
 
             if (walkingAudio_Timer <= 0f) 
             {
-                SoundManager.PlaySound(SoundType.Monster_Wandering, 1f);
+                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_Wandering, 1f, Random.Range(0.6f, 1.2f));
                 walkingAudio_Timer = 0.5f;
             }
 
