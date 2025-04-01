@@ -33,11 +33,6 @@ public class enemyController : MonoBehaviour
     public float walkingAudio_Timer = 0.5f;
     float runningAudio_Timer = 0f;
 
-    [Header("Sounds")]
-    [SerializeField] AudioSource monster;
-    [SerializeField] AudioClip walking_monsterSound;
-    [SerializeField] AudioClip playerSpotted_monsterSound;
-
     void Start()
     {
         wandering = true;
@@ -107,7 +102,7 @@ public class enemyController : MonoBehaviour
 
             if (walkingAudio_Timer <= 0f) 
             {
-                PlaySound(walking_monsterSound, 1f, Random.Range(0.6f, 1.2f));
+                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_Footsteps, 1f, Random.Range(0.6f, 1.2f));
                 walkingAudio_Timer = 0.5f;
             }
 
@@ -187,10 +182,5 @@ public class enemyController : MonoBehaviour
             //monsterRunning.PlayOneShot(running_monsterSound);
             runningAudio_Timer = 4f;
         }
-    }
-    public void PlaySound(AudioClip audioclip, float volume, float pitch)
-    {
-        monster.pitch = pitch;
-        monster.PlayOneShot(audioclip, volume);
     }
 }

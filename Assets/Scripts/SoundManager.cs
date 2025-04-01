@@ -13,8 +13,8 @@ public enum SoundType
     Player_Sprinting = 1,
     Player_Crouching = 2,
     Monster_Wandering = 3,
-    Monster_Chasing = 4,
-    Monster_SeesPlayer = 5,
+    Monster_Footsteps = 4,
+    Monster_SpottedPlayer = 5,
 }
 public enum SoundSource
 {
