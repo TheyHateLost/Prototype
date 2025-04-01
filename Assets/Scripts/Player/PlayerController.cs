@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
                 // Running sound
                 if (sprintSound_Timer <= 0 && sprinting == true && playerIsMoving == true && canSprint == true)
                 {
-                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Sprinting, 0.6f, Random.Range(0.8f, 1.2f));
+                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Sprinting, 0.4f, Random.Range(0.8f, 1.2f));
                     sprintSound_Timer = 0.2375f;
                 }
                 Debug.Log("Running");

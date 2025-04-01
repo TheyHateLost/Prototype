@@ -13,10 +13,9 @@ public enum SoundType
     Player_Sprinting = 1,
     Player_Crouching = 2,
     Monster_Wandering = 3,
-    Monster_Chasing = 4,
-    Monster_SeesPlayer = 5,
+    Monster_Footsteps = 4,
+    Monster_SpottedPlayer = 5,
 }
-
 public enum SoundSource
 {
     Player = 0,
@@ -27,7 +26,6 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] private AudioClip[] soundList;
     private static SoundManager instance;
-    private AudioSource audioSource_old;
     [SerializeField] private AudioSource[] audioSource;
 
     private void Awake()
@@ -36,19 +34,11 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
-        audioSource = GetComponent<AudioSource[]>();
+        //audioSource = GetComponent<AudioSource[]>();
     }
 
     public static void PlaySound(SoundSource source, SoundType sound, float volume = 1, float pitch = 1)
     {
-        //AudioClip[] clips = instance.soundList[(int)sound].Sounds;
-        //AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
-        //instance.audioSource.PlayOneShot(randomClip, volume);
-
-        //instance.audioSource.PlayOneShot(clips, volume);
-
-
-
         //Debug.Log("SOUND: " + sound + " / " + instance.soundList[(int)sound]);
         //instance.audioSource.pitch = pitch;
         //instance.audioSource.PlayOneShot(instance.soundList[(int)sound], volume);
