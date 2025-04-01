@@ -320,11 +320,11 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 1, g: 0.96739584, b: 0.8915094, a: 1}
-  m_Intensity: 6.3
+  m_Color: {r: 1, g: 0.8497518, b: 0.5801887, a: 1}
+  m_Intensity: 6.45
   m_Range: 125.35
-  m_SpotAngle: 72.49661
-  m_InnerSpotAngle: 38.669933
+  m_SpotAngle: 56.86963
+  m_InnerSpotAngle: 42.22152
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
