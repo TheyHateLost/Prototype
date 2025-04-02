@@ -13637,10 +13637,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7786882997510358749, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
-      propertyPath: m_Name
-      value: Ceiling Light (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 7331795247004683497, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 41.8
@@ -13680,6 +13676,10 @@ PrefabInstance:
     - target: {fileID: 7331795247004683497, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7786882997510358749, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
+      propertyPath: m_Name
+      value: Ceiling Light (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14268,6 +14268,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1250100177058205212, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
+      propertyPath: m_Name
+      value: LightOut (11)
+      objectReference: {fileID: 0}
     - target: {fileID: 3914443239611806438, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
       propertyPath: m_LocalPosition.x
       value: 47.6
@@ -14307,10 +14311,6 @@ PrefabInstance:
     - target: {fileID: 3914443239611806438, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1250100177058205212, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
-      propertyPath: m_Name
-      value: LightOut (11)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19472,6 +19472,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1250100177058205212, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
+      propertyPath: m_Name
+      value: LightOut (16)
+      objectReference: {fileID: 0}
     - target: {fileID: 3914443239611806438, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.4
@@ -19511,10 +19515,6 @@ PrefabInstance:
     - target: {fileID: 3914443239611806438, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1250100177058205212, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
-      propertyPath: m_Name
-      value: LightOut (16)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34884,10 +34884,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7786882997510358749, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
-      propertyPath: m_Name
-      value: Ceiling Light (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 7331795247004683497, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 43.3
@@ -34927,6 +34923,10 @@ PrefabInstance:
     - target: {fileID: 7331795247004683497, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7786882997510358749, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
+      propertyPath: m_Name
+      value: Ceiling Light (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39944,7 +39944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6098436800351782912, guid: 3e440d837a4470e4d8fb449e184b172d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -104.5
+      value: -31.5
       objectReference: {fileID: 0}
     - target: {fileID: 6098436800351782912, guid: 3e440d837a4470e4d8fb449e184b172d, type: 3}
       propertyPath: m_LocalRotation.w
