@@ -5205,10 +5205,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 74225966}
     m_Modifications:
-    - target: {fileID: 4152814779312758105, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
-      propertyPath: m_Intensity
-      value: 0.03
-      objectReference: {fileID: 0}
     - target: {fileID: 1250100177058205212, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
       propertyPath: m_Name
       value: LightOut (6)
@@ -5252,6 +5248,10 @@ PrefabInstance:
     - target: {fileID: 3914443239611806438, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152814779312758105, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
+      propertyPath: m_Intensity
+      value: 0.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32333,10 +32333,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 74225966}
     m_Modifications:
-    - target: {fileID: 4152814779312758105, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
-      propertyPath: m_Intensity
-      value: 0.06
-      objectReference: {fileID: 0}
     - target: {fileID: 1250100177058205212, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
       propertyPath: m_Name
       value: LightOut (2)
@@ -32380,6 +32376,10 @@ PrefabInstance:
     - target: {fileID: 3914443239611806438, guid: b7a5b871ee6499e429d0e2d6a5127814, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152814779312758105, guid: 3e71faab616a1eb4ba5b35ab1b9848cb, type: 3}
+      propertyPath: m_Intensity
+      value: 0.06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
