@@ -40,8 +40,6 @@ public class SoundManager : MonoBehaviour
     public static void PlaySound(SoundSource source, SoundType sound, float volume = 1, float pitch = 1)
     {
         //Debug.Log("SOUND: " + sound + " / " + instance.soundList[(int)sound]);
-        //instance.audioSource.pitch = pitch;
-        //instance.audioSource.PlayOneShot(instance.soundList[(int)sound], volume);
         instance.audioSource[(int)source].pitch = pitch;
         instance.audioSource[(int)source].PlayOneShot(instance.soundList[(int)sound], volume);
     }

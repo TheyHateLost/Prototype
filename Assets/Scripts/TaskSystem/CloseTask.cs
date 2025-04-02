@@ -8,7 +8,7 @@ public class CloseTask : MonoBehaviour
     //Closes assigned task UI when leaving collider
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Invisible")
         {
             taskUIToClose.SetActive(false);
         }

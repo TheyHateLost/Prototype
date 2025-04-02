@@ -25,6 +25,7 @@ public class enemyController : MonoBehaviour
     [Header("Booleans")]
     public bool wandering, chasing;
     public static bool endGame;
+    bool playerFound = true;
 
     public Animator aiAnim;
     public GameObject hideText, stopHideText;
@@ -67,6 +68,12 @@ public class enemyController : MonoBehaviour
         // State - Chasing the player
         if (chasing == true)
         {
+            if (playerFound == true)
+            {
+                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_SpottedPlayer, 1f);
+                playerFound = false;
+            }
+
             // Change speed and destination becomes player
             dest = player.position;
             ai.destination = dest;
@@ -97,13 +104,18 @@ public class enemyController : MonoBehaviour
         // State - Wandering the map
         if (wandering == true)
         {
+            if (playerFound == false)
+            {
+                playerFound = true;
+            }
+
             //Walking Sound
             walkingAudio_Timer -= Time.deltaTime;
 
             if (walkingAudio_Timer <= 0f) 
             {
-                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_Footsteps, 1f, Random.Range(0.6f, 1.2f));
-                walkingAudio_Timer = 0.5f;
+                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_Footsteps, 0.6f, Random.Range(0.5f, 1.1f));
+                walkingAudio_Timer = 0.6f;
             }
 
             // Change speed and Wander to determined destination
