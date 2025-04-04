@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class enemyController : MonoBehaviour
 {
-//https://www.youtube.com/watch?v=DU7cgVsU2rM&t=7s
-
     [Header("AI Pathing")]
     public NavMeshAgent ai;
     public List<Transform> destinations;

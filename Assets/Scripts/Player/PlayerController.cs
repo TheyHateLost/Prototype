@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
+    bool readyToJump = true;
 
     [Header("Crouching")]
     public float crouchYScale;
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     float sprintTime;
 
     [Header("Booleans")]
-    public static bool sprinting, crouching, walking, canSprint, playerIsMoving, Paused;
+    public static bool sprinting = false, crouching = false, walking, canSprint = true, playerIsMoving, Paused;
 
     public Transform orientation;
     Vector3 spawnPoint;
@@ -58,15 +58,13 @@ public class PlayerController : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject taskMenu;
+    public GameObject FadeScreen_In;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        readyToJump = true;
-        crouching = false;
-        canSprint = true;
+        FadeScreen_In.SetActive(true);
         desiredMoveSpeed = walkSpeed;
-        sprinting = false;
         sprintRechargeTimer = sprintRechargeDelay;
 
         sprintTime = maxSprintTime;
