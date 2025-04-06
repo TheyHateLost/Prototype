@@ -12,14 +12,17 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ddc3e24a22fc1bc4a94c60963eac24ff
   - enabled: 1
-    path: Assets/Scenes/SampleLevel.unity
-    guid: 9c43a077565d57243b65ab25504fb199
+    path: Assets/Scenes/LS_Level_A.unity
+    guid: 38f458f40c3a15d489875c3d112f5dbf
   - enabled: 1
     path: Assets/Scenes/DeathScene.unity
     guid: 1024c3e582f6b4448a981c8e64fbd3d4
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: da6bdcdb5c9b04443b9c174aaac8b0ef
+  - enabled: 1
+    path: Assets/Scenes/SampleLevel.unity
+    guid: 9c43a077565d57243b65ab25504fb199
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: f877c52d53f7e5742a4f96d7120306eb, type: 3}
   m_UseUCBPForAssetBundles: 0
