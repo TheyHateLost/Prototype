@@ -49,7 +49,6 @@ public class Interator : MonoBehaviour
                         interactObj.Interact();
                     }
                 }
-
             }
         }
         //if not looking at something with IInteractable class then turn off prompt
