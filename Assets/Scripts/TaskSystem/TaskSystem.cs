@@ -7,6 +7,7 @@ public class TaskSystem : MonoBehaviour, IInteractable
     //Brings up the assigned UI
     public void Interact()
     {
+        if (KeypadTask.isResetting == false)
         keypadUI.SetActive(true);
     }
 }

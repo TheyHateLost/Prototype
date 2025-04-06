@@ -11,12 +11,12 @@ public class GameEventsManager : MonoBehaviour
 
     [Header("GameObjects")]
     public static GameEventsManager instance { get; private set; }
-    public GameObject elevator;
-    public GameObject player;
-    public GameObject winning;
-    public GameObject monster;
-    public GameObject allTasksCompleted;
-    public Text numberOfTasksLeft;
+
+    [SerializeField] GameObject elevator;
+    [SerializeField] GameObject WinningArea;
+    [SerializeField] GameObject Monster;
+    [SerializeField] GameObject TasksCompletedUI;
+    [SerializeField] Text numberOfTasksLeft;
 
     DescendingCage elevatorScript;
 
@@ -26,7 +26,7 @@ public class GameEventsManager : MonoBehaviour
     float originalTimeScale;
 
     [Header("Tasks")]
-    public int tasksRemaining = 0;
+    public static int tasksRemaining = 4;
 
     public enum gameState
     {
@@ -72,8 +72,8 @@ public class GameEventsManager : MonoBehaviour
         if (tasksRemaining <= 0)
         {
             //elevatorScript = new DescendingCage();
-            winning.SetActive(true);
-            allTasksCompleted.SetActive(true);
+            WinningArea.SetActive(true);
+            TasksCompletedUI.SetActive(true);
             enemyController.endGame = true;
             //elevatorScript.platMode = DescendingCage.platformMode.MOVING;
         }

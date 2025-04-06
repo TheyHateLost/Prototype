@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Invisible
+  - HidingSpot
+  - CanGrab
+  - CanInteract
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,7 @@ public class SendToWinningScene : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Death
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Invisible"))
         {
             SceneManager.LoadScene(sceneName);
         }

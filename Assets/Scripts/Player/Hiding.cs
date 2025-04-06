@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Hiding : MonoBehaviour
 {
-    public GameObject hideText, stopHideText;
+    public GameObject EnterHideText, ExitHideText;
     public GameObject normalPlayer, hidingPlayer;
     public enemyController monsterScript;
     public Transform monsterTransform;
@@ -16,11 +16,12 @@ public class Hiding : MonoBehaviour
         interactable = false;
         hiding = false;
     }
+
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("MainCamera"))
         {
-            hideText.SetActive(true);
+            EnterHideText.SetActive(true);
             interactable = true;
         }
     }
@@ -28,7 +29,7 @@ public class Hiding : MonoBehaviour
     {
         if (other.CompareTag("MainCamera"))
         {
-            hideText.SetActive(false);
+            EnterHideText.SetActive(false);
             interactable = false;
         }
     }
@@ -38,7 +39,7 @@ public class Hiding : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                hideText.SetActive(false);
+                EnterHideText.SetActive(false);
                 hidingPlayer.SetActive(true);
                 float distance = Vector3.Distance(monsterTransform.position, normalPlayer.transform.position);
                 if (distance > loseDistance)
@@ -48,7 +49,7 @@ public class Hiding : MonoBehaviour
                         monsterScript.stopChase();
                     }
                 }
-                stopHideText.SetActive(true);
+                ExitHideText.SetActive(true);
                 hiding = true;
                 normalPlayer.SetActive(false);
                 interactable = false;
@@ -58,7 +59,7 @@ public class Hiding : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                stopHideText.SetActive(false);
+                ExitHideText.SetActive(false);
                 normalPlayer.SetActive(true);
                 hidingPlayer.SetActive(false);
                 hiding = false;
