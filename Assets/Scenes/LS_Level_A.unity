@@ -461,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Destinations:
   - {x: 1.62, y: 46.4, z: -20}
-  - {x: 1.62, y: 0.01, z: -20}
+  - {x: 1.62, y: 0.59, z: -20}
   Speed: 0.1
   returnSpeed: 0.05
   DestTimer: 4
