@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3235081566404188545}
   - component: {fileID: 2927500116817017844}
   - component: {fileID: 5231030685084687629}
-  - component: {fileID: 8905829092835004292}
+  - component: {fileID: 800469708403406450}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -139,7 +139,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &8905829092835004292
+--- !u!114 &800469708403406450
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,7 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensX: 650
   sensY: 650
-  orientation: {fileID: 5209057777611137478}
+  orientation: {fileID: 0}
+  MaxLeftRotation: -110
+  MaxRightRotation: 110
 --- !u!1 &1217841762489532778
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +372,6 @@ GameObject:
   - component: {fileID: 3397707700829309498}
   - component: {fileID: 7891982482436086327}
   - component: {fileID: 9092343527214905171}
-  - component: {fileID: 2171141771495027559}
   m_Layer: 0
   m_Name: HidingPlayer
   m_TagString: Player
@@ -386,7 +387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2825031325608771903}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -394,7 +395,7 @@ Transform:
   - {fileID: 5209057777611137478}
   - {fileID: 385545709952375803}
   m_Father: {fileID: 1522268685101391095}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &7891982482436086327
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -430,44 +431,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &2171141771495027559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2825031325608771903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 584622792f359aa4bb35d95336177af1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 0
-  sprintSpeed: 0
-  crouchSpeed: 0
-  sprintRechargeDelay: 2
-  jumpForce: 0
-  jumpCooldown: 0
-  airMultiplier: 0
-  crouchYScale: 0
-  distanceAbovePlayer: 0.5
-  playerHeight: 0
-  Ground:
-    serializedVersion: 2
-    m_Bits: 8
-  groundDrag: 0
-  toggleMenu: 9
-  togglePause: 27
-  crouchKey: 99
-  sprintKey: 304
-  jumpKey: 32
-  walkingSound_Timer: 0
-  sprintSound_Timer: 0
-  crouchSound_Timer: 0
-  maxSprintTime: 5
-  orientation: {fileID: 5209057777611137478}
-  pauseMenu: {fileID: 0}
-  taskMenu: {fileID: 0}
 --- !u!1 &3525430172134809418
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +568,7 @@ GameObject:
   - component: {fileID: 7015696495775300210}
   m_Layer: 0
   m_Name: Detection
-  m_TagString: Untagged
+  m_TagString: HidingSpot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -711,8 +674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161d660c285ba364d82300ba767d8368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideText: {fileID: 0}
-  stopHideText: {fileID: 0}
+  EnterHideText: {fileID: 0}
+  ExitHideText: {fileID: 0}
   normalPlayer: {fileID: 0}
   hidingPlayer: {fileID: 2825031325608771903}
   monsterScript: {fileID: 0}

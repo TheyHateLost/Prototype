@@ -1073,8 +1073,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161d660c285ba364d82300ba767d8368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hideText: {fileID: 0}
-  stopHideText: {fileID: 0}
+  EnterHideText: {fileID: 0}
+  ExitHideText: {fileID: 0}
   normalPlayer: {fileID: 0}
   hidingPlayer: {fileID: 6890516290157124309}
   monsterScript: {fileID: 0}
@@ -1477,6 +1477,8 @@ MonoBehaviour:
   sensX: 650
   sensY: 650
   orientation: {fileID: 6182350556806981157}
+  MaxLeftRotation: 20
+  MaxRightRotation: 40
 --- !u!1 &6483008938230914439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,7 +1598,6 @@ GameObject:
   - component: {fileID: 9065383186309397369}
   - component: {fileID: 7204251525849974543}
   - component: {fileID: 7300537220202018481}
-  - component: {fileID: 7442403278799426130}
   m_Layer: 0
   m_Name: HidingPlayer (1)
   m_TagString: Player
@@ -1656,41 +1657,3 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &7442403278799426130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6890516290157124309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 584622792f359aa4bb35d95336177af1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 0
-  sprintSpeed: 0
-  crouchSpeed: 0
-  sprintRechargeDelay: 2
-  jumpForce: 0
-  jumpCooldown: 0
-  airMultiplier: 0
-  crouchYScale: 0
-  distanceAbovePlayer: 0.5
-  playerHeight: 0
-  Ground:
-    serializedVersion: 2
-    m_Bits: 8
-  groundDrag: 0
-  toggleMenu: 9
-  togglePause: 27
-  crouchKey: 99
-  sprintKey: 304
-  jumpKey: 32
-  walkingSound_Timer: 0
-  sprintSound_Timer: 0
-  crouchSound_Timer: 0
-  maxSprintTime: 5
-  orientation: {fileID: 6182350556806981157}
-  pauseMenu: {fileID: 0}
-  taskMenu: {fileID: 0}

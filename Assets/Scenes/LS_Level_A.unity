@@ -576,6 +576,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 800469708403406450, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: orientation
+      value: 
+      objectReference: {fileID: 1780768587}
     - target: {fileID: 1217841762489532778, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -657,6 +661,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1480082575}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: ExitHideText
+      value: 
+      objectReference: {fileID: 944103364}
+    - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: normalPlayer
       value: 
       objectReference: {fileID: 1061068881}
@@ -664,6 +672,10 @@ PrefabInstance:
       propertyPath: stopHideText
       value: 
       objectReference: {fileID: 944103364}
+    - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: EnterHideText
+      value: 
+      objectReference: {fileID: 1480082575}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: monsterScript
       value: 
@@ -2501,6 +2513,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 711843326}
     m_Modifications:
+    - target: {fileID: 800469708403406450, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: orientation
+      value: 
+      objectReference: {fileID: 1626046963}
     - target: {fileID: 1522268685101391095, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.3
@@ -2554,6 +2570,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1480082575}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: ExitHideText
+      value: 
+      objectReference: {fileID: 944103364}
+    - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: normalPlayer
       value: 
       objectReference: {fileID: 1061068881}
@@ -2561,6 +2581,10 @@ PrefabInstance:
       propertyPath: stopHideText
       value: 
       objectReference: {fileID: 944103364}
+    - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: EnterHideText
+      value: 
+      objectReference: {fileID: 1480082575}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: monsterScript
       value: 
@@ -4668,6 +4692,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378092040}
   m_CullTransparentMesh: 1
+--- !u!4 &379211190 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5209057777611137478, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+  m_PrefabInstance: {fileID: 875783196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &380649029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7766,6 +7795,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1480082575}
     - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
+      propertyPath: ExitHideText
+      value: 
+      objectReference: {fileID: 944103364}
+    - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
       propertyPath: normalPlayer
       value: 
       objectReference: {fileID: 1061068881}
@@ -7773,6 +7806,10 @@ PrefabInstance:
       propertyPath: stopHideText
       value: 
       objectReference: {fileID: 944103364}
+    - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
+      propertyPath: EnterHideText
+      value: 
+      objectReference: {fileID: 1480082575}
     - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
       propertyPath: monsterScript
       value: 
@@ -8972,7 +9009,7 @@ GameObject:
   - component: {fileID: 780626395}
   - component: {fileID: 780626394}
   m_Layer: 5
-  m_Name: InteractPromptText
+  m_Name: InteractText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10607,6 +10644,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 800469708403406450, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: orientation
+      value: 
+      objectReference: {fileID: 379211190}
     - target: {fileID: 1217841762489532778, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -10688,6 +10729,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1480082575}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: ExitHideText
+      value: 
+      objectReference: {fileID: 944103364}
+    - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: normalPlayer
       value: 
       objectReference: {fileID: 1061068881}
@@ -10695,6 +10740,10 @@ PrefabInstance:
       propertyPath: stopHideText
       value: 
       objectReference: {fileID: 944103364}
+    - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: EnterHideText
+      value: 
+      objectReference: {fileID: 1480082575}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: monsterScript
       value: 
@@ -11619,7 +11668,7 @@ GameObject:
   - component: {fileID: 944103367}
   - component: {fileID: 944103366}
   m_Layer: 5
-  m_Name: ExitHidePromptText
+  m_Name: ExitHideText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16817,7 +16866,7 @@ GameObject:
   - component: {fileID: 1480082578}
   - component: {fileID: 1480082577}
   m_Layer: 5
-  m_Name: HidePromptText
+  m_Name: EnterHideText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18663,6 +18712,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589235914}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1596831111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5209057777611137478, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+  m_PrefabInstance: {fileID: 1798666142}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1602669086
 GameObject:
   m_ObjectHideFlags: 0
@@ -19117,6 +19171,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!4 &1626046963 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5209057777611137478, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+  m_PrefabInstance: {fileID: 183634951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1630275384
 GameObject:
   m_ObjectHideFlags: 0
@@ -20981,6 +21040,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770709357}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1780768587 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5209057777611137478, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+  m_PrefabInstance: {fileID: 39643442}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1785070384
 GameObject:
   m_ObjectHideFlags: 0
@@ -21458,6 +21522,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 800469708403406450, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: orientation
+      value: 
+      objectReference: {fileID: 1596831111}
     - target: {fileID: 1217841762489532778, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -21539,6 +21607,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1480082575}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: ExitHideText
+      value: 
+      objectReference: {fileID: 944103364}
+    - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: normalPlayer
       value: 
       objectReference: {fileID: 1061068881}
@@ -21546,6 +21618,10 @@ PrefabInstance:
       propertyPath: stopHideText
       value: 
       objectReference: {fileID: 944103364}
+    - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: EnterHideText
+      value: 
+      objectReference: {fileID: 1480082575}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: monsterScript
       value: 
@@ -23004,6 +23080,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1480082575}
     - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
+      propertyPath: ExitHideText
+      value: 
+      objectReference: {fileID: 944103364}
+    - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
       propertyPath: normalPlayer
       value: 
       objectReference: {fileID: 1061068881}
@@ -23011,6 +23091,10 @@ PrefabInstance:
       propertyPath: stopHideText
       value: 
       objectReference: {fileID: 944103364}
+    - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
+      propertyPath: EnterHideText
+      value: 
+      objectReference: {fileID: 1480082575}
     - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
       propertyPath: monsterScript
       value: 
@@ -24363,6 +24447,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1480082575}
     - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
+      propertyPath: ExitHideText
+      value: 
+      objectReference: {fileID: 944103364}
+    - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
       propertyPath: normalPlayer
       value: 
       objectReference: {fileID: 1061068881}
@@ -24370,6 +24458,10 @@ PrefabInstance:
       propertyPath: stopHideText
       value: 
       objectReference: {fileID: 944103364}
+    - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
+      propertyPath: EnterHideText
+      value: 
+      objectReference: {fileID: 1480082575}
     - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
       propertyPath: monsterScript
       value: 
@@ -25392,6 +25484,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123817539}
   m_CullTransparentMesh: 1
+--- !u!4 &2138208532 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6182350556806981157, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
+  m_PrefabInstance: {fileID: 1640961791030567078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &351450951661589285
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25400,6 +25497,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 711843326}
     m_Modifications:
+    - target: {fileID: 800469708403406450, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
+      propertyPath: orientation
+      value: 
+      objectReference: {fileID: 2138208532}
     - target: {fileID: 1522268685101391095, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.23
@@ -25440,30 +25541,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2171141771495027559, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
-      propertyPath: pauseMenu
-      value: 
-      objectReference: {fileID: 450507927}
     - target: {fileID: 2816125421862955402, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: m_Name
       value: Bin (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4910782352136610160, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
-      propertyPath: m_TagString
-      value: HidingSpot
-      objectReference: {fileID: 0}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
-      propertyPath: hideText
+      propertyPath: ExitHideText
       value: 
-      objectReference: {fileID: 1480082575}
+      objectReference: {fileID: 944103364}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: normalPlayer
       value: 
       objectReference: {fileID: 1061068881}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
-      propertyPath: stopHideText
+      propertyPath: EnterHideText
       value: 
-      objectReference: {fileID: 944103364}
+      objectReference: {fileID: 1480082575}
     - target: {fileID: 6390226506661553648, guid: 74b773eaa9dfc1f4b84f1643ba833556, type: 3}
       propertyPath: monsterScript
       value: 
@@ -25489,34 +25582,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Closet (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 3666989187537866682, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 3666989187537866682, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
-      propertyPath: near clip plane
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5382317266410768500, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.049
-      objectReference: {fileID: 0}
-    - target: {fileID: 5382317266410768500, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.188
-      objectReference: {fileID: 0}
     - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
-      propertyPath: hideText
+      propertyPath: ExitHideText
       value: 
-      objectReference: {fileID: 1480082575}
+      objectReference: {fileID: 944103364}
     - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
       propertyPath: normalPlayer
       value: 
       objectReference: {fileID: 1061068881}
     - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
-      propertyPath: stopHideText
+      propertyPath: EnterHideText
       value: 
-      objectReference: {fileID: 944103364}
+      objectReference: {fileID: 1480082575}
     - target: {fileID: 7109278325848593511, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
       propertyPath: monsterScript
       value: 
@@ -25525,10 +25602,6 @@ PrefabInstance:
       propertyPath: monsterTransform
       value: 
       objectReference: {fileID: 863167775}
-    - target: {fileID: 7442403278799426130, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
-      propertyPath: pauseMenu
-      value: 
-      objectReference: {fileID: 450507927}
     - target: {fileID: 9143475193737765332, guid: 184ff36323d1e0940a35bcb01c09dd14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.39

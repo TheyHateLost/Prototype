@@ -12,6 +12,9 @@ public class HidingCamera: MonoBehaviour
     float xRotation;
     float yRotation;
 
+    [SerializeField] float MaxLeftRotation;
+    [SerializeField] float MaxRightRotation;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -30,9 +33,10 @@ public class HidingCamera: MonoBehaviour
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -40f, 30f);
+        yRotation = Mathf.Clamp(yRotation, MaxLeftRotation, MaxRightRotation);
 
         // rotate cam and orientation
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
+        orientation.localRotation = Quaternion.Euler(0, yRotation, 0);
     }
 }
