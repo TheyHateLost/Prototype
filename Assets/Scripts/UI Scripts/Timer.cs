@@ -6,22 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
-    float currentTime;
-    public float startingTime = 10f;
+    float currentOxygen;
+    public float startingOxygen = 100f;
+    public static int OxygenDecreaseRate = 10; // Oxygen decrease rate per second
 
     [SerializeField] Text countdownText;
     void Start()
     {
-        currentTime = startingTime;
+        currentOxygen = startingOxygen;
+        countdownText.text = currentOxygen.ToString("0") + " %";
     }
     void Update()
     {
-        currentTime -= 1 * Time.deltaTime;
-        countdownText.text = currentTime.ToString("0");
+        currentOxygen -= Time.deltaTime / OxygenDecreaseRate;
+        countdownText.text = currentOxygen.ToString("0") + " %";
 
-        if (currentTime <= 0)
+        if (currentOxygen <= 0)
         {
-            currentTime = 0;
+            currentOxygen = 0;
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);  
         }
     }

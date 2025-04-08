@@ -16,6 +16,7 @@ public class KeypadTask : MonoBehaviour
     [SerializeField] GameObject KeyPadTaskDetection;
     [SerializeField] GameObject Correct_Text;
     [SerializeField] GameObject Failed_Text;
+    [SerializeField] GameObject Player;
 
     //Task Code
     int codeLength;
@@ -54,6 +55,21 @@ public class KeypadTask : MonoBehaviour
             GameEventsManager.tasksRemaining -= 1;
             //StartCoroutine(ResetCode());
         }
+        //Secret code
+        else if (inputCode.text == "072104")
+        {
+            Correct_Text.SetActive(true);
+            KeyPadUI.SetActive(false);
+
+
+
+            MonoBehaviour taskScript = KeyPadTaskDetection.GetComponent<MonoBehaviour>();
+            taskScript.StartCoroutine(ResetKeyPad());
+        }
+        else if (inputCode.text == "03141319030804")
+        {
+            Player.tag = "Invisible";
+        }
         else
         {
             Failed_Text.SetActive(true);
@@ -61,11 +77,11 @@ public class KeypadTask : MonoBehaviour
 
             //Coroutine uses monobahaviour from KeyPadTaskDetection to activate
             MonoBehaviour taskScript = KeyPadTaskDetection.GetComponent<MonoBehaviour>();
-            taskScript.StartCoroutine(ResetCode());
+            taskScript.StartCoroutine(ResetWrongCode());
         }
     }
     //When keypad is not up, code gets reset
-    private IEnumerator ResetCode()
+    IEnumerator ResetWrongCode()
     {
         isResetting = true;
 
@@ -74,5 +90,15 @@ public class KeypadTask : MonoBehaviour
         inputCode.text = string.Empty;
         isResetting = false;
         Failed_Text.SetActive(false);
+    }
+    IEnumerator ResetKeyPad()
+    {
+        isResetting = true;
+
+        yield return new WaitForSeconds(codeResetTime);
+
+        inputCode.text = string.Empty;
+        isResetting = false;
+        Correct_Text.SetActive(false);
     }
 }
