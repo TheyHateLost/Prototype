@@ -6,13 +6,9 @@ using UnityEngine.InputSystem;
 
 public class HoldTasks : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        public float 
-        private bool isHolding = false;
-    
-     }
+    /*
+    public float 
+    bool isHolding = false;
 
     // Update is called once per frame
     void Update()
@@ -40,6 +36,5 @@ public class HoldTasks : MonoBehaviour
         ResetHold();
 
     }
-}
-    
+}*/
 }
