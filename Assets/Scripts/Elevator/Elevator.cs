@@ -77,7 +77,7 @@ public class Elevator: MonoBehaviour
                 CurrentDest = 0;
             }
         }
-        platMode = platformMode.MOVING;
+        //platMode = platformMode.MOVING;
     }
 
     void OnCollisionExit(Collision other)

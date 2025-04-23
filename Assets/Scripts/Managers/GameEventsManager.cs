@@ -16,13 +16,14 @@ public class GameEventsManager : MonoBehaviour
     [SerializeField] GameObject Monster;
     [SerializeField] GameObject TasksCompletedUI;
     [SerializeField] Text numberOfTasksLeft;
+    [SerializeField] GameObject PlayerCode;
 
     MonsterController monsterScript;
     DescendingCage elevatorScript;
 
     [Header("Menus")]
     public GameObject PauseMenu;
-    public GameObject KeypadMenu, KeypadMenu1, KeypadMenu2, KeypadMenu3;
+    public GameObject KeypadMenu;
     float originalTimeScale;
 
     [Header("Tasks")]
@@ -57,7 +58,7 @@ public class GameEventsManager : MonoBehaviour
 
         //Debug.Log(tasksRemaining);
 
-        if ((KeypadMenu.activeInHierarchy) || (KeypadMenu1.activeInHierarchy) || (KeypadMenu2.activeInHierarchy) || (KeypadMenu3.activeInHierarchy))
+        if ((KeypadMenu.activeInHierarchy))
         {
             currentState = gameState.InMenu;
         }
@@ -73,6 +74,7 @@ public class GameEventsManager : MonoBehaviour
 
         if (tasksRemaining <= 0)
         {
+            PlayerCode.SetActive(true);
             //elevatorScript = new DescendingCage();
             WinningArea.SetActive(true);
             TasksCompletedUI.SetActive(true);

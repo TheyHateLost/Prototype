@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class KeypadTask : MonoBehaviour
 {
     //Code given to player
-    [SerializeField] TextMeshProUGUI generatedCode;
+    //[SerializeField] TextMeshProUGUI generatedCode;
 
     //Players input
     [SerializeField] TextMeshProUGUI inputCode;
@@ -17,6 +17,7 @@ public class KeypadTask : MonoBehaviour
     [SerializeField] GameObject Correct_Text;
     [SerializeField] GameObject Failed_Text;
     [SerializeField] GameObject Player;
+    [SerializeField]CheckOut CheckOut;
 
     //Task Code
     int codeLength;
@@ -25,21 +26,10 @@ public class KeypadTask : MonoBehaviour
 
     void OnEnable()
     {
-        codeLength = Random.Range(5,9);
-        string code = string.Empty;
-
-        for(int i = 0; i < codeLength; i++)
-        {
-            code += Random.Range(1,10);
-        }
-
-        generatedCode.text = code;
         inputCode.text = string.Empty; 
     }
     public void NumPadButtonClick(int number)
     {
-        //if (isResetting) { return; }
-
         //the generated code is set to 
         inputCode.text += number;
     }
@@ -47,13 +37,11 @@ public class KeypadTask : MonoBehaviour
     public void SubmitCode()
     {
         //Code is Correct
-        if (inputCode.text == generatedCode.text)
+        if (inputCode.text == CheckOut.PlayerCode.text)
         {
             Correct_Text.SetActive(true);
             KeyPadUI.SetActive(false);
             KeyPadTaskDetection.SetActive(false);
-            GameEventsManager.tasksRemaining -= 1;
-            //StartCoroutine(ResetCode());
         }
         //Secret code
         else if (inputCode.text == "072104")
