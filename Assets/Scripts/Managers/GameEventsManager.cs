@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class GameEventsManager : MonoBehaviour
 {
-
     [Header("GameObjects")]
     public static GameEventsManager instance { get; private set; }
 
@@ -18,6 +17,7 @@ public class GameEventsManager : MonoBehaviour
     [SerializeField] GameObject TasksCompletedUI;
     [SerializeField] Text numberOfTasksLeft;
 
+    MonsterController monsterScript;
     DescendingCage elevatorScript;
 
     [Header("Menus")]
@@ -41,12 +41,14 @@ public class GameEventsManager : MonoBehaviour
         originalTimeScale = Time.timeScale;
         currentState = gameState.Normal;
 
+        elevatorScript = elevator.GetComponent<DescendingCage>();
+        monsterScript = Monster.GetComponent<MonsterController>();
+
         if (instance != null)
         {
             Debug.LogError("Found more than one Game Events Manager in the scene.");
         }
         instance = this;
-
     }
 
     void Update()
@@ -74,8 +76,8 @@ public class GameEventsManager : MonoBehaviour
             //elevatorScript = new DescendingCage();
             WinningArea.SetActive(true);
             TasksCompletedUI.SetActive(true);
-            enemyController.endGame = true;
-            //elevatorScript.platMode = DescendingCage.platformMode.MOVING;
+            MonsterController.endGame = true;
+            elevatorScript.platMode = DescendingCage.platformMode.MOVING;
         }
     }
 

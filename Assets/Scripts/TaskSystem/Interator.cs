@@ -5,6 +5,7 @@ using UnityEngine;
 interface IInteractable
 {
     public void Interact();
+    //public void InteractText();
 }
 // Main interaction script
 public class Interator : MonoBehaviour
@@ -13,6 +14,10 @@ public class Interator : MonoBehaviour
     public float InteractRange = 2f; // Default value for safety
     public GameObject interactText;
     public TextMeshProUGUI interactPrompt;
+
+    //Custom Interact Prompt Text
+    //Example: "Press E to Pick Up" or "Press E to Partyy!"
+    [HideInInspector]public static string interactTextString = "[E]";
 
     void Update()
     {
@@ -24,10 +29,13 @@ public class Interator : MonoBehaviour
             //if looking at something with IInteractable class on it...
             if (hit.collider.gameObject.TryGetComponent(out IInteractable interactObj))
             {
+                //interactObj.InteractText();
+
                 //show prompt to interact with item
                 if (hit.collider.gameObject.CompareTag("CanGrab"))
                 {
-                    interactPrompt.text = "Press E to Pick Up";
+                    //interactPrompt.text = "Press E to Pick Up";
+                    interactPrompt.text = interactTextString;
                     interactText.SetActive(true);
 
                     if (Input.GetKeyDown(KeyCode.E))

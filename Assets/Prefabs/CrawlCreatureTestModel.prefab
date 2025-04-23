@@ -94,9 +94,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e8ce0f1ed344544290482b19a6e9d38, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4810404741857339595}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e8ce0f1ed344544290482b19a6e9d38, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3653771244557828775}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e8ce0f1ed344544290482b19a6e9d38, type: 3}
       insertIndex: -1
@@ -104,59 +101,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e8ce0f1ed344544290482b19a6e9d38, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2638790301103263426}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e8ce0f1ed344544290482b19a6e9d38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4277525358968822223}
   m_SourcePrefab: {fileID: 100100000, guid: 4e8ce0f1ed344544290482b19a6e9d38, type: 3}
 --- !u!1 &119707734007966508 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4e8ce0f1ed344544290482b19a6e9d38, type: 3}
   m_PrefabInstance: {fileID: 966057704519128701}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4810404741857339595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119707734007966508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d80cb3fc0507e94bb8c0a03e0b51ab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ai: {fileID: 3653771244557828775}
-  destinations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  player: {fileID: 0}
-  rayCastOffset: {x: 0, y: 0, z: 0}
-  aiDistance: 0
-  walkSpeed: 7
-  chaseSpeed: 10
-  minIdleTime: 0.5
-  maxIdleTime: 1.5
-  idleTime: 0
-  sightDistance: 20
-  catchDistance: 2
-  chaseTime: 0
-  minChaseTime: 10
-  maxChaseTime: 15
-  jumpscareTime: 2
-  deathScene: DeathScene
-  wandering: 0
-  chasing: 0
-  aiAnim: {fileID: 0}
-  hideText: {fileID: 0}
-  stopHideText: {fileID: 0}
-  walkingAudio_Timer: 0.5
 --- !u!195 &3653771244557828775
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -297,3 +250,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4277525358968822223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119707734007966508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6753388208153d34c882f92ddf7fc398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayCastOffset: {x: 0, y: 0, z: 0}
+  walkSpeed: 7
+  chaseSpeed: 9.5
+  minIdleTime: 0.45
+  maxIdleTime: 1.25
+  sightDistance: 20
+  catchDistance: 2
+  minChaseTime: 10
+  maxChaseTime: 15
+  jumpscareTime: 2
+  deathScene: DeathScene
+  walkingAudio_Timer: 0.5
+  runningAudio_Timer: 0
+  monsterAI: {fileID: 3653771244557828775}
+  player: {fileID: 0}
+  PatrolDestinations:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  EnterHide_Text: {fileID: 0}
+  ExitHide_Text: {fileID: 0}

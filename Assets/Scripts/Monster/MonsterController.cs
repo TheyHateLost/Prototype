@@ -4,42 +4,47 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-public class enemyController : MonoBehaviour
+public class MonsterController : MonoBehaviour
 {
     [Header("AI Pathing")]
-    public NavMeshAgent ai;
-    public List<Transform> destinations;
-    public Transform player;
     public Vector3 rayCastOffset;
     Transform currentDest;
-    Vector3 dest;
-    public float aiDistance;
+    float aiDistance;
     float extraRotationSpeed;
 
     [Header("Monster Stats")]
-    public float walkSpeed, chaseSpeed, minIdleTime, maxIdleTime, idleTime, sightDistance, catchDistance, chaseTime, minChaseTime, maxChaseTime, jumpscareTime;
+    public float walkSpeed, chaseSpeed, minIdleTime, maxIdleTime, sightDistance, catchDistance, minChaseTime, maxChaseTime, jumpscareTime;
+    float idleTime, chaseTime;
     public string deathScene;
 
     [Header("Booleans")]
-    public bool wandering, chasing;
-    public static bool endGame;
+    [HideInInspector] public static bool wandering, chasing, endGame, IgnorePlayer = false;
     bool playerFound = true;
 
-    public Animator aiAnim;
-    public GameObject hideText, stopHideText;
-
     [Header("Timers")]
-    public float walkingAudio_Timer = 0.5f;
-    float runningAudio_Timer = 0f;
+    [SerializeField] float walkingAudio_Timer = 0.5f;
+    [SerializeField] float runningAudio_Timer = 0f;
+
+    [Header("References")]
+    [SerializeField] NavMeshAgent monsterAI;
+    [SerializeField] Transform player;
+    [SerializeField] List<Transform> PatrolDestinations;
+    [SerializeField] GameObject EnterHide_Text, ExitHide_Text;
+    [HideInInspector] public static Vector3 target;
 
     void Start()
     {
         wandering = true;
-        if(destinations.Count > 0)
-            currentDest = destinations[Random.Range(0, destinations.Count)];
+        if(PatrolDestinations.Count > 0)
+            currentDest = PatrolDestinations[Random.Range(0, PatrolDestinations.Count)];
     }
     void Update()
     {
+        Debug.Log(target);
+        Debug.Log("Wandering" + wandering);
+        Debug.Log("Chasing" + chasing);
+        Debug.Log("IgnorePlayer" + IgnorePlayer);
+
         Vector3 direction = (player.position - transform.position).normalized;
         RaycastHit hit;
         aiDistance = Vector3.Distance(player.position, this.transform.position);
@@ -48,9 +53,10 @@ public class enemyController : MonoBehaviour
         if (Physics.Raycast(transform.position + rayCastOffset, direction, out hit, sightDistance))
         {
             // Monster sees player
-            if (hit.collider.gameObject.tag == "Player")
+            if (hit.collider.gameObject.tag == "Player" && IgnorePlayer == false)
             {
                 // Initiate Chase
+                target = player.position;
                 wandering = false;
                 StopCoroutine("stayIdle");
                 StopCoroutine("chaseRoutine");
@@ -73,27 +79,16 @@ public class enemyController : MonoBehaviour
             }
 
             // Change speed and destination becomes player
-            dest = player.position;
-            ai.destination = dest;
-            ai.speed = chaseSpeed;
-
-            //RunningAudio();
-
-            //aiAnim.ResetTrigger("walk");
-            //aiAnim.ResetTrigger("idle");
-            //aiAnim.SetTrigger("sprint");
+            monsterAI.destination = target;
+            monsterAI.speed = chaseSpeed;
 
             // Distance between monster and player - (Monster catches player)
-            if (aiDistance <= catchDistance)
+            if (aiDistance <= catchDistance && IgnorePlayer == false)
             {
-                // Kill player and play jumpscare 
+                // Kill player
                 player.gameObject.SetActive(false);
-                //aiAnim.ResetTrigger("walk");
-                //aiAnim.ResetTrigger("idle");
-                hideText.SetActive(false);
-                stopHideText.SetActive(false);
-                //aiAnim.ResetTrigger("sprint");
-                //aiAnim.SetTrigger("jumpscare");
+                EnterHide_Text.SetActive(false);
+                ExitHide_Text.SetActive(false);
                 StartCoroutine(deathRoutine());
                 chasing = false;
             }
@@ -119,23 +114,15 @@ public class enemyController : MonoBehaviour
             // Change speed and Wander to determined destination
             if (currentDest != null)
             {
-                dest = currentDest.position;
-                ai.destination = dest;
-                ai.speed = walkSpeed;
+                target = currentDest.position;
+                monsterAI.destination = target;
+                monsterAI.speed = walkSpeed;
             }
 
-            //Animations
-            //aiAnim.ResetTrigger("sprint");
-            //aiAnim.ResetTrigger("idle");
-            //aiAnim.SetTrigger("walk");
-
             // Reached destination, idle there then choose next destination randomly
-            if (ai.remainingDistance <= ai.stoppingDistance + 0.1f)
+            if (monsterAI.remainingDistance <= monsterAI.stoppingDistance + 0.1f)
             {
-                //aiAnim.ResetTrigger("sprint");
-                //aiAnim.ResetTrigger("walk");
-                //aiAnim.SetTrigger("idle");
-                ai.speed = 0;
+                monsterAI.speed = 0;
                 StopCoroutine("stayIdle");
                 StartCoroutine("stayIdle");
                 wandering = false;
@@ -144,9 +131,9 @@ public class enemyController : MonoBehaviour
         // When tasks complete - know where player is and hunt them
         if (endGame == true)
         {
-            dest = player.position;
-            ai.destination = dest;
-            ai.speed = chaseSpeed;
+            target = player.position;
+            monsterAI.destination = target;
+            monsterAI.speed = chaseSpeed;
             wandering = false;
             chasing = false;
         }
@@ -157,7 +144,7 @@ public class enemyController : MonoBehaviour
         wandering = true;
         chasing = false;
         StopCoroutine("chaseRoutine");
-        currentDest = destinations[Random.Range(0, destinations.Count)];
+        currentDest = PatrolDestinations[Random.Range(0, PatrolDestinations.Count)];
     }
 
     IEnumerator stayIdle()
@@ -165,8 +152,8 @@ public class enemyController : MonoBehaviour
         idleTime = Random.Range(minIdleTime, maxIdleTime);
         yield return new WaitForSeconds(idleTime);
         wandering = true;
-        if(destinations.Count > 0)
-            currentDest = destinations[Random.Range(0, destinations.Count)];
+        if(PatrolDestinations.Count > 0)
+            currentDest = PatrolDestinations[Random.Range(0, PatrolDestinations.Count)];
     }
 
     // Routines

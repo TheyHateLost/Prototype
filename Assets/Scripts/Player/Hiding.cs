@@ -6,7 +6,7 @@ public class Hiding : MonoBehaviour
 {
     public GameObject EnterHideText, ExitHideText;
     public GameObject normalPlayer, hidingPlayer;
-    public enemyController monsterScript;
+    public MonsterController monsterScript;
     public Transform monsterTransform;
     bool interactable, hiding;
     public float loseDistance;
@@ -44,7 +44,7 @@ public class Hiding : MonoBehaviour
                 float distance = Vector3.Distance(monsterTransform.position, normalPlayer.transform.position);
                 if (distance > loseDistance)
                 {
-                    if (monsterScript.chasing == true)
+                    if (MonsterController.chasing == true)
                     {
                         monsterScript.stopChase();
                     }
