@@ -96,7 +96,7 @@ public class Elevator: MonoBehaviour
         Vector3 old = transform.position;
         transform.position = Vector3.MoveTowards(transform.position, dest, Speed);
         Vector3 movement = transform.position - old;
-        Vector3 lastStop = Destinations.Last();
+
         foreach (Transform tra in Riders)
         {
             tra.position += movement;
@@ -106,11 +106,7 @@ public class Elevator: MonoBehaviour
         {
             CurrentDest++;
         }
-        if (Vector3.Distance(transform.position, lastStop) < 0.01f)
-        {
-            destTimer = DestTimer;
-            platMode = platformMode.ATSTOP;
-        }
+
     }
     void ReturnDest()
     {
