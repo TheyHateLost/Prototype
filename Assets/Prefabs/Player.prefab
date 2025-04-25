@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1014039990159531824}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Invisible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,7 +162,6 @@ MonoBehaviour:
   jumpCooldown: 0
   airMultiplier: 0.1
   crouchYScale: 0.5
-  distanceAbovePlayer: 0.5
   playerHeight: 2
   Ground:
     serializedVersion: 2
@@ -567,6 +566,7 @@ GameObject:
   - component: {fileID: 5379110530035376777}
   - component: {fileID: 6409803172261017020}
   - component: {fileID: 3715854673563497714}
+  - component: {fileID: 1150937090471348624}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -622,7 +622,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.2
   far clip plane: 1000
   field of view: 90
   orthographic: 0
@@ -742,7 +742,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df11cbd93663cc0499fef61a9fb66741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteracterSource: {fileID: 5298285289671228633}
+  playerCamTransform: {fileID: 5298285289671228633}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
   InteractRange: 6
   interactText: {fileID: 0}
   interactPrompt: {fileID: 0}
@@ -765,3 +768,22 @@ MonoBehaviour:
   crouchBobSpeed: 0.15
   crouchBobAmount: 0.05
   midpoint: 0.96
+--- !u!114 &1150937090471348624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7880902115642603493}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 826c7d832c14ab24980884db285db8e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractRange: 6
+  interactText: {fileID: 0}
+  interactPrompt: {fileID: 0}
+  playerCamTransform: {fileID: 5298285289671228633}
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64

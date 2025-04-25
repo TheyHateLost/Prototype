@@ -17,7 +17,7 @@ public class KeypadTask : MonoBehaviour
     [SerializeField] GameObject Correct_Text;
     [SerializeField] GameObject Failed_Text;
     [SerializeField] GameObject Player;
-    [SerializeField]CheckOut CheckOut;
+    [SerializeField] CheckOut PlayerCodeScript;
 
     //Task Code
     int codeLength;
@@ -37,7 +37,7 @@ public class KeypadTask : MonoBehaviour
     public void SubmitCode()
     {
         //Code is Correct
-        if (inputCode.text == CheckOut.PlayerCode.text)
+        if (inputCode.text == PlayerCodeScript.PlayerCode.text)
         {
             Correct_Text.SetActive(true);
             KeyPadUI.SetActive(false);

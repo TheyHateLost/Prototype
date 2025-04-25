@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     [Header("Crouching")]
     public float crouchYScale;
     float startYScale;
-    [SerializeField] float distanceAbovePlayer = 0.5f;
     bool canStand;
 
     [Header("Ground Check")]
