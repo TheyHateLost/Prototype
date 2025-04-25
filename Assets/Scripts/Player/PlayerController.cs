@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour
                 // Running sound
                 if (sprintSound_Timer <= 0 && sprinting == true && playerIsMoving == true && canSprint == true)
                 {
-                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Sprinting, 0.3f, Random.Range(0.7f, 1.2f));
+                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Sprinting, 0.12f, Random.Range(0.7f, 1.2f));
                     sprintSound_Timer = 0.2375f;
                 }
                 Debug.Log("Running");
@@ -230,7 +230,7 @@ public class PlayerController : MonoBehaviour
                 // Walking sound
                 if (walkingSound_Timer <= 0 && walking == true)
                 {
-                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Walking, 0.2f, Random.Range(0.8f, 1.2f));
+                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Walking, 0.11f, Random.Range(0.8f, 1.2f));
                     walkingSound_Timer = 0.475f;
                 }
             }
