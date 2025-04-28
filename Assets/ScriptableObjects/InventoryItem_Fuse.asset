@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: InventoryItem_Fuse
   displayName: Fuse
-  prefab: {fileID: 0}
+  prefab: {fileID: 7975214182264648143, guid: fcca8d52e060cef4c92f634d2fa6b392, type: 3}

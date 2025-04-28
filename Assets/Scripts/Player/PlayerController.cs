@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Debug.Log(currentMoveSpeed);
-        Debug.Log(sprinting);
+        //Debug.Log(sprinting);
     }
 
     private void FixedUpdate()
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
                 crouching = true;
                 sprinting = false;
 
-                Debug.Log("Crouching");
+                //Debug.Log("Crouching");
             }
 
             // Stop Crouching
@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
                     SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Sprinting, 0.12f, Random.Range(0.7f, 1.2f));
                     sprintSound_Timer = 0.2375f;
                 }
-                Debug.Log("Running");
+                //Debug.Log("Running");
             }
 
             // Jumping - Probably will not be used
@@ -225,7 +225,7 @@ public class PlayerController : MonoBehaviour
 
                 sprinting = false;
 
-                Debug.Log("Walking");
+                //Debug.Log("Walking");
 
                 // Walking sound
                 if (walkingSound_Timer <= 0 && walking == true)

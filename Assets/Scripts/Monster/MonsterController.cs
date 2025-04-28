@@ -40,11 +40,6 @@ public class MonsterController : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(target);
-        Debug.Log("Wandering" + wandering);
-        Debug.Log("Chasing" + chasing);
-        Debug.Log("IgnorePlayer" + IgnorePlayer);
-
         Vector3 direction = (player.position - transform.position).normalized;
         RaycastHit hit;
         aiDistance = Vector3.Distance(player.position, this.transform.position);

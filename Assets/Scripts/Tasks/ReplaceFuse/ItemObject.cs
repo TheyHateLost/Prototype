@@ -12,7 +12,7 @@ public class ItemObject : MonoBehaviour, IInteractable
     public void Interact()
     {
         OnHandlePickupItem();
-        //Debug.Log("Picked up " + referenceItem.displayName);
+        Debug.Log("Picked up " + referenceItem.displayName);
     }
     public void OnHandlePickupItem()
     {
