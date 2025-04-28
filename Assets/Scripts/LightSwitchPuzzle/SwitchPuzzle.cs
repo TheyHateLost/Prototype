@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SwitchPuzzle : MonoBehaviour
@@ -37,9 +38,30 @@ public class SwitchPuzzle : MonoBehaviour
     void ToggleLight(int index)
     {
         Color currentColor = lights[index].material.color;
+
         if (currentColor == Color.grey)
+        {
             lights[index].material.color = Color.yellow;
+        }
         else
             lights[index].material.color = Color.grey;
+    }
+
+    void Update()
+    {
+        CheckForCompletion();
+    }
+
+    void CheckForCompletion()
+    {
+        int index = 4;
+        foreach (Renderer renderer in lights)
+
+        {
+            if (lights[index].material.color == Color.yellow)
+            {
+                Debug.Log("Complete");
+            }
+        }
     }
 }

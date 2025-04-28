@@ -24,6 +24,7 @@ public class GameEventsManager : MonoBehaviour
     [Header("Menus")]
     public GameObject PauseMenu;
     public GameObject KeypadMenu;
+    public GameObject PuzzleUI;
     float originalTimeScale;
 
     [Header("Tasks")]
@@ -58,7 +59,7 @@ public class GameEventsManager : MonoBehaviour
 
         //Debug.Log(tasksRemaining);
 
-        if ((KeypadMenu.activeInHierarchy))
+        if ((KeypadMenu.activeInHierarchy && KeypadMenu != null) || (PuzzleUI.activeInHierarchy && PuzzleUI != null))
         {
             currentState = gameState.InMenu;
         }

@@ -3152,7 +3152,7 @@ Transform:
   m_GameObject: {fileID: 414892053}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.04, y: -4.78, z: 4.45}
+  m_LocalPosition: {x: 2.04, y: -4.78, z: 3.817}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3642,7 +3642,7 @@ Transform:
   m_GameObject: {fileID: 463933003}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.54, y: -4.93, z: 4.1}
+  m_LocalPosition: {x: -0.54, y: -4.93, z: 3.573}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7315,9 +7315,9 @@ GameObject:
   - component: {fileID: 999207049}
   - component: {fileID: 999207048}
   - component: {fileID: 999207047}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PuzzleTerminal
-  m_TagString: Untagged
+  m_TagString: CanInteract
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7418,7 +7418,7 @@ Transform:
   m_GameObject: {fileID: 999207046}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.1, y: 1.03, z: -30.77}
+  m_LocalPosition: {x: 2.333, y: 1.03, z: -31.977}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10447,7 +10447,7 @@ Transform:
   m_GameObject: {fileID: 1459507404}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.68, y: -4.91, z: 4.17}
+  m_LocalPosition: {x: 0.68, y: -4.91, z: 3.6430035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12048,6 +12048,7 @@ MonoBehaviour:
   PlayerCode: {fileID: 0}
   PauseMenu: {fileID: 450507927}
   KeypadMenu: {fileID: 309998708}
+  PuzzleUI: {fileID: 1681201080}
   currentState: 2
 --- !u!1 &1659080794
 GameObject:

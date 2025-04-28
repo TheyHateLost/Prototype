@@ -33,20 +33,37 @@ public class Interator : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("CanGrab"))
                 {
                     interactTextString = "[E] - Grab";
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        //use the method from the script of the item you are looking at
+                        interactObj.Interact();
+                    }
                 }
                 else if (hit.collider.gameObject.CompareTag("CanInteract"))
                 {
                     interactTextString = "[E] - Interact";
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        //use the method from the script of the item you are looking at
+                        interactObj.Interact();
+                    }
+                }
+                else if (hit.collider.gameObject.CompareTag("CanHold"))
+                {
+                    interactTextString = "[E] - Hold";
+
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        //use the method from the script of the item you are looking at
+                        interactObj.Interact();
+                    }
                 }
 
                 interactPrompt.text = interactTextString;
                 interactText.SetActive(true);
 
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    //use the method from the script of the item you are looking at
-                    interactObj.Interact();
-                }
             }
         }
         //if not looking at something with IInteractable class then turn off prompt
