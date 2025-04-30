@@ -18,10 +18,16 @@ public class HoldTasks : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-
+         isHolding = true;
+         
     }
     void Update()
     {
+        if (!Input.GetKey(KeyCode.E))
+        {
+            isHolding = false;
+        }
+
         if (isHolding)
         {
             holdTimer += Time.deltaTime;
@@ -29,7 +35,7 @@ public class HoldTasks : MonoBehaviour, IInteractable
             if (holdTimer >= holdDuration)
             {
                 //Load next level
-                OnHoldComplete.Invoke();
+                //OnHoldComplete.Invoke();
                 ResetHold();
             }
         }

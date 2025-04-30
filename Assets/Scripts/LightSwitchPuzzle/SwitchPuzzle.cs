@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SwitchPuzzle : MonoBehaviour
+/*public class SwitchPuzzle : MonoBehaviour
 {
     public Renderer[] lights;
 
@@ -64,4 +64,4 @@ public class SwitchPuzzle : MonoBehaviour
             }
         }
     }
-}
+} */

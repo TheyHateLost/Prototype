@@ -8,6 +8,7 @@ TagManager:
   - HidingSpot
   - CanGrab
   - CanInteract
+  - CanHold
   layers:
   - Default
   - TransparentFX
