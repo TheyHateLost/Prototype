@@ -39,8 +39,13 @@ public class HoldTasks : MonoBehaviour, IInteractable
         if (Distancefromplayer >= taskRadius)
         {
             isHolding = false;
+            fillCircle.gameObject.SetActive(false);
         }
 
+        else
+        {
+            fillCircle.gameObject.SetActive(true);
+        }
            
 
             if (!Input.GetKey(KeyCode.E))

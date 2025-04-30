@@ -8865,8 +8865,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156854538020be748b0c9e7170e8379b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdDuration: 2
+  playertransform: {fileID: 1061068887}
+  holdDuration: 10
   fillCircle: {fileID: 97702364}
+  taskRadius: 4
 --- !u!136 &1186519292
 CapsuleCollider:
   m_ObjectHideFlags: 0
