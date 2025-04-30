@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     public static bool sprinting = false, crouching = false, walking, canSprint = true, playerIsMoving, Paused;
 
     public Transform orientation;
-    Vector3 spawnPoint;
+    Vector3 SpawnPlayerPoint;
     Rigidbody rb;
 
     float horizontalInput;
@@ -67,8 +67,6 @@ public class PlayerController : MonoBehaviour
         sprintRechargeTimer = sprintRechargeDelay;
 
         sprintTime = maxSprintTime;
-
-        spawnPoint = transform.position;
 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -97,6 +95,13 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.linearDamping = 0;
+        }
+
+        if (gameObject.transform.position.y < -5f)
+        {
+            gameObject.transform.position = SpawnPlayerPoint;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
 
         //Debug.Log(currentMoveSpeed);
@@ -236,7 +241,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     public bool CanCrouch()
     {
         return grounded;

@@ -8,43 +8,35 @@ using NUnit.Framework.Interfaces;
 public class FuseBox : MonoBehaviour,IInteractable
 {
     public InventoryItemData referenceItem;
-    int numberOfFuses = 0;
-    public List<ItemRequirement> requirements;
-    public bool removeRequirements;
+    [SerializeField]int FusesInBox;
     [SerializeField] GameObject[] FusesInFuseBox;
+    public static int FuseBoxPowered = 0;
+    bool SendPower = false;
 
     public void Interact()
     {
         InventoryItem item = InventorySystem.current.Get(referenceItem);
-        if (item != null && item.data.id == "InventoryItem_Fuse")
+        if (item != null && item.data.id == "InventoryItem_Fuse" && FusesInBox < 2)
         {
             InventorySystem.current.Remove(referenceItem);
 
-            FusesInFuseBox[numberOfFuses].SetActive(true);
-            numberOfFuses++;
-            Debug.Log(numberOfFuses);
+            FusesInFuseBox[FusesInBox].SetActive(true);
+            FusesInBox += 1;
+            Debug.Log(FusesInBox);
         }
-
     }
 
-    /*bool MeetsRequirements()
+    void Update()
     {
-        foreach (ItemRequirement requirement in requirements)
+        if (FusesInBox >= 2)
         {
-            if (!requirement.HasRequirement()) { return false; }
-        }
-
-        return true;
-    }
-    void RemoveRequirements()
-    {
-        foreach (ItemRequirement requirement in requirements)
-        {
-            for (int i = 0; i < requirement.amount; i++)
+            if (SendPower)
             {
-                InventorySystem.current.Remove(requirement.itemData);
-                Debug.Log("Removed " + requirement.itemData);
+                SendPower = false;
+                FuseBoxPowered++;
+                Debug.Log(FuseBoxPowered);
             }
         }
-    }*/
+        Debug.Log(FusesInBox);
+    }
 }

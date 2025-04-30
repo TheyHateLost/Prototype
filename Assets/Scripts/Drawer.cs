@@ -9,6 +9,9 @@ public class Drawer : MonoBehaviour, IInteractable
     bool CanInteract = true;
     Vector3 startPosition;
     Vector3 targetPosition;
+    //Set to -0.6f or 0.6f depending on the direction of the drawer
+    [SerializeField] float distance = 0.6f; //Distance to move the drawer
+
     float Speed = 0.01f;
 
     public void Interact()
@@ -36,7 +39,7 @@ public class Drawer : MonoBehaviour, IInteractable
     void Awake()
     {
         startPosition = transform.position;
-        targetPosition = new Vector3(startPosition.x - 0.6f, startPosition.y, startPosition.z);
+        targetPosition = new Vector3(startPosition.x + (distance), startPosition.y, startPosition.z);
     }
 
     void Update()

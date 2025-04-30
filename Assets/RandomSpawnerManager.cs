@@ -8,17 +8,21 @@ public class RandomSpawnerManager : MonoBehaviour
     [SerializeField] GameObject[] Keycards;
     [SerializeField] GameObject[] GasCans;
 
+    //6 GasCan Locations
+    //11 Fuse Locations
+    //2 Keycard Locations
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SpawnFuses();
         SpawnKeycards();
-        //SpawnGasCans();
+        SpawnGasCans();
     }
 
     void SpawnFuses()
     {
-        int numberOfItemsToSpawn = 3;
+        int numberOfItemsToSpawn = 4;
         List<GameObject> selectedElements = new List<GameObject>();
         List<int> indices = new List<int>();
 
@@ -59,12 +63,10 @@ public class RandomSpawnerManager : MonoBehaviour
             selectedElements[i].SetActive(true);
             indices.RemoveAt(randomIndex);
         }
-
-
     }
     void SpawnGasCans()
     {
-        int numberOfItemsToSpawn = 3;
+        int numberOfItemsToSpawn = 2;
         List<GameObject> selectedElements = new List<GameObject>();
         List<int> indices = new List<int>();
         // Create a list of indices for the array
