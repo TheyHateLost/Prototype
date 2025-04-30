@@ -15,6 +15,7 @@ public class Interator : MonoBehaviour
     public float InteractRange = 2f; // Default value for safety
     public GameObject interactText;
     public TextMeshProUGUI interactPrompt;
+    public static bool CanInteract = true; // Set to true when looking at an interactable object
 
     //Custom Interact Prompt Text
     //Example: "Press E to Pick Up" or "Press E to Partyy!"
@@ -25,7 +26,7 @@ public class Interator : MonoBehaviour
         //Raycast from mouse position(center screen)
         //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(playerCamTransform.position, playerCamTransform.forward, out hit, InteractRange, interactableLayer))
+        if (Physics.Raycast(playerCamTransform.position, playerCamTransform.forward, out hit, InteractRange, interactableLayer) && CanInteract == true)
         {
             //if looking at something with IInteractable class on it...
             if (hit.collider.gameObject.TryGetComponent(out IInteractable interactObj))
@@ -34,7 +35,7 @@ public class Interator : MonoBehaviour
                 {
                     interactTextString = "[E] - Grab";
 
-                    if (Input.GetKeyDown(KeyCode.E))
+                    if (Input.GetKeyUp(KeyCode.E))
                     {
                         //use the method from the script of the item you are looking at
                         interactObj.Interact();
@@ -44,7 +45,7 @@ public class Interator : MonoBehaviour
                 {
                     interactTextString = "[E] - Interact";
 
-                    if (Input.GetKeyDown(KeyCode.E))
+                    if (Input.GetKeyUp(KeyCode.E))
                     {
                         //use the method from the script of the item you are looking at
                         interactObj.Interact();
@@ -54,7 +55,7 @@ public class Interator : MonoBehaviour
                 {
                     interactTextString = "[E] - Hold";
 
-                    if (Input.GetKey(KeyCode.E))
+                    if (Input.GetKeyDown(KeyCode.E))
                     {
                         //use the method from the script of the item you are looking at
                         interactObj.Interact();

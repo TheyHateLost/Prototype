@@ -10,8 +10,8 @@ public class FuseBox : MonoBehaviour,IInteractable
     public InventoryItemData referenceItem;
     [SerializeField]int FusesInBox;
     [SerializeField] GameObject[] FusesInFuseBox;
-    public static int FuseBoxPowered = 0;
-    bool SendPower = false;
+    //public static int FuseBoxPowered = 0;
+    public static int FusesAdded;
 
     public void Interact()
     {
@@ -22,21 +22,22 @@ public class FuseBox : MonoBehaviour,IInteractable
 
             FusesInFuseBox[FusesInBox].SetActive(true);
             FusesInBox += 1;
+            FusesAdded += 1;
             Debug.Log(FusesInBox);
         }
     }
 
     void Update()
     {
-        if (FusesInBox >= 2)
+        if (FusesAdded >= 4)
         {
-            if (SendPower)
-            {
-                SendPower = false;
-                FuseBoxPowered++;
-                Debug.Log(FuseBoxPowered);
-            }
+            Power();
         }
-        Debug.Log(FusesInBox);
+        Debug.Log(FusesAdded);
+    }
+
+    void Power()
+    {
+
     }
 }

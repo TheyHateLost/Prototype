@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float crouchSpeed;
     [SerializeField] float sprintRechargeDelay = 2;
     float sprintRechargeTimer;
-    float currentMoveSpeed;
+    public float currentMoveSpeed;
     float desiredMoveSpeed;
 
     [Header("Jumping")]

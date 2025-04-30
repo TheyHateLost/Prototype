@@ -17,6 +17,7 @@ public class ItemObject : MonoBehaviour, IInteractable
     public void OnHandlePickupItem()
     {
         InventorySystem.current.Add(referenceItem);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
