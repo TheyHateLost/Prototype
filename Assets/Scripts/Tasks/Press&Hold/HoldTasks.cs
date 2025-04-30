@@ -6,11 +6,13 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class HoldTasks : MonoBehaviour, IInteractable
 {
+    public Transform playertransform;
     public float holdDuration = 1f;
     public Image fillCircle;
-
+    public float taskRadius = 4f;
     float holdTimer;
     bool isHolding = false;
+    float Distancefromplayer;
 
     public static event Action OnHoldComplete;
 
@@ -21,9 +23,32 @@ public class HoldTasks : MonoBehaviour, IInteractable
          isHolding = true;
          
     }
+
+   
+    void Start()
+    {
+        // Initialize the fill circle to be empty
+        fillCircle.fillAmount = 0;
+    }
     void Update()
     {
-        if (!Input.GetKey(KeyCode.E))
+        Distancefromplayer = Vector3.Distance(playertransform.position, this.transform.position);
+
+
+
+        if (Distancefromplayer >= taskRadius)
+        {
+            isHolding = false;
+            fillCircle.gameObject.SetActive(false);
+        }
+
+        else
+        {
+            fillCircle.gameObject.SetActive(true);
+        }
+           
+
+            if (!Input.GetKey(KeyCode.E))
         {
             isHolding = false;
         }
