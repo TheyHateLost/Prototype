@@ -6,49 +6,40 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class HoldTasks : MonoBehaviour, IInteractable
 {
-    public Transform playertransform;
-    public float holdDuration = 1f;
-    public Image fillCircle;
-    public float taskRadius = 4f;
+    [SerializeField] Transform playerTransform;
+    [SerializeField] Image fillCircle;
+    [SerializeField] float holdDuration = 1f;
+    [SerializeField] float taskRadius = 4f;
     float holdTimer;
     bool isHolding = false;
     float Distancefromplayer;
 
     public static event Action OnHoldComplete;
 
-    // Update is called once per frame
-
     public void Interact()
     {
-         isHolding = true;
-         
+        isHolding = true; 
     }
 
-   
     void Start()
     {
-        // Initialize the fill circle to be empty
         fillCircle.fillAmount = 0;
     }
     void Update()
     {
-        Distancefromplayer = Vector3.Distance(playertransform.position, this.transform.position);
-
-
+        Distancefromplayer = Vector3.Distance(playerTransform.position, this.transform.position);
 
         if (Distancefromplayer >= taskRadius)
         {
             isHolding = false;
             fillCircle.gameObject.SetActive(false);
         }
-
         else
         {
             fillCircle.gameObject.SetActive(true);
         }
            
-
-            if (!Input.GetKey(KeyCode.E))
+        if (!Input.GetKey(KeyCode.E))
         {
             isHolding = false;
         }
@@ -59,8 +50,7 @@ public class HoldTasks : MonoBehaviour, IInteractable
             fillCircle.fillAmount = holdTimer / holdDuration;
             if (holdTimer >= holdDuration)
             {
-                //Load next level
-                //OnHoldComplete.Invoke();
+                //Do Task
                 ResetHold();
             }
         }

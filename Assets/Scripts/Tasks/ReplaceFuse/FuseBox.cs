@@ -12,7 +12,6 @@ public class FuseBox : MonoBehaviour,IInteractable
     [SerializeField] GameObject[] FusesInFuseBox;
     //public static int FuseBoxPowered = 0;
     public static int FusesAdded;
-    bool TurnOn = true;
 
     public void Interact()
     {
@@ -30,16 +29,9 @@ public class FuseBox : MonoBehaviour,IInteractable
 
     void Update()
     {
-        Power();
-    }
-
-    void Power()
-    {
-        if (FusesAdded >= 4 && TurnOn)
+        if (FusesAdded >= 4)
         {
-            TurnOn = false;
-            GameEventsManager.tasksRemaining--;
+            Fuse_Lever.Lever_Active = true;
         }
-
     }
 }
