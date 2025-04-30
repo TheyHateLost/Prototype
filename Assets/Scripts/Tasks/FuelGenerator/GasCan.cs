@@ -10,12 +10,14 @@ public class GasCan : MonoBehaviour, IInteractable
 
     [SerializeField] GameObject Player_GasCan;
     [SerializeField] GameObject gasCanPrefab;
+    GameObject DroppedGasCan;
     [SerializeField] PlayerController playerScript;
     public InventoryItemData referenceItem;
 
     public void Interact()
     {
         Player_GasCan.SetActive(true);
+        Destroy(DroppedGasCan);
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class GasCan : MonoBehaviour, IInteractable
             }
 
             // If the player presses the E key, drop the gas can
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.Q))
             {
                 DropGasCan();
                 InventorySystem.current.Remove(referenceItem);
@@ -45,34 +47,13 @@ public class GasCan : MonoBehaviour, IInteractable
             HoldingGasCan = false;
             Interator.CanInteract = true;
         }
-
-        // If the player is holding the gas can, set the player's move speed always to walk speed and disable interaction
-        /*if (HoldingGasCan == true)
-        {
-            Interator.CanInteract = false;
-
-            if (PlayerController.crouching != true)
-            {
-                playerScript.currentMoveSpeed = playerScript.walkSpeed;
-            }
-
-            // If the player presses the E key, drop the gas can
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                DropGasCan();
-                InventorySystem.current.Remove(referenceItem);
-            }
-        }
-        else
-        {
-            Interator.CanInteract = true;
-        }*/
     }
 
     void DropGasCan()
     {
         Player_GasCan.SetActive(false);
         InventorySystem.current.Remove(referenceItem);
-        Instantiate(gasCanPrefab, playerScript.transform.position, Quaternion.identity);
+        DroppedGasCan = Instantiate(gasCanPrefab, playerScript.transform.position, Quaternion.identity);
+        Instantiate(DroppedGasCan);
     }
 }
