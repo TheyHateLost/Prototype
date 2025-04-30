@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+using Unity.VisualScripting;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
         desiredMoveSpeed = walkSpeed;
         sprintRechargeTimer = sprintRechargeDelay;
 
+        SpawnPlayerPoint = new Vector3(1,1,1);
         sprintTime = maxSprintTime;
 
         rb = GetComponent<Rigidbody>();
