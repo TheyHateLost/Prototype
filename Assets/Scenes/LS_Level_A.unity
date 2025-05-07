@@ -11551,6 +11551,7 @@ MeshFilter:
   m_GameObject: {fileID: 475652128}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &475857085
 GameObject:
   m_ObjectHideFlags: 0
@@ -11722,6 +11723,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.688}
+=======
+>>>>>>> parent of 0419ac4 (Reworked elevator, fixed game manager,  added generator props to electrical)
 =======
 >>>>>>> parent of 0419ac4 (Reworked elevator, fixed game manager,  added generator props to electrical)
 --- !u!1 &478186760
@@ -68796,9 +68799,12 @@ SceneRoots:
   - {fileID: 623437820}
   - {fileID: 1242814245}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 1074734465369551913}
   - {fileID: 1039994012}
   - {fileID: 1058469228}
   - {fileID: 476860088}
+=======
+>>>>>>> parent of 0419ac4 (Reworked elevator, fixed game manager,  added generator props to electrical)
 =======
 >>>>>>> parent of 0419ac4 (Reworked elevator, fixed game manager,  added generator props to electrical)
