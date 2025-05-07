@@ -9,6 +9,7 @@ public class Elevator: MonoBehaviour
 {
     //Platform destinations
     public List<Vector3> Destinations;
+    public Vector3 Dest;
     private int CurrentDest;
 
     //Platform Speeds
@@ -22,6 +23,9 @@ public class Elevator: MonoBehaviour
     public float DestTimer = 4;
     float destTimer;
     public float elevatorCallBackSpeed = 2f;
+
+    [SerializeField] Animator InsideElevatorDoorAnimator;
+    [SerializeField] Animator OutsideElevatorDoorAnimator;
     public enum platformMode
     {
         IDLE,
@@ -29,10 +33,12 @@ public class Elevator: MonoBehaviour
         RETURN,
         ATSTOP
     }
-    private void Start()
+    void Start()
     {
         destTimer = DestTimer;
         platMode = platformMode.IDLE;
+        OutsideElevatorDoorAnimator.enabled = false;
+        InsideElevatorDoorAnimator.enabled = false;
     }
     public platformMode platMode;
 
@@ -44,12 +50,13 @@ public class Elevator: MonoBehaviour
             case platformMode.IDLE:
                 break;
             case platformMode.MOVING:
-                MoveToDestination();
+                MoveToDest();
                 break;
             case platformMode.RETURN:
                 //PlatformMoveBack();
                 break;
             case platformMode.ATSTOP:
+
                 if (playerIsOn == false)
                 {
                     destTimer -= Time.deltaTime;
@@ -62,7 +69,7 @@ public class Elevator: MonoBehaviour
                 break;
         }
     }
-    void OnCollisionEnter(Collision other)
+    void OnCollisionStay(Collision other)
     {
         playerIsOn = true;
 
@@ -79,6 +86,7 @@ public class Elevator: MonoBehaviour
         }
         //platMode = platformMode.MOVING;
     }
+
 
     void OnCollisionExit(Collision other)
     {
@@ -108,12 +116,11 @@ public class Elevator: MonoBehaviour
         }
 
     }
-    void ReturnDest()
+    void MoveToDest()
     {
-        if (Destinations.Count == 0) return;
-        Vector3 dest = Destinations[CurrentDest];
+        //if (Destinations.Count == 0) return;
         Vector3 old = transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, dest, returnSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, Dest, Speed);
         Vector3 movement = transform.position - old;
 
         foreach (Transform tra in Riders)
@@ -121,17 +128,19 @@ public class Elevator: MonoBehaviour
             tra.position += movement;
         }
 
-        if (Vector3.Distance(transform.position, dest) < 0.01f)
+        if (Vector3.Distance(transform.position, Dest) < 0.01f)
         {
-            CurrentDest--;
-            if (CurrentDest < 0)
-            {
-                CurrentDest = 0;
-                platMode = platformMode.IDLE;
-            }
+            OutsideElevatorDoorAnimator.enabled = true;
+            InsideElevatorDoorAnimator.enabled = true;
+            StartCoroutine(OpenElevatorDoors());
         }
     }
-
+    IEnumerator OpenElevatorDoors()
+    {
+        OutsideElevatorDoorAnimator.Play("OpenOutsideElevatorDoor");
+        yield return new WaitForSeconds(0.5f);
+        InsideElevatorDoorAnimator.Play("OpenElevatorDoor");
+    }
 
     //Bugfix: sets state to ATSTOP when player gets back on platform when reached the destination
     void SetState2AtStop()
