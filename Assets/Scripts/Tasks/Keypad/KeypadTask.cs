@@ -54,7 +54,8 @@ public class KeypadTask : MonoBehaviour
             MonoBehaviour taskScript = KeyPadTaskDetection.GetComponent<MonoBehaviour>();
             taskScript.StartCoroutine(ResetKeyPad());
         }
-        else if (inputCode.text == "03141319030804")
+        //a = 01
+        else if (inputCode.text == "04151420040905")
         {
             Player.tag = "Invisible";
         }
