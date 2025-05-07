@@ -17,8 +17,7 @@ public class DescendingCage: MonoBehaviour
 
     //List of players/objects that will stay on the platform
     private List<Transform> Riders = new List<Transform>();
-    [SerializeField] Animator InsideElevatorDoorAnimator;
-    [SerializeField] Animator OutsideElevatorDoorAnimator;
+
 
     private bool playerIsOn = false;
     public float DestTimer = 4;
@@ -33,9 +32,6 @@ public class DescendingCage: MonoBehaviour
     }
     private void Start()
     {
-        OutsideElevatorDoorAnimator.enabled = false;
-        InsideElevatorDoorAnimator.enabled = false;
-
         destTimer = DestTimer;
         platMode = platformMode.IDLE;
     }
@@ -52,16 +48,9 @@ public class DescendingCage: MonoBehaviour
                 PlatformActive();
                 break;
             case platformMode.RETURN:
-                StartCoroutine(CloseElevatorDoors());
-                Invoke("PlatformMoveBack", elevatorCallBackSpeed);
-                //PlatformMoveBack();
+                PlatformMoveBack();
                 break;
             case platformMode.ATSTOP:
-
-                OutsideElevatorDoorAnimator.enabled = true;
-                InsideElevatorDoorAnimator.enabled = true;
-                StartCoroutine(OpenElevatorDoors());
-
                 if (playerIsOn == false)
                 {
                     destTimer -= Time.deltaTime;
@@ -120,7 +109,6 @@ public class DescendingCage: MonoBehaviour
         }
         if (Vector3.Distance(transform.position, lastStop) < 0.01f)
         {
-
             destTimer = DestTimer;
             platMode = platformMode.ATSTOP;
         }
@@ -158,17 +146,5 @@ public class DescendingCage: MonoBehaviour
             destTimer = DestTimer;
             platMode = platformMode.ATSTOP;
         }
-    }
-    IEnumerator OpenElevatorDoors()
-    {
-        OutsideElevatorDoorAnimator.Play("OpenOutsideElevatorDoor");
-        yield return new WaitForSeconds(0.5f);
-        InsideElevatorDoorAnimator.Play("OpenElevatorDoor");
-    }
-    IEnumerator CloseElevatorDoors()
-    {
-        OutsideElevatorDoorAnimator.Play("CloseOutsideElevatorDoor");
-        yield return new WaitForSeconds(0.5f);
-        InsideElevatorDoorAnimator.Play("CloseElevatorDoor");
     }
 }

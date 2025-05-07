@@ -102,7 +102,7 @@ public class MonsterController : MonoBehaviour
 
             if (walkingAudio_Timer <= 0f) 
             {
-                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_Wandering, 0.6f, Random.Range(0.5f, 1.1f));
+                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_Footsteps, 0.6f, Random.Range(0.5f, 1.1f));
                 walkingAudio_Timer = 0.6f;
             }
 

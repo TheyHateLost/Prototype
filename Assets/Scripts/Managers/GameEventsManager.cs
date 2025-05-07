@@ -14,9 +14,9 @@ public class GameEventsManager : MonoBehaviour
     [SerializeField] GameObject elevator;
     [SerializeField] GameObject WinningArea;
     [SerializeField] GameObject Monster;
-    [SerializeField] GameObject LeaveLevelPromptUI;
+    [SerializeField] GameObject TasksCompletedUI;
     [SerializeField] Text numberOfTasksLeft;
-    [SerializeField] GameObject LeaveLevelCode;
+    [SerializeField] GameObject PlayerCode;
 
     MonsterController monsterScript;
     DescendingCage elevatorScript;
@@ -43,7 +43,7 @@ public class GameEventsManager : MonoBehaviour
         originalTimeScale = Time.timeScale;
         currentState = gameState.Normal;
 
-        //elevatorScript = elevator.GetComponent<DescendingCage>();
+        elevatorScript = elevator.GetComponent<DescendingCage>();
         monsterScript = Monster.GetComponent<MonsterController>();
 
         if (instance != null)
@@ -63,7 +63,7 @@ public class GameEventsManager : MonoBehaviour
         {
             currentState = gameState.InMenu;
         }
-        else if (PauseMenu.activeInHierarchy && PauseMenu != null)
+        else if (PauseMenu.activeInHierarchy)
         {
             currentState = gameState.Paused;
         }
@@ -75,10 +75,10 @@ public class GameEventsManager : MonoBehaviour
 
         if (tasksRemaining <= 0)
         {
-            LeaveLevelCode.SetActive(true);
+            PlayerCode.SetActive(true);
             //elevatorScript = new DescendingCage();
             WinningArea.SetActive(true);
-            LeaveLevelPromptUI.SetActive(true);
+            TasksCompletedUI.SetActive(true);
             MonsterController.endGame = true;
             elevatorScript.platMode = DescendingCage.platformMode.MOVING;
         }

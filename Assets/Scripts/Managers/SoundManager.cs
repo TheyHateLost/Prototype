@@ -9,9 +9,12 @@ using UnityEngine.Audio;
 public enum SoundType
 {
     //The numbers are the index of the sound in the soundList array
-    Player_Footsteps = 0,
-    Monster_Wandering = 1,
-    Monster_SpottedPlayer = 2,
+    Player_Walking = 0,
+    Player_Sprinting = 1,
+    Player_Crouching = 2,
+    Monster_Wandering = 3,
+    Monster_Footsteps = 4,
+    Monster_SpottedPlayer = 5,
 }
 public enum SoundSource
 {
@@ -28,6 +31,10 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+    private void Start()
+    {
+        //audioSource = GetComponent<AudioSource[]>();
     }
 
     public static void PlaySound(SoundSource source, SoundType sound, float volume = 1, float pitch = 1)
