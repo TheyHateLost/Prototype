@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class HoldTasks : MonoBehaviour, IInteractable
 {
-    bool taskdone = false; 
     [SerializeField] Transform playerTransform;
     [SerializeField] Image fillCircle;
     [SerializeField] float holdDuration = 1f;
@@ -34,8 +33,6 @@ public class HoldTasks : MonoBehaviour, IInteractable
         {
             isHolding = false;
             fillCircle.gameObject.SetActive(false);
-
-
         }
         else
         {
@@ -51,12 +48,10 @@ public class HoldTasks : MonoBehaviour, IInteractable
         {
             holdTimer += Time.deltaTime;
             fillCircle.fillAmount = holdTimer / holdDuration;
-            if (holdTimer >= holdDuration && taskdone==false)
-                
-            {  taskdone = true;
+            if (holdTimer >= holdDuration)
+            {
                 //Do Task
-                GameEventsManager.tasksRemaining--; //ResetHold();
-                fillCircle.gameObject.SetActive(false);
+                ResetHold();
             }
         }
     }
@@ -79,7 +74,4 @@ public class HoldTasks : MonoBehaviour, IInteractable
         holdTimer = 0;
         fillCircle.fillAmount = 0;
     }
-    
-            
-    
 }

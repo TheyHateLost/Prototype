@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
@@ -8,8 +7,6 @@ public class InventorySystem : MonoBehaviour
     Dictionary<InventoryItemData, InventoryItem> m_itemDictionary;
     public static InventorySystem current;
     public List<InventoryItem> inventory { get; private set; }
-
-    public InventoryItemData GasCanItem;
 
     void Awake()
     {
@@ -55,7 +52,6 @@ public class InventorySystem : MonoBehaviour
 
     public void Remove(InventoryItemData referenceData)
     {
-
         if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             value.RemoveFromStack();
@@ -64,33 +60,6 @@ public class InventorySystem : MonoBehaviour
                 inventory.Remove(value);
                 m_itemDictionary.Remove(referenceData);
             }
-        }
-    }
-
-    public void DropItem()
-    {
-        InventoryItemData referenceData = GasCanItem;
-        if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
-        {
-            if (referenceData != null && referenceData.id == "InventoryItem_GasCan")
-            {
-                Instantiate(referenceData.prefab, transform.position, Quaternion.identity);
-                value.RemoveFromStack();
-                if (value.stackSize == 0)
-                {
-                    inventory.Remove(value);
-                    m_itemDictionary.Remove(referenceData);
-                }
-            }
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            
-            DropItem();
         }
     }
 
