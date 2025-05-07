@@ -182,8 +182,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4178153669758104475}
   - component: {fileID: 6418230844101640758}
-  - component: {fileID: 4858680518380842406}
   - component: {fileID: 1489184712920023133}
+  - component: {fileID: 4858680518380842406}
   m_Layer: 6
   m_Name: GasCan
   m_TagString: CanGrab
@@ -234,6 +234,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.31165695, y: 1.5240235, z: 0.8883705}
   m_Center: {x: -0.008905411, y: 0.26201177, z: 0.00068473816}
+--- !u!114 &1489184712920023133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2839835344656910185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c10494b2abff746a8d25bc9423d567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player_GasCan: {fileID: 0}
+  gasCanPrefab: {fileID: 2839835344656910185}
+  playerScript: {fileID: 0}
+  referenceItem: {fileID: 11400000, guid: 3fe8a15a1e26f6146a500419301a8479, type: 2}
 --- !u!114 &4858680518380842406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,22 +262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c860b9216316bfd4f8a2e0bdc2f301da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceItem: {fileID: 11400000, guid: 3fe8a15a1e26f6146a500419301a8479, type: 2}
---- !u!114 &1489184712920023133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2839835344656910185}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14c10494b2abff746a8d25bc9423d567, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player_GasCan: {fileID: 0}
-  gasCanPrefab: {fileID: 2839835344656910185}
-  playerScript: {fileID: 0}
   referenceItem: {fileID: 11400000, guid: 3fe8a15a1e26f6146a500419301a8479, type: 2}
 --- !u!1 &3689418400344619205
 GameObject:

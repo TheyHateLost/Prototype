@@ -16,33 +16,36 @@ public class GasCan : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        Player_GasCan.SetActive(true);
         Destroy(DroppedGasCan);
     }
 
     // Update is called once per frame
     void Update()
     {
-        InventoryItem item = InventorySystem.current.Get(referenceItem);
-        if (item != null && item.data.id == "InventoryItem_GasCan")
+        // If the gas can prefab is active in the hierarchy, the player is holding the gas can 
+        if (Player_GasCan.activeInHierarchy)
         {
+            HoldingGasCan = true;
+
             Interator.CanInteract = false;
-            Player_GasCan.SetActive(true);
 
             if (PlayerController.crouching != true)
             {
-                playerScript.currentMoveSpeed = 6f;
+                playerScript.currentMoveSpeed = playerScript.walkSpeed;
             }
 
-            // If the player presses the Q key, drop the gas can
+            // If the player presses the E key, drop the gas can
             if (Input.GetKeyUp(KeyCode.Q))
             {
                 DropGasCan();
+                InventorySystem.current.Remove(referenceItem);
             }
         }
         else
         {
+            HoldingGasCan = false;
             Interator.CanInteract = true;
-            Player_GasCan.SetActive(false);
         }
     }
 
@@ -50,6 +53,7 @@ public class GasCan : MonoBehaviour, IInteractable
     {
         Player_GasCan.SetActive(false);
         InventorySystem.current.Remove(referenceItem);
-        Instantiate(DroppedGasCan, playerScript.transform.position, Quaternion.identity);
+        DroppedGasCan = Instantiate(gasCanPrefab, playerScript.transform.position, Quaternion.identity);
+        Instantiate(DroppedGasCan);
     }
 }
