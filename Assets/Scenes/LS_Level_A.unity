@@ -20761,7 +20761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1061068887}
   fillCircle: {fileID: 885785368}
-  holdDuration: 10
+  holdDuration: 6
   taskRadius: 4
 --- !u!136 &476860085
 CapsuleCollider:
