@@ -9,9 +9,15 @@ using UnityEngine.Audio;
 public enum SoundType
 {
     //The numbers are the index of the sound in the soundList array
+    //PlayerSounds
     Player_Footsteps = 0,
+    //MonsterSounds
     Monster_Wandering = 1,
     Monster_SpottedPlayer = 2,
+    //TaskSounds
+    Task_Complete = 3,
+
+    GasCan_Filling = 4,
 }
 public enum SoundSource
 {

@@ -16,7 +16,7 @@ public class GasCan : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Destroy(DroppedGasCan);
+        //Destroy(DroppedGasCan);
     }
 
     // Update is called once per frame
@@ -49,7 +49,7 @@ public class GasCan : MonoBehaviour, IInteractable
     void DropGasCan()
     {
         Player_GasCan.SetActive(false);
-        InventorySystem.current.Remove(referenceItem);
-        Instantiate(DroppedGasCan, playerScript.transform.position, Quaternion.identity);
+        //InventorySystem.current.Remove(referenceItem);
+        //Instantiate(gasCanPrefab, playerScript.transform.position, Quaternion.identity);
     }
 }
