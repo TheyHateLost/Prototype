@@ -10,7 +10,6 @@ public class GameEventsManager : MonoBehaviour
 {
     [Header("GameObjects")]
     public static GameEventsManager instance { get; private set; }
-
     [SerializeField] GameObject elevator;
     [SerializeField] GameObject WinningArea;
     [SerializeField] GameObject Monster;
@@ -18,13 +17,14 @@ public class GameEventsManager : MonoBehaviour
     [SerializeField] Text numberOfTasksLeft;
     [SerializeField] GameObject LeaveLevelCode;
 
+    [Header("UI")]
+    public GameObject PauseMenu;
+    [SerializeField] GameObject[] TaskUI;
+
     MonsterController monsterScript;
     DescendingCage elevatorScript;
 
-    [Header("Menus")]
-    public GameObject PauseMenu;
-    public GameObject KeypadMenu;
-    public GameObject PuzzleUI;
+    public static bool PlayerInMenu;
     float originalTimeScale;
 
     [Header("Tasks")]
@@ -55,22 +55,38 @@ public class GameEventsManager : MonoBehaviour
 
     void Update()
     {
+
+        //Debug.Log(PlayerInMenu);
         numberOfTasksLeft.text = tasksRemaining.ToString();
 
-        //Debug.Log(tasksRemaining);
+        if (PlayerInMenu == false)
+        {
+            if (PauseMenu.activeInHierarchy && PauseMenu != null)
+            {
+                currentState = gameState.Paused;
+            }
+            else
+            {
+                ResumeTime();
+                currentState = gameState.Normal;
+            }
+        }
 
-        if ((KeypadMenu.activeInHierarchy && KeypadMenu != null) || (PuzzleUI.activeInHierarchy && PuzzleUI != null))
+        Debug.Log(currentState);
+
+        foreach (GameObject taskUI in TaskUI)
         {
-            currentState = gameState.InMenu;
-        }
-        else if (PauseMenu.activeInHierarchy && PauseMenu != null)
-        {
-            currentState = gameState.Paused;
-        }
-        else
-        {
-            ResumeTime();
-            currentState = gameState.Normal;
+            if (taskUI != null && taskUI.activeInHierarchy)
+            {
+                PlayerInMenu = true;
+                currentState = gameState.InMenu;
+                break;
+            }
+            else
+            {
+                PlayerInMenu = false;
+            }
+
         }
 
         if (tasksRemaining <= 0)
@@ -80,7 +96,7 @@ public class GameEventsManager : MonoBehaviour
             WinningArea.SetActive(true);
             LeaveLevelPromptUI.SetActive(true);
             MonsterController.endGame = true;
-            elevatorScript.platMode = DescendingCage.platformMode.MOVING;
+            //elevatorScript.platMode = DescendingCage.platformMode.MOVING;
         }
     }
 

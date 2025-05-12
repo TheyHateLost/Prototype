@@ -35,7 +35,7 @@ public class Interator : MonoBehaviour
                 {
                     interactTextString = "[E] - Grab";
 
-                    if (Input.GetKey(KeyCode.E))
+                    if (Input.GetKeyUp(KeyCode.E))
                     {
                         //use the method from the script of the item you are looking at
                         interactObj.Interact();
@@ -45,7 +45,7 @@ public class Interator : MonoBehaviour
                 {
                     interactTextString = "[E] - Interact";
 
-                    if (Input.GetKey(KeyCode.E))
+                    if (Input.GetKeyUp(KeyCode.E))
                     {
                         //use the method from the script of the item you are looking at
                         interactObj.Interact();

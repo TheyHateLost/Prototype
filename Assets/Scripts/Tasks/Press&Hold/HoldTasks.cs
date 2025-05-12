@@ -34,8 +34,6 @@ public class HoldTasks : MonoBehaviour, IInteractable
         {
             isHolding = false;
             fillCircle.gameObject.SetActive(false);
-
-
         }
         else
         {

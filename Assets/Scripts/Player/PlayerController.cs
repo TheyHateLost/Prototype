@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(SmoothlyLerpMoveSpeed());
 
         // Pausing
-        if (Input.GetKeyDown(togglePause))
+        if (Input.GetKeyDown(togglePause) && GameEventsManager.PlayerInMenu == false)
         {
             if (pauseMenu.activeInHierarchy)
             {

@@ -9,6 +9,7 @@ TagManager:
   - CanGrab
   - CanInteract
   - CanHold
+  - Used
   layers:
   - Default
   - TransparentFX
