@@ -55,8 +55,6 @@ public class GameEventsManager : MonoBehaviour
 
     void Update()
     {
-
-        //Debug.Log(PlayerInMenu);
         numberOfTasksLeft.text = tasksRemaining.ToString();
 
         if (PlayerInMenu == false)
@@ -71,8 +69,6 @@ public class GameEventsManager : MonoBehaviour
                 currentState = gameState.Normal;
             }
         }
-
-        Debug.Log(currentState);
 
         foreach (GameObject taskUI in TaskUI)
         {

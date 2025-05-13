@@ -24,11 +24,4 @@ public class GasCan : MonoBehaviour
             Player_GasCan.SetActive(false);
         }
     }
-
-    /*void DropGasCan()
-    {
-        Player_GasCan.SetActive(false);
-        InventorySystem.current.Remove(referenceItem);
-        Instantiate(DroppedGasCan, playerScript.transform.position, Quaternion.identity);
-    }*/
 }

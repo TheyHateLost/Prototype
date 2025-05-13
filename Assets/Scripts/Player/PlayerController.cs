@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public float walkingSound_Timer = 0, sprintSound_Timer = 0, crouchSound_Timer = 0;
     public float maxSprintTime = 5;
     float sprintTime;
+    public float Heartbeat_Timer = 2f;
 
     [Header("Booleans")]
     public static bool sprinting = false, crouching = false, walking, canSprint = true, playerIsMoving, Paused;
@@ -57,6 +58,8 @@ public class PlayerController : MonoBehaviour
     float verticalInput;
     Vector3 moveDirection;
 
+    [Header("References")]
+    [SerializeField] Transform monsterTransform;
     public GameObject pauseMenu;
     public GameObject taskMenu;
     public GameObject FadeScreen_In;
@@ -87,6 +90,7 @@ public class PlayerController : MonoBehaviour
 
         playerIsMoving = (Mathf.Abs(Input.GetAxisRaw("Horizontal")) + Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0.1f);
 
+        Heartbeat();
         MyInput();
         speedControl();
         RechargeSprint();
@@ -106,9 +110,6 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
-
-        //Debug.Log(currentMoveSpeed);
-        //Debug.Log(sprinting);
     }
 
     private void FixedUpdate()
@@ -174,7 +175,7 @@ public class PlayerController : MonoBehaviour
                 // Crouching sound
                 if (crouchSound_Timer <= 0 && crouching == true && playerIsMoving == true)
                 {
-                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.08f, Random.Range(0.9f, 1.2f));
+                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.008f, Random.Range(0.9f, 1.2f));
                     crouchSound_Timer = 0.7f;
                 }
             }
@@ -214,7 +215,7 @@ public class PlayerController : MonoBehaviour
                 // Running sound
                 if (sprintSound_Timer <= 0 && sprinting == true && playerIsMoving == true && canSprint == true)
                 {
-                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.105f, Random.Range(0.7f, 1.2f));
+                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.0105f, Random.Range(0.7f, 1.2f));
                     sprintSound_Timer = 0.2375f;
                 }
                 //Debug.Log("Running");
@@ -238,7 +239,7 @@ public class PlayerController : MonoBehaviour
                 // Walking sound
                 if (walkingSound_Timer <= 0 && walking == true)
                 {
-                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.1f, Random.Range(0.8f, 1.2f));
+                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.01f, Random.Range(0.8f, 1.2f));
                     walkingSound_Timer = 0.475f;
                 }
             }
@@ -320,12 +321,55 @@ public class PlayerController : MonoBehaviour
                 sprintTime += Time.deltaTime;
             }
         }
+    }
 
-        /*// In case the timer goes above max allowed time
-        if (sprintTime > maxSprintTime)
+    void Heartbeat()
+    {
+        float DistanceFromMonster = Vector3.Distance(monsterTransform.position, gameObject.transform.position);
+
+        if (DistanceFromMonster <= 35f)
         {
-            sprintTime = maxSprintTime;
-        }*/
+            Heartbeat_Timer -= Time.deltaTime;
+
+            if (Heartbeat_Timer <= 0)
+            {
+                SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Heartbeat, 2f / DistanceFromMonster);
+
+                if (DistanceFromMonster > 30 && DistanceFromMonster < 35)
+                {
+                    Heartbeat_Timer = 1.9f;
+                }
+                else if (DistanceFromMonster > 25 && DistanceFromMonster < 30)
+                {
+                    Heartbeat_Timer = 1.75f;
+                }
+                else if (DistanceFromMonster > 20 && DistanceFromMonster < 25)
+                {
+                    Heartbeat_Timer = 1.50f;
+                }
+                else if (DistanceFromMonster > 15 && DistanceFromMonster < 20)
+                {
+                    Heartbeat_Timer = 1.30f;
+                }
+                else if (DistanceFromMonster > 10 && DistanceFromMonster < 15)
+                {
+                    Heartbeat_Timer = 1.15f;
+                }
+                else if (DistanceFromMonster > 5 && DistanceFromMonster < 10)
+                {
+                    Heartbeat_Timer = 0.9f;
+                }
+                else if (DistanceFromMonster > 0 && DistanceFromMonster < 5)
+                {
+                    Heartbeat_Timer = .75f;
+                }
+            }
+        }
+        else
+        {
+            Heartbeat_Timer = 1.9f;
+            Debug.Log("TooFar");
+        }
     }
 }
 

@@ -22,8 +22,7 @@ public class MonsterController : MonoBehaviour
     bool playerFound = true;
 
     [Header("Timers")]
-    [SerializeField] float walkingAudio_Timer = 0.5f;
-    [SerializeField] float runningAudio_Timer = 0f;
+    [SerializeField] float wanderingAudioTimer = 9.5f;
 
     [Header("References")]
     [SerializeField] NavMeshAgent monsterAI;
@@ -69,7 +68,7 @@ public class MonsterController : MonoBehaviour
         {
             if (playerFound == true)
             {
-                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_SpottedPlayer, 1f);
+                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_SpottedPlayer, 1f, 1f , 25f);
                 playerFound = false;
             }
 
@@ -98,12 +97,12 @@ public class MonsterController : MonoBehaviour
             }
 
             //Walking Sound
-            walkingAudio_Timer -= Time.deltaTime;
+            wanderingAudioTimer -= Time.deltaTime;
 
-            if (walkingAudio_Timer <= 0f) 
+            if (wanderingAudioTimer <= 0f) 
             {
-                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_Wandering, 0.6f, Random.Range(0.5f, 1.1f));
-                walkingAudio_Timer = 0.6f;
+                SoundManager.PlaySound(SoundSource.Monster, SoundType.Monster_Wandering, 0.8f, Random.Range(0.75f, 1.1f), 35f);
+                wanderingAudioTimer = 9.5f;
             }
 
             // Change speed and Wander to determined destination
@@ -163,16 +162,5 @@ public class MonsterController : MonoBehaviour
     {
         yield return new WaitForSeconds(jumpscareTime);
         SceneManager.LoadScene(deathScene);
-    }
-    public void RunningAudio()
-    {
-        runningAudio_Timer -= Time.fixedDeltaTime;
-
-        // Running sound
-        if (runningAudio_Timer <= 0 && wandering)
-        {
-            //monsterRunning.PlayOneShot(running_monsterSound);
-            runningAudio_Timer = 4f;
-        }
     }
 }
