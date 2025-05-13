@@ -59,6 +59,7 @@ public class GameEventsManager : MonoBehaviour
 
     void Update()
     {
+        if (numberOfTasksLeft != null)
         numberOfTasksLeft.text = tasksRemaining.ToString();
 
         if (PlayerInMenu == false)

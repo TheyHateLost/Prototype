@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
 {
     float currentOxygen;
     public float startingOxygen = 100f;
-    public static int OxygenDecreaseRate = 10; // Oxygen decrease rate per second
+    public static int OxygenDecreaseRate = 8; // Oxygen decrease rate per second
 
     [SerializeField] Text[] countdownText;
     void Start()
@@ -16,7 +16,10 @@ public class Timer : MonoBehaviour
         currentOxygen = startingOxygen;
         for (int i = 0; i < countdownText.Length; i++)
         {
-            countdownText[i].text = currentOxygen.ToString("0") + " %";
+            if (countdownText[i] != null)
+            {
+                countdownText[i].text = currentOxygen.ToString("0") + " %";
+            }
         }
     }
     void Update()
@@ -28,6 +31,7 @@ public class Timer : MonoBehaviour
         // Update the countdown text
         for (int i = 0; i < countdownText.Length; i++)
         {
+            if (countdownText[i] != null)
             countdownText[i].text = currentOxygen.ToString("0") + " %";
         }
 

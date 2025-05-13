@@ -20,6 +20,9 @@ public class KeypadTask : MonoBehaviour
     [SerializeField]float codeResetTime = 4f;
     public static bool isResetting = false;
 
+
+    [SerializeField] GameObject Secret_Help_UI;
+
     void OnEnable()
     {
         inputCode.text = string.Empty; 
@@ -38,16 +41,18 @@ public class KeypadTask : MonoBehaviour
             Correct_Text.SetActive(true);
             gameObject.gameObject.SetActive(false);
         }
-        //Secret code
-        else if (inputCode.text == "072104")
+        //Spell "Help" to bring up old UI
+        else if (inputCode.text == "08051216")
         {
+            Secret_Help_UI.SetActive(true);
+
             Correct_Text.SetActive(true);
             gameObject.SetActive(false);
 
             MonoBehaviour taskScript = KeyPad_Object.GetComponent<MonoBehaviour>();
             taskScript.StartCoroutine(ResetKeyPad());
         }
-        //a = 01
+        //Spell "Dont Die" to become invisible
         else if (inputCode.text == "04151420040905")
         {
             Player.tag = "Invisible";
