@@ -76,8 +76,5 @@ public class HoldTasks : MonoBehaviour, IInteractable
         isHolding = false;
         holdTimer = 0;
         fillCircle.fillAmount = 0;
-    }
-    
-            
-    
+    } 
 }
