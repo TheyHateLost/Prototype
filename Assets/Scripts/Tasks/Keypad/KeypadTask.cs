@@ -5,15 +5,11 @@ using UnityEngine.UI;
 
 public class KeypadTask : MonoBehaviour
 {
-    //Code given to player
-    //[SerializeField] TextMeshProUGUI generatedCode;
-
     //Players input
     [SerializeField] TextMeshProUGUI inputCode;
 
     //Task objects
-    [SerializeField] GameObject KeyPadUI;
-    [SerializeField] GameObject KeyPadTaskDetection;
+    [SerializeField] GameObject KeyPad_Object;
     [SerializeField] GameObject Correct_Text;
     [SerializeField] GameObject Failed_Text;
     [SerializeField] GameObject Player;
@@ -21,7 +17,7 @@ public class KeypadTask : MonoBehaviour
 
     //Task Code
     int codeLength;
-    [SerializeField]float codeResetTime = 2f;
+    [SerializeField]float codeResetTime = 4f;
     public static bool isResetting = false;
 
     void OnEnable()
@@ -40,18 +36,15 @@ public class KeypadTask : MonoBehaviour
         if (inputCode.text == ComputerInputScript.PlayerCode.text)
         {
             Correct_Text.SetActive(true);
-            KeyPadUI.SetActive(false);
-            KeyPadTaskDetection.SetActive(false);
+            gameObject.gameObject.SetActive(false);
         }
         //Secret code
         else if (inputCode.text == "072104")
         {
             Correct_Text.SetActive(true);
-            KeyPadUI.SetActive(false);
+            gameObject.SetActive(false);
 
-
-
-            MonoBehaviour taskScript = KeyPadTaskDetection.GetComponent<MonoBehaviour>();
+            MonoBehaviour taskScript = KeyPad_Object.GetComponent<MonoBehaviour>();
             taskScript.StartCoroutine(ResetKeyPad());
         }
         //a = 01
@@ -62,10 +55,10 @@ public class KeypadTask : MonoBehaviour
         else
         {
             Failed_Text.SetActive(true);
-            KeyPadUI.SetActive(false);
+            gameObject.SetActive(false);
 
             //Coroutine uses monobahaviour from KeyPadTaskDetection to activate
-            MonoBehaviour taskScript = KeyPadTaskDetection.GetComponent<MonoBehaviour>();
+            MonoBehaviour taskScript = KeyPad_Object.GetComponent<MonoBehaviour>();
             taskScript.StartCoroutine(ResetWrongCode());
         }
     }
@@ -77,8 +70,8 @@ public class KeypadTask : MonoBehaviour
         yield return new WaitForSeconds(codeResetTime);
 
         inputCode.text = string.Empty;
-        isResetting = false;
         Failed_Text.SetActive(false);
+        isResetting = false;
     }
     IEnumerator ResetKeyPad()
     {

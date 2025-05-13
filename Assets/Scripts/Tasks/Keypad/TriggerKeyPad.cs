@@ -16,9 +16,12 @@ public class TriggerKeyPad : MonoBehaviour, IInteractable
     public void Interact()
     {
         InventoryItem item = InventorySystem.current.Get(referenceItem_KeyCard);
-        if (item != null && item.data.id == "InventoryItem_Keycard" && KeypadTask.isResetting == false)
+        if (item != null && item.data.id == "InventoryItem_Keycard")
         {
-            keypadUI.SetActive(true);
+            if (KeypadTask.isResetting == false)
+            {
+                keypadUI.SetActive(true);
+            }
         }
         else
         {

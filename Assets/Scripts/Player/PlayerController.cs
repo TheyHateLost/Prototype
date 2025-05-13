@@ -368,7 +368,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             Heartbeat_Timer = 1.9f;
-            Debug.Log("TooFar");
         }
     }
 }
