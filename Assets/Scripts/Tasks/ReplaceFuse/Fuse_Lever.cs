@@ -12,6 +12,8 @@ public class Fuse_Lever : MonoBehaviour, IInteractable
         {
             GameEventsManager.tasksRemaining--;
             LeverUsed = true;
+            gameObject.tag = "Used";
+            gameObject.layer = 0;
         }
     }
 }

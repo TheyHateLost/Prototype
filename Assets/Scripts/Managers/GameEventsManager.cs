@@ -13,8 +13,10 @@ public class GameEventsManager : MonoBehaviour
     [SerializeField] GameObject elevator;
     [SerializeField] GameObject WinningArea;
     [SerializeField] GameObject Monster;
-    [SerializeField] GameObject LeaveLevelPromptUI;
     [SerializeField] Text numberOfTasksLeft;
+
+    [Header("EndGame")]
+    [SerializeField] GameObject LeaveLevelPromptUI;
     [SerializeField] GameObject LeaveLevelCode;
 
     [Header("UI")]
@@ -29,6 +31,8 @@ public class GameEventsManager : MonoBehaviour
 
     [Header("Tasks")]
     public static int tasksRemaining = 4;
+    [SerializeField] GameObject[] Green_TaskLight;
+    [SerializeField] GameObject[] Red_TaskLight;
 
     public enum gameState
     {
@@ -82,18 +86,10 @@ public class GameEventsManager : MonoBehaviour
             {
                 PlayerInMenu = false;
             }
-
         }
 
-        if (tasksRemaining <= 0)
-        {
-            LeaveLevelCode.SetActive(true);
-            //elevatorScript = new DescendingCage();
-            WinningArea.SetActive(true);
-            LeaveLevelPromptUI.SetActive(true);
-            MonsterController.endGame = true;
-            //elevatorScript.platMode = DescendingCage.platformMode.MOVING;
-        }
+        //Handles the task lights and the end game situation
+        TaskManager();
     }
 
     void FixedUpdate()
@@ -131,5 +127,34 @@ public class GameEventsManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+    void TaskManager()
+    {
+        if (tasksRemaining == 3)
+        {
+            Red_TaskLight[0].SetActive(false);
+            Green_TaskLight[0].SetActive(true);
+        }
+        if (tasksRemaining == 2)
+        {
+            Red_TaskLight[1].SetActive(false);
+            Green_TaskLight[1].SetActive(true);
+        }
+        if (tasksRemaining == 1)
+        {
+            Red_TaskLight[2].SetActive(false);
+            Green_TaskLight[2].SetActive(true);
+        }
+        if (tasksRemaining <= 0)
+        {
+            Red_TaskLight[3].SetActive(false);
+            Green_TaskLight[3].SetActive(true);
+
+            LeaveLevelCode.SetActive(true);
+            WinningArea.SetActive(true);
+            LeaveLevelPromptUI.SetActive(true);
+            MonsterController.endGame = true;
+            //elevatorScript.platMode = DescendingCage.platformMode.MOVING;
+        }
     }
 }
