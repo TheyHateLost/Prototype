@@ -14,6 +14,7 @@ public class KeypadTask : MonoBehaviour
     [SerializeField] GameObject Failed_Text;
     [SerializeField] GameObject Player;
     [SerializeField] CheckOut ComputerInputScript;
+    [SerializeField] GameObject WinningArea;
 
     //Task Code
     int codeLength;
@@ -39,6 +40,7 @@ public class KeypadTask : MonoBehaviour
         if (inputCode.text == ComputerInputScript.PlayerCode.text)
         {
             Correct_Text.SetActive(true);
+            WinningArea.SetActive(true);
             gameObject.gameObject.SetActive(false);
         }
         //Spell "Help" to bring up old UI

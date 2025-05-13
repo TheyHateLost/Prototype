@@ -11,7 +11,6 @@ public class GameEventsManager : MonoBehaviour
     [Header("GameObjects")]
     public static GameEventsManager instance { get; private set; }
     [SerializeField] GameObject elevator;
-    [SerializeField] GameObject WinningArea;
     [SerializeField] GameObject Monster;
     [SerializeField] Text numberOfTasksLeft;
 
@@ -152,7 +151,6 @@ public class GameEventsManager : MonoBehaviour
             Green_TaskLight[3].SetActive(true);
 
             LeaveLevelCode.SetActive(true);
-            WinningArea.SetActive(true);
             LeaveLevelPromptUI.SetActive(true);
             MonsterController.endGame = true;
             //elevatorScript.platMode = DescendingCage.platformMode.MOVING;
