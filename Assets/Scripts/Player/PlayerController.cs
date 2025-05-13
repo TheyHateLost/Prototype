@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
         desiredMoveSpeed = walkSpeed;
         sprintRechargeTimer = sprintRechargeDelay;
 
-        SpawnPlayerPoint = new Vector3(1,1,1);
+        SpawnPlayerPoint = new Vector3(1,2,-32);
         sprintTime = maxSprintTime;
 
         rb = GetComponent<Rigidbody>();
