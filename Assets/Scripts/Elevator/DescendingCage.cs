@@ -9,7 +9,7 @@ public class DescendingCage: MonoBehaviour
 {
     //Platform destinations
     public List<Vector3> Destinations;
-    private int CurrentDest;
+    int CurrentDest;
 
     //Platform Speeds
     public float Speed = 0.1f;
@@ -20,10 +20,10 @@ public class DescendingCage: MonoBehaviour
     [SerializeField] Animator InsideElevatorDoorAnimator;
     [SerializeField] Animator OutsideElevatorDoorAnimator;
 
-    private bool playerIsOn = false;
-    public float DestTimer = 4;
-    float destTimer;
-    public float elevatorCallBackSpeed = 2f;
+    [SerializeField] bool playerIsOn = false;
+
+    float elevatorCallBackSpeed = 2.5f;
+    float elevatorCallBackTimer = 3f;
     public enum platformMode
     {
         IDLE,
@@ -31,12 +31,11 @@ public class DescendingCage: MonoBehaviour
         RETURN,
         ATSTOP
     }
-    private void Start()
+    void Start()
     {
         OutsideElevatorDoorAnimator.enabled = false;
         InsideElevatorDoorAnimator.enabled = false;
 
-        destTimer = DestTimer;
         platMode = platformMode.IDLE;
     }
     public platformMode platMode;
@@ -64,12 +63,16 @@ public class DescendingCage: MonoBehaviour
 
                 if (playerIsOn == false)
                 {
-                    destTimer -= Time.deltaTime;
-                    if (destTimer <= 0)
+                    elevatorCallBackTimer -= Time.fixedDeltaTime;
+                    if (elevatorCallBackTimer <= 0)
                     {
                         CurrentDest = 0;
                         platMode = platformMode.RETURN;
                     }
+                }
+                else if (playerIsOn == true)    
+                {
+                    elevatorCallBackTimer = 3f;
                 }
                 break;
         }
@@ -89,16 +92,16 @@ public class DescendingCage: MonoBehaviour
                 CurrentDest = 0;
             }
         }
-        platMode = platformMode.MOVING;
+        if (platMode != platformMode.ATSTOP)
+        {
+            platMode = platformMode.MOVING;
+        }
     }
 
     void OnCollisionExit(Collision other)
     {
         playerIsOn = false;
         Riders.Remove(other.transform);
-
-        //Calls platform back if player is not on it 
-        Invoke("SetState2AtStop", elevatorCallBackSpeed);
     }
 
     void PlatformActive()
@@ -120,8 +123,6 @@ public class DescendingCage: MonoBehaviour
         }
         if (Vector3.Distance(transform.position, lastStop) < 0.01f)
         {
-
-            destTimer = DestTimer;
             platMode = platformMode.ATSTOP;
         }
     }
@@ -150,15 +151,6 @@ public class DescendingCage: MonoBehaviour
         }
     }
 
-    //Bugfix: sets state to ATSTOP when player gets back on platform when reached the destination
-    void SetState2AtStop()
-    {
-        if (playerIsOn == false)
-        {
-            destTimer = DestTimer;
-            platMode = platformMode.ATSTOP;
-        }
-    }
     IEnumerator OpenElevatorDoors()
     {
         OutsideElevatorDoorAnimator.Play("OpenOutsideElevatorDoor");
