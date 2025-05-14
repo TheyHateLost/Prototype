@@ -11,6 +11,7 @@ public class HoldTasks : MonoBehaviour, IInteractable
     [SerializeField] Image fillCircle;
     [SerializeField] float holdDuration = 1f;
     [SerializeField] float taskRadius = 4f;
+    [SerializeField] GameObject Smoke_Particles;
     float holdTimer;
     bool isHolding = false;
     float Distancefromplayer;
@@ -54,6 +55,7 @@ public class HoldTasks : MonoBehaviour, IInteractable
             {  taskdone = true;
                 //Do Task
                 GameEventsManager.tasksRemaining--; //ResetHold();
+                Smoke_Particles.SetActive(false);
                 fillCircle.gameObject.SetActive(false);
             }
         }
