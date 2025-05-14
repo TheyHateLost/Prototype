@@ -36,10 +36,7 @@ public class HoldTasks : MonoBehaviour, IInteractable
             isHolding = false;
             fillCircle.gameObject.SetActive(false);
         }
-        else
-        {
-            fillCircle.gameObject.SetActive(true);
-        }
+
            
         if (!Input.GetKey(KeyCode.E))
         {
@@ -48,6 +45,7 @@ public class HoldTasks : MonoBehaviour, IInteractable
 
         if (isHolding)
         {
+            fillCircle.gameObject.SetActive(true);
             holdTimer += Time.deltaTime;
             fillCircle.fillAmount = holdTimer / holdDuration;
             if (holdTimer >= holdDuration && taskdone==false)
@@ -57,6 +55,8 @@ public class HoldTasks : MonoBehaviour, IInteractable
                 GameEventsManager.tasksRemaining--; //ResetHold();
                 Smoke_Particles.SetActive(false);
                 fillCircle.gameObject.SetActive(false);
+                gameObject.tag = "Used";
+                gameObject.layer = 0;
             }
         }
     }

@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
                 // Crouching sound
                 if (crouchSound_Timer <= 0 && crouching == true && playerIsMoving == true)
                 {
-                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.008f, Random.Range(0.9f, 1.2f));
+                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.01f, Random.Range(0.9f, 1.2f));
                     crouchSound_Timer = 0.7f;
                 }
             }
@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
                 // Running sound
                 if (sprintSound_Timer <= 0 && sprinting == true && playerIsMoving == true && canSprint == true)
                 {
-                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.0105f, Random.Range(0.7f, 1.2f));
+                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.35f, Random.Range(0.7f, 1.2f));
                     sprintSound_Timer = 0.2375f;
                 }
                 //Debug.Log("Running");
@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour
                 // Walking sound
                 if (walkingSound_Timer <= 0 && walking == true)
                 {
-                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.01f, Random.Range(0.8f, 1.2f));
+                    SoundManager.PlaySound(SoundSource.Player, SoundType.Player_Footsteps, 0.25f, Random.Range(0.8f, 1.2f));
                     walkingSound_Timer = 0.475f;
                 }
             }
@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour
     {
         float DistanceFromMonster = Vector3.Distance(monsterTransform.position, gameObject.transform.position);
 
-        if (DistanceFromMonster <= 35f)
+        if (DistanceFromMonster <= 50f)
         {
             Heartbeat_Timer -= Time.deltaTime;
 
