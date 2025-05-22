@@ -80,7 +80,7 @@ public class MonsterController : MonoBehaviour
             if (aiDistance <= catchDistance && IgnorePlayer == false)
             {
                 // Kill player
-                player.gameObject.SetActive(false);
+                //player.gameObject.SetActive(false);
                 EnterHide_Text.SetActive(false);
                 ExitHide_Text.SetActive(false);
                 StartCoroutine(deathRoutine());
