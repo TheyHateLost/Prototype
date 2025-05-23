@@ -8,6 +8,7 @@ public class HoldTasks : MonoBehaviour, IInteractable
 {
     bool taskdone = false; 
     [SerializeField] Transform playerTransform;
+    [SerializeField] GameEventsManager gameEventsManager;
     [SerializeField] Image fillCircle;
     [SerializeField] float holdDuration = 1f;
     [SerializeField] float taskRadius = 4f;
@@ -15,8 +16,6 @@ public class HoldTasks : MonoBehaviour, IInteractable
     float holdTimer;
     bool isHolding = false;
     float Distancefromplayer;
-
-    public static event Action OnHoldComplete;
 
     public void Interact()
     {
@@ -37,7 +36,6 @@ public class HoldTasks : MonoBehaviour, IInteractable
             fillCircle.gameObject.SetActive(false);
         }
 
-           
         if (!Input.GetKey(KeyCode.E))
         {
             isHolding = false;
@@ -52,7 +50,7 @@ public class HoldTasks : MonoBehaviour, IInteractable
                 
             {  taskdone = true;
                 //Do Task
-                GameEventsManager.tasksRemaining--; //ResetHold();
+                gameEventsManager.tasksRemaining--; //ResetHold();
                 Smoke_Particles.SetActive(false);
                 fillCircle.gameObject.SetActive(false);
                 gameObject.tag = "Used";

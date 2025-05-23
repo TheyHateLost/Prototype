@@ -4,6 +4,7 @@ using UnityEngine;
 public class SwitchPuzzle : MonoBehaviour, IInteractable
 {
     public Renderer[] PuzzleLight_Object;
+    public PuzzleCompletion puzzleCompleteScript;
     bool taskComplete = false;
     //[SerializeField] GameObject PuzzleTrigger_Object;
 
@@ -63,10 +64,9 @@ public class SwitchPuzzle : MonoBehaviour, IInteractable
                 if (taskComplete == false)
                 {
                     taskComplete = true;
-                    PuzzleCompletion.puzzleComplete = true;
+                    puzzleCompleteScript.puzzleComplete = true;
                     gameObject.tag = "Used";
                     gameObject.layer = 0;
-                    //gameObject.SetActive(false);
                 }
             }
         }

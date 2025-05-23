@@ -80,7 +80,6 @@ public class MonsterController : MonoBehaviour
             if (aiDistance <= catchDistance && IgnorePlayer == false)
             {
                 // Kill player
-                //player.gameObject.SetActive(false);
                 EnterHide_Text.SetActive(false);
                 ExitHide_Text.SetActive(false);
                 StartCoroutine(deathRoutine());
@@ -125,11 +124,10 @@ public class MonsterController : MonoBehaviour
         // When tasks complete - know where player is and hunt them
         if (endGame == true)
         {
-            target = player.position;
-            monsterAI.destination = target;
-            monsterAI.speed = chaseSpeed;
-            wandering = false;
-            chasing = false;
+            sightDistance = 25f;
+            monsterAI.speed = 9.25f;
+            minIdleTime = 0.2f;
+            maxIdleTime = 0.55f;
         }
     }
 

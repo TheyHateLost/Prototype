@@ -10,6 +10,7 @@ public class FuseBox : MonoBehaviour,IInteractable
     public InventoryItemData referenceItem;
     [SerializeField]int FusesInBox;
     [SerializeField] GameObject[] FusesInFuseBox;
+    public Fuse_Lever fuseLever;
     public static int FusesAdded;
 
     public void Interact()
@@ -30,7 +31,7 @@ public class FuseBox : MonoBehaviour,IInteractable
     {
         if (FusesAdded >= 4)
         {
-            Fuse_Lever.Lever_Active = true;
+            fuseLever.Lever_Active = true;
         }
         if (FusesInBox >= 2)
         {

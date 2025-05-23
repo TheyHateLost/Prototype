@@ -29,7 +29,7 @@ public class GameEventsManager : MonoBehaviour
     float originalTimeScale;
 
     [Header("Tasks")]
-    public static int tasksRemaining = 4;
+    public int tasksRemaining = 4;
     [SerializeField] GameObject[] Green_TaskLight;
     [SerializeField] GameObject[] Red_TaskLight;
 

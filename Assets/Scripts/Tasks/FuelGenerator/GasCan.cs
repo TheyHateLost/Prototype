@@ -8,7 +8,6 @@ public class GasCan : MonoBehaviour
 {
     [SerializeField] GameObject Player_GasCan;
     public InventoryItemData GasCanObject;
-    static bool PlayerHasGasCan = false;    
 
     // Update is called once per frame
     void Update()
@@ -16,7 +15,6 @@ public class GasCan : MonoBehaviour
         InventoryItem item = InventorySystem.current.Get(GasCanObject);
         if (item != null && item.data.id == "InventoryItem_GasCan")
         {
-            PlayerHasGasCan = true;
             Player_GasCan.SetActive(true);
         }
         else

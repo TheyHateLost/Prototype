@@ -10,17 +10,15 @@ public class RefuelTank : MonoBehaviour, IInteractable
 {
     bool taskdone = false;
     [SerializeField] Transform playerTransform;
+    [SerializeField] GameEventsManager gameEventsManager;
     [SerializeField] Image fillCircle;
     [SerializeField] float holdDuration = 1f;
-    [SerializeField] float taskRadius = 4f;
     float holdTimer;
     bool isHolding = false;
     float Distancefromplayer;
 
     int numberOfGasCanUsed = 0;
-    float taskResetTimer = 2f;
 
-    public static event Action OnHoldComplete;
     public InventoryItemData referenceItem_GasCan;
     void Start()
     {
@@ -56,7 +54,7 @@ public class RefuelTank : MonoBehaviour, IInteractable
                 if (numberOfGasCanUsed >= 2 && taskdone == false)
                 {
                     taskdone = true;
-                    GameEventsManager.tasksRemaining--;
+                    gameEventsManager.tasksRemaining--;
                     gameObject.tag = "Used";
                     gameObject.layer = 0;
                 }
