@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     float sprintRechargeTimer;
     public float currentMoveSpeed;
     float desiredMoveSpeed;
+    public bool InfiniteSprint = false;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
     public float Heartbeat_Timer = 2f;
 
     [Header("Booleans")]
-    public static bool sprinting = false, crouching = false, walking, canSprint = true, playerIsMoving, Paused;
+    public bool sprinting = false, crouching = false, walking, canSprint = true, playerIsMoving, Paused;
 
     public Transform orientation;
     Vector3 SpawnPlayerPoint;
@@ -136,9 +137,6 @@ public class PlayerController : MonoBehaviour
         sprintSound_Timer -= Time.deltaTime;
         crouchSound_Timer -= Time.deltaTime;
 
-        StopAllCoroutines();
-        StartCoroutine(SmoothlyLerpMoveSpeed());
-
         // Pausing
         if (Input.GetKeyDown(togglePause) && GameEventsManager.PlayerInMenu == false)
         {
@@ -183,7 +181,7 @@ public class PlayerController : MonoBehaviour
             // Start Crouching
             if (Input.GetKeyDown(crouchKey) && CanCrouch())
             {
-                desiredMoveSpeed = crouchSpeed;
+                currentMoveSpeed = crouchSpeed;
 
                 transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
                 rb.AddForce(Vector3.down * 100f, ForceMode.Impulse);
@@ -197,19 +195,20 @@ public class PlayerController : MonoBehaviour
             // Stop Crouching
             else if (Input.GetKeyUp(crouchKey) && grounded)
             {
-                desiredMoveSpeed = walkSpeed;
+                currentMoveSpeed = walkSpeed;
 
                 transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
                 crouching = false;
             }
 
             // Sprinting
-            else if (Input.GetKey(sprintKey) && grounded && crouching == false && sprintTime > 0f)
+            else if (Input.GetKey(sprintKey) && crouching == false && sprintTime > 0f && canSprint)
             {
-                desiredMoveSpeed = sprintSpeed;
+                currentMoveSpeed = sprintSpeed;
                 sprintRechargeTimer = sprintRechargeDelay;
                 sprinting = true;
 
+                if (!InfiniteSprint)
                 sprintTime -= Time.deltaTime;
 
                 // Running sound
@@ -219,6 +218,12 @@ public class PlayerController : MonoBehaviour
                     sprintSound_Timer = 0.2375f;
                 }
                 //Debug.Log("Running");
+
+                if (sprintTime <= 0)
+                {
+                    canSprint = false;
+                    StartCoroutine(SprintExhuastionDelay());
+                }
             }
 
             // Jumping - Probably will not be used
@@ -230,7 +235,7 @@ public class PlayerController : MonoBehaviour
             // Walking
             else if (grounded && crouching == false)
             {
-                desiredMoveSpeed = walkSpeed;
+                currentMoveSpeed = walkSpeed;
 
                 sprinting = false;
 
@@ -279,18 +284,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Current speed lerps to the speed of the current state(walking, sprinting, etc)
-    private IEnumerator SmoothlyLerpMoveSpeed()
-    {
-        // lerp movementSpeed to desired speed
-        float difference = Mathf.Abs(desiredMoveSpeed - currentMoveSpeed);
-        //float startValue = currentMoveSpeed;
-        
-            currentMoveSpeed = Mathf.Lerp(currentMoveSpeed, desiredMoveSpeed, Time.deltaTime);
-
-            yield return null;
-    }
-
     void PlayerJump()
     {
         readyToJump = false;
@@ -312,15 +305,15 @@ public class PlayerController : MonoBehaviour
     // Recharges sprint when not running
     void RechargeSprint()
     {
-        if (!Input.GetKey(sprintKey) || sprintTime < maxSprintTime)
+        if (!Input.GetKey(sprintKey) && sprintTime < maxSprintTime)
         {
-             sprintRechargeTimer -= Time.deltaTime;
-
-            if (sprintRechargeTimer <= 0f)
-            {
-                sprintTime += Time.deltaTime;
-            }
+            sprintTime += Time.deltaTime / 2;
         }
+    }
+    IEnumerator SprintExhuastionDelay()
+    {
+        yield return new WaitForSeconds(sprintRechargeDelay);
+        canSprint = true;
     }
 
     void Heartbeat()

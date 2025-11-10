@@ -30,7 +30,7 @@ public class CameraController: MonoBehaviour
 
         xRotation -= mouseY;
 
-        xRotation = Mathf.Clamp(xRotation, -55f, 65f);
+        xRotation = Mathf.Clamp(xRotation, -75f, 85f);
 
         if (GameEventsManager.PlayerInMenu != true)
         {

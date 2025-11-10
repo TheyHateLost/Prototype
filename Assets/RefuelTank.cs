@@ -20,9 +20,12 @@ public class RefuelTank : MonoBehaviour, IInteractable
     int numberOfGasCanUsed = 0;
 
     public InventoryItemData referenceItem_GasCan;
+
+    [SerializeField] Animator ReactorAnimator;
     void Start()
     {
         fillCircle.fillAmount = 0;
+        ReactorAnimator.Play("ReactorPistonAnim");
     }
     public void Interact()
     {
@@ -57,6 +60,7 @@ public class RefuelTank : MonoBehaviour, IInteractable
                     gameEventsManager.tasksRemaining--;
                     gameObject.tag = "Used";
                     gameObject.layer = 0;
+                    ReactorAnimator.Play("WorkingReactor");
                 }
             }
         }

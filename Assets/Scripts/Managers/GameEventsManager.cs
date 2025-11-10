@@ -32,6 +32,7 @@ public class GameEventsManager : MonoBehaviour
     public int tasksRemaining = 4;
     [SerializeField] GameObject[] Green_TaskLight;
     [SerializeField] GameObject[] Red_TaskLight;
+    [SerializeField] PlayerController pm;
 
     public enum gameState
     {
@@ -150,10 +151,24 @@ public class GameEventsManager : MonoBehaviour
             Red_TaskLight[3].SetActive(false);
             Green_TaskLight[3].SetActive(true);
 
-            LeaveLevelCode.SetActive(true);
-            LeaveLevelPromptUI.SetActive(true);
-            MonsterController.endGame = true;
-            //elevatorScript.platMode = DescendingCage.platformMode.MOVING;
+            EndGame();
         }
+    }
+
+
+    void EndGame()
+    {
+        //Display Check Out Code and leave prompt
+        LeaveLevelCode.SetActive(true);
+        LeaveLevelPromptUI.SetActive(true);
+
+
+        if (monsterScript != null)
+            MonsterController.endGame = true;
+        //elevatorScript.platMode = DescendingCage.platformMode.MOVING;
+
+        pm.InfiniteSprint = true;
+        pm.sprintSpeed = 32.5f;
+
     }
 }

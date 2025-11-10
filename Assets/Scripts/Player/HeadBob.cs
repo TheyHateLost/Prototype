@@ -20,18 +20,19 @@ public class HeadBob : MonoBehaviour
 
     //Y scale of the camera(height of the cam)
     public float midpoint = 0.96f;
+    [SerializeField] PlayerController pm;
 
     void FixedUpdate()
     {
-        if (PlayerController.walking == true)
+        if (pm.walking == true)
         {
             normalHeadBob();
         }
-        if (PlayerController.sprinting == true)
+        if (pm.sprinting == true)
         {
             sprintingHeadBob();
         }
-        if (PlayerController.crouching == true)
+        if (pm.crouching == true)
         {
             crouchingHeadBob();
         }
