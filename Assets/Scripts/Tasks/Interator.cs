@@ -61,6 +61,16 @@ public class Interator : MonoBehaviour
                         interactObj.Interact();
                     }
                 }
+                else if (hit.collider.gameObject.CompareTag("Decoy"))
+                {
+                    interactTextString = "[E] - Activate Decoy";
+
+                    if (Input.GetKeyUp(KeyCode.E))
+                    {
+                        //use the method from the script of the item you are looking at
+                        interactObj.Interact();
+                    }
+                }
 
                 interactPrompt.text = interactTextString;
                 interactText.SetActive(true);

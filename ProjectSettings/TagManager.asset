@@ -10,6 +10,7 @@ TagManager:
   - CanInteract
   - CanHold
   - Used
+  - Decoy
   layers:
   - Default
   - TransparentFX

@@ -8,10 +8,10 @@ using UnityEngine.UI;
 
 public class GameEventsManager : MonoBehaviour
 {
-    [Header("GameObjects")]
+    [Header("References")]
     public static GameEventsManager instance { get; private set; }
     [SerializeField] GameObject elevator;
-    [SerializeField] GameObject Monster;
+    [SerializeField] MonsterController MonsterScript;
     [SerializeField] Text numberOfTasksLeft;
 
     [Header("EndGame")]
@@ -22,7 +22,7 @@ public class GameEventsManager : MonoBehaviour
     public GameObject PauseMenu;
     [SerializeField] GameObject[] TaskUI;
 
-    MonsterController monsterScript;
+    
     DescendingCage elevatorScript;
 
     public static bool PlayerInMenu;
@@ -47,14 +47,16 @@ public class GameEventsManager : MonoBehaviour
         originalTimeScale = Time.timeScale;
         currentState = gameState.Normal;
 
-        //elevatorScript = elevator.GetComponent<DescendingCage>();
-        monsterScript = Monster.GetComponent<MonsterController>();
-
         if (instance != null)
         {
             Debug.LogError("Found more than one Game Events Manager in the scene.");
         }
         instance = this;
+
+        if (PlayerController.TimesDied >= 3 && PlayerController.TimesDied < 5)
+            tasksRemaining = 3;
+        else if (PlayerController.TimesDied >= 5)
+            tasksRemaining = 2;
     }
 
     void Update()
@@ -88,6 +90,8 @@ public class GameEventsManager : MonoBehaviour
                 PlayerInMenu = false;
             }
         }
+
+        
 
         //Handles the task lights and the end game situation
         TaskManager();
@@ -140,6 +144,8 @@ public class GameEventsManager : MonoBehaviour
         {
             Red_TaskLight[1].SetActive(false);
             Green_TaskLight[1].SetActive(true);
+            //If half the tasks are done, monster gets angry, making it faster
+            MonsterScript.aggressiveState = MonsterController.AggressiveState.Angry;
         }
         if (tasksRemaining == 1)
         {
@@ -162,10 +168,8 @@ public class GameEventsManager : MonoBehaviour
         LeaveLevelCode.SetActive(true);
         LeaveLevelPromptUI.SetActive(true);
 
-
-        if (monsterScript != null)
-            MonsterController.endGame = true;
-        //elevatorScript.platMode = DescendingCage.platformMode.MOVING;
+        if (MonsterScript != null)
+            MonsterScript.aggressiveState = MonsterController.AggressiveState.Enraged;
 
         pm.InfiniteSprint = true;
         pm.sprintSpeed = 32.5f;

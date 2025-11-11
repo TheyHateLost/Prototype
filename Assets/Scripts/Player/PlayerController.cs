@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject taskMenu;
     public GameObject FadeScreen_In;
+    public static int TimesDied = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -307,7 +308,17 @@ public class PlayerController : MonoBehaviour
     {
         if (!Input.GetKey(sprintKey) && sprintTime < maxSprintTime)
         {
-            sprintTime += Time.deltaTime / 2;
+            if (TimesDied < 3)
+                sprintTime += Time.deltaTime / 1.5f;
+            else
+            {
+                sprintTime += Time.deltaTime;
+            }
+        }
+
+        if (sprintTime == maxSprintTime)
+        {
+            canSprint = true;
         }
     }
     IEnumerator SprintExhuastionDelay()

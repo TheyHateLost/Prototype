@@ -6,18 +6,20 @@ using Unity.VisualScripting;
 public class Decoy : MonoBehaviour, IInteractable
 {
     [Header("Decoy Settings")]
-    [SerializeField] float decoyDuration = 5f;
-    [SerializeField] float decoyCooldown = 10f;
+    [SerializeField] float DecoyDuration = 5f;
+    [SerializeField] float decoyCooldown = 50f;
     [SerializeField] float DecoyRadius = 10f;
-    [SerializeField] Transform Monsterpos;
 
-    [SerializeField] bool DecoyActive;
-    [SerializeField] bool CanUseDecoy;
-    [SerializeField] float decoyTimer;
-    float MonsterDistance;
+    [Header("References")]
+    [SerializeField] MonsterController MonsterScript;
+    [SerializeField] Transform Monsterpos;
+    [SerializeField] GameObject DecoyReadyLight, DecoyInActiveLight, DecoyOnIndicator;
+
+    bool DecoyActive;
+    bool CanUseDecoy;
+    float DistanceFromMonster;
     void Start()
     {
-        decoyTimer = decoyDuration;
         DecoyActive = false;
         CanUseDecoy = true;
     }
@@ -25,29 +27,33 @@ public class Decoy : MonoBehaviour, IInteractable
     {
         if (DecoyActive == false && CanUseDecoy == true)
         {
-            ActivateDecoy();
+            StartCoroutine(DecoyCooldown());
         }
     }
     void Update()
     {
-        MonsterDistance = Vector3.Distance(Monsterpos.position, this.transform.position);
+        DistanceFromMonster = Vector3.Distance(Monsterpos.position, this.transform.position);
 
         if (DecoyActive == true)
         {
-            if (MonsterDistance <= DecoyRadius)
+            DecoyOnIndicator.SetActive(true);
+            if (DistanceFromMonster <= DecoyRadius)
             {
-                MonsterController.chasing = true;
-                MonsterController.wandering = false;
-                MonsterController.IgnorePlayer = true;
+                MonsterScript.targetState = MonsterController.TargetState.Chasing;
+                MonsterScript.IgnorePlayer = true;
                 MonsterController.target = this.transform.position;
             }
+        }
 
-            decoyTimer -= Time.deltaTime;
-
-            if (decoyTimer <= 0f)
-            {
-                DeactivateDecoy();
-            }
+        if (CanUseDecoy)
+        {
+            DecoyReadyLight.SetActive(true);
+            DecoyInActiveLight.SetActive(false);
+        }
+        else
+        {
+            DecoyReadyLight.SetActive(false);
+            DecoyInActiveLight.SetActive(true);
         }
     }
     void ActivateDecoy()
@@ -57,16 +63,18 @@ public class Decoy : MonoBehaviour, IInteractable
     }
     void DeactivateDecoy()
     {
-        decoyTimer = decoyDuration;
         DecoyActive = false;
-        CanUseDecoy = true;
-        MonsterController.wandering = true;
-        MonsterController.IgnorePlayer = false;
-        StartCoroutine(DecoyCooldown());
-    }
 
+        DecoyOnIndicator.SetActive(false);
+
+        MonsterScript.targetState = MonsterController.TargetState.Wandering;
+        MonsterScript.IgnorePlayer = false;
+    }
     IEnumerator DecoyCooldown()
     {
+        ActivateDecoy();
+        yield return new WaitForSeconds(DecoyDuration);
+        DeactivateDecoy();
         yield return new WaitForSeconds(decoyCooldown);
         CanUseDecoy = true;
     }
